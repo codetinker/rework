@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+==========================================================================
+【CORPORATE OIL & GAS DESIGN SYSTEM】
+1. DESIGN PHILOSOPHY:
+   - Corporate Authority & Industrial Excellence: Professional, sophisticated design that reflects RWNA's position as a leading oil & gas engineering firm.
+   - Steel & Energy Aesthetic: Dark, powerful color palette inspired by industrial steel, petroleum, and offshore operations.
+   - Executive Presence: Clean, minimal layouts with strong typography that commands respect and trust from C-level executives and procurement teams.
+   - Technical Precision: Sharp edges, geometric patterns, and structured layouts that reflect engineering precision and reliability.
+
+2. TYPOGRAPHY:
+   - Primary (Inter): Professional, highly legible sans-serif that's standard in corporate environments. Clean, authoritative, and modern.
+   - Mono (JetBrains Mono): Technical specifications, certifications, project data, and safety metrics to emphasize precision and compliance.
+   - Hierarchy: Bold, large headings for impact; clean body text for readability; technical mono for data credibility.
+
+3. COLOR SYSTEM:
+   - Corporate Steel Blue: Deep, authoritative blue-gray (#1e293b) representing industrial strength and corporate professionalism.
+   - Petroleum Gold: Sophisticated gold accent (#f59e0b) for highlights, CTAs, and premium elements.
+   - Industrial Gray: Multiple shades of gray for depth, hierarchy, and technical information.
+   - Safety Orange: Strategic use of orange for safety-related content and urgent CTAs.
+   - High Contrast: Ensures readability in industrial environments and executive boardrooms.
+
+4. USAGE GUIDE:
+   - Layout: Full-width hero sections with industrial imagery; structured grid systems; generous white space for executive appeal.
+   - Cards: Sharp, angular cards with subtle shadows and metallic borders to represent industrial precision.
+   - Interactive Elements: Smooth, professional animations; hover effects that suggest quality and reliability.
+   - Content Hierarchy: Clear information architecture suitable for technical decision-makers and executives.
+==========================================================================
+*/
+
+:root {
+  /* Typography */
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-mono: JetBrains Mono, monospace;
+  
+  /* Radius */
+  --radius: 0.5rem;
+
+  /* Modern Oil & Gas Blue Theme */
+  --background: oklch(0.99 0.002 240);     /* Pure white background */
+  --foreground: oklch(0.08 0.015 240);     /* Deep navy text */
+  --card: oklch(0.98 0.005 240);           /* Subtle card background */
+  --card-foreground: oklch(0.08 0.015 240);
+  --popover: oklch(0.98 0.005 240);
+  --popover-foreground: oklch(0.08 0.015 240);
+  --primary: oklch(0.45 0.15 240);         /* Professional Blue */
+  --primary-foreground: oklch(0.98 0.01 240);
+  --secondary: oklch(0.94 0.01 240);       /* Light blue-gray */
+  --secondary-foreground: oklch(0.20 0.03 240);
+  --muted: oklch(0.96 0.005 240);          /* Very light background */
+  --muted-foreground: oklch(0.40 0.02 240); /* Medium blue-gray text */
+  --accent: oklch(0.55 0.18 240);          /* Bright blue accent */
+  --accent-foreground: oklch(0.98 0.01 240);
+  --destructive: oklch(0.55 0.18 25);      /* Safety orange */
+  --destructive-foreground: oklch(0.98 0.01 25);
+  --border: oklch(0.88 0.01 240);          /* Light blue borders */
+  --input: oklch(0.97 0.005 240);          /* Input backgrounds */
+  --ring: oklch(0.45 0.15 240);            /* Focus rings */
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.55 0.15 210);
+  --chart-2: oklch(0.45 0.12 180);
+  --chart-3: oklch(0.35 0.10 240);
+  --chart-4: oklch(0.65 0.14 200);
+  --chart-5: oklch(0.75 0.12 190);
+  
+  /* Blue Theme Sidebar Tokens */
+  --sidebar: oklch(0.12 0.02 240);         /* Deep blue sidebar */
+  --sidebar-foreground: oklch(0.95 0.01 240);
+  --sidebar-primary: oklch(0.55 0.18 240); /* Bright blue accent */
+  --sidebar-primary-foreground: oklch(0.98 0.01 240);
+  --sidebar-accent: oklch(0.18 0.03 240);
+  --sidebar-accent-foreground: oklch(0.95 0.01 240);
+  --sidebar-border: oklch(0.18 0.03 240);
+  --sidebar-ring: oklch(0.55 0.18 240);
+}
+
+.dark {
+  --background: oklch(0.12 0.02 225);
+  --foreground: oklch(0.92 0.01 225);
+  --card: oklch(0.15 0.03 225);
+  --card-foreground: oklch(0.92 0.01 225);
+  --popover: oklch(0.12 0.02 225);
+  --popover-foreground: oklch(0.92 0.01 225);
+  --primary: oklch(0.65 0.18 210);
+  --primary-foreground: oklch(0.1 0.04 210);
+  --secondary: oklch(0.22 0.04 225);
+  --secondary-foreground: oklch(0.92 0.01 225);
+  --muted: oklch(0.22 0.04 225);
+  --muted-foreground: oklch(0.65 0.04 225);
+  --accent: oklch(0.25 0.06 210);
+  --accent-foreground: oklch(0.95 0.02 210);
+  --destructive: oklch(0.45 0.16 25);
+  --destructive-foreground: oklch(0.95 0.01 25);
+  --border: oklch(0.25 0.04 225);
+  --input: oklch(0.25 0.04 225);
+  --ring: oklch(0.65 0.18 210);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.65 0.18 210);
+  --chart-2: oklch(0.55 0.15 180);
+  --chart-3: oklch(0.75 0.12 240);
+  --chart-4: oklch(0.50 0.14 200);
+  --chart-5: oklch(0.60 0.16 190);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(0.10 0.02 225);
+  --sidebar-foreground: oklch(0.92 0.01 225);
+  --sidebar-primary: oklch(0.65 0.18 210);
+  --sidebar-primary-foreground: oklch(0.1 0.04 210);
+  --sidebar-accent: oklch(0.18 0.04 225);
+  --sidebar-accent-foreground: oklch(0.92 0.01 225);
+  --sidebar-border: oklch(0.20 0.04 225);
+  --sidebar-ring: oklch(0.65 0.18 210);
+}
+
+@theme inline {
+  /* Shadcn Core Mapping */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Charts Mapping */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar Mapping */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Typography */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* Radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans min-h-screen;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  code, pre {
+    @apply font-mono;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-primary;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40;
+  }
+
+  /* Hide scrollbar for horizontal scroll */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Client logo scroll animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Infinite scroll animation for homepage clients */
+@keyframes infinite-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-infinite-scroll {
+  animation: infinite-scroll 60s linear infinite;
+}
+
+.animate-infinite-scroll:hover {
+  animation-play-state: paused;
+}
