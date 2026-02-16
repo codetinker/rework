@@ -29,11 +29,7 @@ import {
   GripVertical,
   FolderPlus,
   Save,
-  X,
-  RotateCcw,
-  AlertTriangle,
-  Calendar,
-  Trash
+  X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -108,10 +104,6 @@ interface Service {
   createdAt: string;
   updatedAt: string;
   publishedAt?: string;
-  // Trash system fields
-  isDeleted?: boolean;
-  deletedAt?: string;
-  deletedBy?: string;
 }
 
 const iconOptions = [
@@ -249,578 +241,558 @@ const mockServices: Service[] = [
     ],
     keyFeatures: [
       "All types of flange faces",
-      "Seal groove preparation",
-      "Weld preparation services",
+      "Seal groove preparation", 
+      "Weld preparation",
       "Counter boring capabilities"
     ],
     specifications: [
       "Flange sizes: 2\" to 120\" diameter",
-      "Surface finish: Ra 3.2 μm or better",
-      "Tolerance: ±0.002\" flatness"
+      "Surface finish: Ra 3.2 μm or better"
     ],
-    iconType: "wrench",
+    iconType: "cog",
     status: "active",
-    createdAt: "2026-01-16T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-01-21T09:00:00Z"
+    createdAt: "2026-01-10T08:00:00Z",
+    updatedAt: "2026-02-05T16:45:00Z",
+    publishedAt: "2026-01-15T10:00:00Z"
   },
+  // Add more services here (truncated for brevity - keeping the same structure)
   {
     id: "s3",
-    title: "Line Boring",
-    category: "On-site Machining Services",
-    shortDescription: "Precision line boring services for accurate alignment and dimensional restoration of machinery components.",
-    detailedDescription: "Professional line boring services to restore precise alignment and dimensions in machinery components, ensuring optimal performance and extended equipment life.",
+    title: "Diamond Wire Saw (DWS)",
+    category: "Subsea Pipeline and Structure Cutting",
+    shortDescription: "RWNA Subsea Diamond Wire Saw System has been specially designed to cut submerged pipes (horizontal and vertical), tubular structures and pipelines of varying materials and thickness.",
+    detailedDescription: "Advanced underwater cutting solutions for pipeline maintenance, decommissioning, and emergency repairs using specialized diamond wire saw technology.",
     benefits: [
-      "Precise alignment restoration",
-      "Extended equipment life",
-      "Reduced vibration and wear",
-      "Improved operational efficiency"
+      "Precise underwater cutting",
+      "Minimal environmental impact",
+      "Suitable for various materials",
+      "Emergency repair capability"
     ],
     keyFeatures: [
-      "Portable line boring equipment",
-      "High precision capabilities",
-      "Various bore sizes supported",
-      "On-site service delivery"
+      "Horizontal and vertical cutting",
+      "Various materials compatibility",
+      "Different thickness capability",
+      "Submerged operation"
     ],
     specifications: [
-      "Bore diameter: 25mm to 1500mm",
-      "Length capacity: Up to 6 meters",
-      "Tolerance: ±0.01mm"
+      "Cutting diameter: Up to 48\" pipe OD",
+      "Operating depth: Up to 300m",
+      "Wire speed: Variable control"
     ],
-    iconType: "drill",
-    status: "active",
-    createdAt: "2026-01-17T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-01-22T09:00:00Z"
+    iconType: "waves",
+    status: "featured",
+    createdAt: "2026-01-20T12:00:00Z",
+    updatedAt: "2026-02-12T11:20:00Z",
+    publishedAt: "2026-01-25T14:00:00Z"
   },
   {
     id: "s4",
-    title: "Valve Seat Cutting",
+    title: "Hydraulic Bolt Tensioning",
     category: "On-site Machining Services",
-    shortDescription: "Specialized valve seat cutting and refurbishment services to restore valve sealing performance.",
-    detailedDescription: "Expert valve seat cutting services to restore proper sealing surfaces and ensure optimal valve performance in critical applications.",
+    shortDescription: "RWNA has highly trained technicians and state of the art equipment for all bolting needs. We offer an accurate method of tightening threaded fasteners with subsequent load bearing capabilities through hydraulic technology.",
+    detailedDescription: "Professional hydraulic bolt tensioning services with highly trained technicians and state-of-the-art equipment for accurate fastener tightening and load bearing applications.",
     benefits: [
-      "Restored sealing performance",
-      "Extended valve life",
-      "Reduced leakage",
-      "Cost-effective refurbishment"
+      "Highly trained technicians",
+      "State of the art equipment",
+      "Accurate tightening method",
+      "Superior load bearing capabilities"
     ],
     keyFeatures: [
-      "Precision cutting tools",
-      "Various valve types supported",
-      "On-site refurbishment",
-      "Quality surface finish"
+      "Hydraulic technology",
+      "Threaded fastener expertise",
+      "Load bearing optimization",
+      "Professional service team"
     ],
     specifications: [
-      "Valve sizes: 1\" to 48\" diameter",
-      "Seat angles: 30°, 45°, 60°",
-      "Surface finish: Ra 0.8 μm"
-    ],
-    iconType: "cog",
-    status: "active",
-    createdAt: "2026-01-18T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-01-23T09:00:00Z"
-  },
-  {
-    id: "s5",
-    title: "Portable Milling",
-    category: "On-site Machining Services",
-    shortDescription: "Portable milling services for precision machining of large components that cannot be moved to a workshop.",
-    detailedDescription: "Advanced portable milling capabilities for precision machining of large, stationary components, bringing workshop-quality results to your location.",
-    benefits: [
-      "Workshop-quality results on-site",
-      "No component removal required",
-      "Reduced downtime",
-      "Precision machining capabilities"
-    ],
-    keyFeatures: [
-      "Portable milling machines",
-      "Large component capability",
-      "Precision tooling",
-      "Flexible setup options"
-    ],
-    specifications: [
-      "Milling capacity: Up to 2m x 1m",
-      "Spindle power: 15-30 kW",
-      "Positioning accuracy: ±0.02mm"
+      "Bolt sizes: M12 to M100",
+      "Tensioning force: Up to 500 tons",
+      "Accuracy: ±5% of target load"
     ],
     iconType: "settings",
     status: "active",
-    createdAt: "2026-01-19T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-01-24T09:00:00Z"
+    createdAt: "2026-01-14T11:00:00Z",
+    updatedAt: "2026-02-08T15:20:00Z",
+    publishedAt: "2026-01-20T12:45:00Z"
   },
   {
-    id: "s6",
-    title: "Shaft Turning",
+    id: "s5",
+    title: "Hydraulic/Pneumatic Torque Wrench",
     category: "On-site Machining Services",
-    shortDescription: "On-site shaft turning and refurbishment services for rotating equipment maintenance and repair.",
-    detailedDescription: "Professional shaft turning services to restore dimensional accuracy and surface finish of rotating shafts without equipment removal.",
+    shortDescription: "RWNA owns and operates state of the art hydraulic & pneumatic torque wrenches supported by qualified and experienced manpower. A hydraulic torque wrench is a tool designed to exert torque on a fastener to achieve proper tightening or loosening of a connection through the use of hydraulics.",
+    detailedDescription: "State-of-the-art hydraulic and pneumatic torque wrench services with qualified and experienced manpower for precise fastener tightening and loosening operations.",
     benefits: [
-      "Equipment remains in place",
-      "Restored dimensional accuracy",
-      "Improved surface finish",
-      "Extended shaft life"
+      "State of the art equipment",
+      "Qualified and experienced manpower",
+      "Precise torque application",
+      "Proper tightening and loosening"
     ],
     keyFeatures: [
-      "Portable lathe equipment",
-      "Various shaft diameters",
-      "Precision turning capabilities",
-      "Surface finishing options"
+      "Hydraulic torque wrenches",
+      "Pneumatic torque wrenches",
+      "Fastener expertise",
+      "Connection optimization"
     ],
     specifications: [
-      "Shaft diameter: 50mm to 2000mm",
-      "Length capacity: Up to 8 meters",
-      "Surface finish: Ra 1.6 μm"
+      "Torque range: 100 Nm to 47,000 Nm",
+      "Accuracy: ±4% of reading",
+      "Operating pressure: Up to 700 bar"
     ],
     iconType: "wrench",
     status: "active",
-    createdAt: "2026-01-20T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-01-25T09:00:00Z"
+    createdAt: "2026-01-16T13:00:00Z",
+    updatedAt: "2026-02-09T09:45:00Z",
+    publishedAt: "2026-01-22T14:30:00Z"
+  },
+  {
+    id: "s6",
+    title: "Hot/Cold Tapping",
+    category: "On-site Machining Services",
+    shortDescription: "RWNA presents the best hot/cold tapping solution that allows a branch connection to be made into piping or vessels while the system remains live and under working pressure.",
+    detailedDescription: "Advanced hot and cold tapping solutions enabling branch connections to be made into live piping systems and vessels under working pressure without shutdown.",
+    benefits: [
+      "No system shutdown required",
+      "Live system operation",
+      "Working pressure maintenance",
+      "Cost-effective branch connections"
+    ],
+    keyFeatures: [
+      "Hot tapping capability",
+      "Cold tapping services",
+      "Live system connections",
+      "Pressure vessel compatibility"
+    ],
+    specifications: [
+      "Pipe sizes: 2\" to 48\" diameter",
+      "Pressure rating: Up to 150 bar",
+      "Temperature range: -20°C to +400°C"
+    ],
+    iconType: "drill",
+    status: "featured",
+    createdAt: "2026-01-18T10:30:00Z",
+    updatedAt: "2026-02-11T16:15:00Z",
+    publishedAt: "2026-01-24T11:00:00Z"
   },
   {
     id: "s7",
-    title: "Keyway Cutting",
+    title: "Line Boring and Hole Drilling & Threading",
     category: "On-site Machining Services",
-    shortDescription: "Precision keyway cutting services for shaft and hub connections in rotating machinery.",
-    detailedDescription: "Expert keyway cutting services to create precise keyway slots for secure shaft-hub connections in rotating machinery applications.",
+    shortDescription: "RWNA offers both onshore and offshore on-site machining services for line boring as well as hole drilling and threading. Line boring is the process of enlarging a hole that has already been drilled (or cast).",
+    detailedDescription: "Comprehensive onshore and offshore line boring, hole drilling, and threading services for precision machining applications and equipment alignment.",
     benefits: [
-      "Precise keyway dimensions",
-      "Secure shaft connections",
-      "Reduced assembly time",
-      "Professional finish quality"
+      "Onshore and offshore capability",
+      "Precision hole enlargement",
+      "Equipment alignment services",
+      "Threading capabilities"
     ],
     keyFeatures: [
-      "Portable keyway cutting tools",
-      "Various keyway standards",
-      "Precision cutting capability",
-      "Quality surface finish"
+      "Line boring expertise",
+      "Hole drilling services",
+      "Threading operations",
+      "Precision machining"
     ],
     specifications: [
-      "Keyway width: 3mm to 50mm",
-      "Depth accuracy: ±0.05mm",
-      "Length: Up to 500mm"
+      "Boring diameter: Up to 500mm",
+      "Drilling capacity: Up to 100mm diameter",
+      "Threading: M6 to M100"
     ],
     iconType: "drill",
     status: "active",
-    createdAt: "2026-01-21T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-01-26T09:00:00Z"
+    createdAt: "2026-01-20T14:00:00Z",
+    updatedAt: "2026-02-12T10:30:00Z",
+    publishedAt: "2026-01-26T15:45:00Z"
   },
   {
     id: "s8",
-    title: "Thread Cutting & Repair",
+    title: "On-Site Valve Services",
     category: "On-site Machining Services",
-    shortDescription: "Thread cutting and repair services for damaged or worn threaded connections in industrial equipment.",
-    detailedDescription: "Comprehensive thread cutting and repair services to restore threaded connections and create new threads in existing components.",
+    shortDescription: "Comprehensive valve grinding, lapping, and testing services performed on-site to restore valve performance and extend operational life.",
+    detailedDescription: "Professional on-site valve services including grinding, lapping, and testing to restore valve performance, extend operational life, and ensure system reliability.",
     benefits: [
-      "Restored thread integrity",
-      "Cost-effective repair solution",
-      "Extended component life",
-      "Improved connection reliability"
+      "Restored valve performance",
+      "Extended operational life",
+      "On-site convenience",
+      "System reliability improvement"
     ],
     keyFeatures: [
-      "Thread cutting tools",
-      "Thread repair inserts",
-      "Various thread standards",
-      "Quality assurance testing"
+      "Valve grinding services",
+      "Precision lapping",
+      "Performance testing",
+      "Operational life extension"
     ],
     specifications: [
-      "Thread sizes: M6 to M100",
-      "Thread pitch: 0.5mm to 6mm",
-      "Thread class: 6H/6g standard"
+      "Valve sizes: 1\" to 48\" diameter",
+      "Valve types: Gate, Globe, Ball, Check",
+      "Pressure classes: 150# to 2500#"
     ],
-    iconType: "cog",
+    iconType: "settings",
     status: "active",
-    createdAt: "2026-01-22T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-01-27T09:00:00Z"
+    createdAt: "2026-01-22T12:00:00Z",
+    updatedAt: "2026-02-13T14:20:00Z",
+    publishedAt: "2026-01-28T16:30:00Z"
   },
 
   // Category 2: Subsea Pipeline and Structure Cutting (2 services)
   {
-    id: "s9",
-    title: "Subsea Pipeline Cutting",
-    category: "Subsea Pipeline and Structure Cutting",
-    shortDescription: "Advanced subsea pipeline cutting services for decommissioning, maintenance, and emergency response operations.",
-    detailedDescription: "Specialized subsea pipeline cutting services using advanced underwater cutting technologies for safe and efficient pipeline operations in marine environments.",
-    benefits: [
-      "Safe underwater operations",
-      "Minimal environmental impact",
-      "Precise cutting capabilities",
-      "Emergency response ready"
-    ],
-    keyFeatures: [
-      "Diamond wire cutting",
-      "Hydraulic cutting tools",
-      "ROV-operated systems",
-      "Environmental protection"
-    ],
-    specifications: [
-      "Pipeline diameter: 4\" to 48\"",
-      "Water depth: Up to 300m",
-      "Cutting accuracy: ±5mm"
-    ],
-    iconType: "waves",
-    status: "featured",
-    createdAt: "2026-01-23T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-01-28T09:00:00Z"
-  },
-  {
     id: "s10",
-    title: "Subsea Structure Dismantling",
+    title: "Hydraulic Driven Heavy Duty Split Frame (HD HDSF)",
     category: "Subsea Pipeline and Structure Cutting",
-    shortDescription: "Comprehensive subsea structure dismantling services for offshore platform decommissioning and marine construction.",
-    detailedDescription: "Expert subsea structure dismantling services for safe and efficient removal of offshore structures while maintaining environmental compliance.",
+    shortDescription: "RWNA also provides Subsea Cutting service using Hydraulic Driven Heavy Duty Split Frame \"HD HDSF\" machines depending on the cutting requirements.",
+    detailedDescription: "Heavy-duty subsea cutting services using hydraulic driven split frame machines designed for demanding underwater cutting applications and varying requirements.",
     benefits: [
-      "Environmental compliance",
-      "Safe dismantling procedures",
-      "Efficient project execution",
-      "Minimal marine disruption"
+      "Heavy-duty cutting capability",
+      "Hydraulic power system",
+      "Adaptable to cutting requirements",
+      "Robust subsea operation"
     ],
     keyFeatures: [
-      "Controlled demolition techniques",
-      "Environmental monitoring",
-      "Debris recovery systems",
-      "Safety protocols"
+      "Hydraulic driven system",
+      "Heavy duty construction",
+      "Split frame design",
+      "Requirement-based adaptation"
     ],
     specifications: [
-      "Structure size: Up to 500 tons",
-      "Water depth: Up to 200m",
-      "Recovery rate: 95% minimum"
+      "Cutting capacity: Up to 60\" pipe OD",
+      "Operating depth: Up to 500m",
+      "Hydraulic pressure: Up to 350 bar"
     ],
     iconType: "waves",
     status: "active",
-    createdAt: "2026-01-24T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-01-29T09:00:00Z"
+    createdAt: "2026-01-24T15:30:00Z",
+    updatedAt: "2026-02-14T12:45:00Z",
+    publishedAt: "2026-01-30T17:15:00Z"
   },
 
   // Category 3: W3P Enclosure System (1 service)
   {
     id: "s11",
-    title: "W3P Habitat Welding Enclosure",
+    title: "W3P Enclosure System",
     category: "W3P Enclosure System (Habitat for Welding)",
-    shortDescription: "SIRIM QAS internationally certified safety enclosure system for underwater welding operations, designed to protect, prevent, and pressurize.",
-    detailedDescription: "The W3P (Wet Welding Protection and Pressurization) system is a SIRIM QAS internationally certified habitat enclosure specifically designed for safe underwater welding operations.",
+    shortDescription: "RWNA's W3P Enclosure System is a SIRIM QAS internationally certified safety enclosure (also known as a welding habitat) for hot work, primarily welding.",
+    detailedDescription: "SIRIM QAS internationally certified safety enclosure for hot work, primarily welding, designed to protect, prevent, and pressurize.",
     benefits: [
-      "SIRIM QAS international certification",
-      "Enhanced safety for underwater welding",
-      "Controlled working environment",
-      "Reduced operational risks"
+      "SIRIM QAS internationally certified",
+      "Enhanced safety for hot work",
+      "Prevents contamination",
+      "Controlled environment"
     ],
     keyFeatures: [
-      "Pressurized habitat design",
-      "Safety monitoring systems",
-      "Emergency backup systems",
-      "Quality welding environment"
+      "International safety standards",
+      "Hot work protection",
+      "Welding habitat design",
+      "Pressurization capability"
     ],
     specifications: [
-      "Working depth: Up to 50m",
-      "Habitat size: 2m x 2m x 2m",
-      "Pressure rating: 6 bar",
-      "Certification: SIRIM QAS"
+      "Certification: SIRIM QAS International",
+      "Pressure rating: Up to 15 PSI",
+      "Temperature range: -20°C to +60°C"
     ],
     iconType: "shield",
     status: "featured",
-    createdAt: "2026-01-25T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-01-30T09:00:00Z"
+    createdAt: "2026-01-05T09:30:00Z",
+    updatedAt: "2026-02-08T13:15:00Z",
+    publishedAt: "2026-01-10T11:00:00Z"
   },
 
   // Category 4: Precision Metal Designing and Machining (10 services)
   {
     id: "s12",
-    title: "CNC Precision Machining",
+    title: "DMG Mori CNC Turnmill Machine",
     category: "Precision Metal Designing and Machining",
-    shortDescription: "State-of-the-art CNC machining services for complex precision components with tight tolerances.",
-    detailedDescription: "Advanced CNC machining capabilities for producing high-precision components with complex geometries and tight tolerances for critical applications.",
+    shortDescription: "DMG Mori, NL2000 - Made in Japan. Multipurpose machine able to perform both turning and milling functions.",
+    detailedDescription: "State-of-the-art CNC machinery and precision manufacturing capabilities for complex engineering components using advanced Japanese technology.",
     benefits: [
       "High precision manufacturing",
-      "Complex geometry capability",
-      "Consistent quality output",
-      "Reduced lead times"
+      "Dual turning and milling capability",
+      "Japanese quality and reliability",
+      "Complex component production"
     ],
     keyFeatures: [
-      "5-axis CNC machines",
-      "CAD/CAM integration",
-      "Quality inspection systems",
-      "Material versatility"
+      "Multipurpose turning and milling",
+      "Advanced CNC control system",
+      "High accuracy positioning",
+      "Automated tool changing"
     ],
     specifications: [
-      "Tolerance: ±0.005mm",
-      "Work envelope: 1500x1000x800mm",
-      "Spindle speed: 12,000 RPM"
+      "Model: DMG Mori NL2000",
+      "Origin: Made in Japan",
+      "Max turning diameter: 500mm",
+      "Spindle speed: Up to 4000 RPM"
     ],
     iconType: "cog",
-    status: "featured",
-    createdAt: "2026-01-26T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-01-31T09:00:00Z"
+    status: "active",
+    createdAt: "2026-01-12T14:00:00Z",
+    updatedAt: "2026-02-06T10:30:00Z",
+    publishedAt: "2026-01-18T09:00:00Z"
   },
   {
     id: "s13",
-    title: "Custom Component Design",
+    title: "Double Column Fully Automatic Band Saw",
     category: "Precision Metal Designing and Machining",
-    shortDescription: "Custom component design and engineering services for specialized industrial applications.",
-    detailedDescription: "Comprehensive design and engineering services for custom components, from concept development to final production-ready designs.",
+    shortDescription: "Model WA-460 HANC - Made in Taiwan. Double column machine provides maximum capacity and rigidity.",
+    detailedDescription: "High-capacity band saw with double column design for maximum rigidity and precision cutting of large materials.",
     benefits: [
-      "Tailored solutions",
-      "Engineering expertise",
-      "Design optimization",
-      "Cost-effective development"
+      "Maximum cutting capacity",
+      "Superior rigidity and stability",
+      "Fully automatic operation",
+      "High precision cuts"
     ],
     keyFeatures: [
-      "3D CAD modeling",
-      "Finite element analysis",
-      "Prototype development",
-      "Design validation"
+      "Double column design",
+      "Fully automatic operation",
+      "Large material capacity",
+      "Precision cutting control"
     ],
     specifications: [
-      "Design software: SolidWorks, AutoCAD",
-      "Analysis: FEA, CFD capabilities",
-      "File formats: STEP, IGES, DWG"
+      "Model: WA-460 HANC",
+      "Origin: Made in Taiwan",
+      "Cutting capacity: 460mm diameter",
+      "Blade speed: Variable control"
     ],
     iconType: "settings",
     status: "active",
-    createdAt: "2026-01-27T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-02-01T09:00:00Z"
+    createdAt: "2026-01-14T16:00:00Z",
+    updatedAt: "2026-02-07T11:20:00Z",
+    publishedAt: "2026-01-19T14:30:00Z"
   },
   {
     id: "s14",
-    title: "Prototype Manufacturing",
+    title: "Waterjet Cutting Machine",
     category: "Precision Metal Designing and Machining",
-    shortDescription: "Rapid prototype manufacturing services for product development and testing applications.",
-    detailedDescription: "Fast and accurate prototype manufacturing services to support product development cycles and design validation processes.",
+    shortDescription: "Flow Model MACH2 3120b - Made in USA. Cutting process by using water and abrasive (garnet).",
+    detailedDescription: "Advanced waterjet cutting technology for complex materials and precision requirements using high-pressure water and abrasive cutting.",
     benefits: [
-      "Rapid turnaround",
-      "Design validation support",
-      "Cost-effective prototyping",
-      "Multiple material options"
+      "No heat affected zone",
+      "Precise cutting of various materials",
+      "Complex geometry capability",
+      "Minimal material waste"
     ],
     keyFeatures: [
-      "Rapid prototyping capability",
-      "Various manufacturing methods",
-      "Quality testing services",
-      "Design iteration support"
+      "High-pressure water cutting",
+      "Abrasive garnet system",
+      "Multi-material compatibility",
+      "CNC controlled precision"
     ],
     specifications: [
-      "Lead time: 3-7 days",
-      "Materials: Aluminum, steel, plastics",
-      "Quantity: 1-100 pieces"
+      "Model: Flow MACH2 3120b",
+      "Origin: Made in USA",
+      "Cutting pressure: Up to 60,000 PSI",
+      "Table size: 3120mm x 1560mm"
     ],
-    iconType: "wrench",
-    status: "active",
-    createdAt: "2026-01-28T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-02-02T09:00:00Z"
+    iconType: "zap",
+    status: "featured",
+    createdAt: "2026-01-08T11:00:00Z",
+    updatedAt: "2026-02-04T15:45:00Z",
+    publishedAt: "2026-01-14T12:00:00Z"
   },
   {
     id: "s15",
-    title: "Precision Turning",
+    title: "TMT CNC Turning Machine",
     category: "Precision Metal Designing and Machining",
-    shortDescription: "High-precision turning services for cylindrical components with exceptional surface finish and dimensional accuracy.",
-    detailedDescription: "Advanced precision turning capabilities for producing high-quality cylindrical components with superior surface finish and tight dimensional tolerances.",
+    shortDescription: "TMT Model L-290M - Made in Taiwan. Easy to operate with high precision and accuracy.",
+    detailedDescription: "High-precision CNC turning machine designed for easy operation while maintaining exceptional accuracy and repeatability.",
     benefits: [
-      "Exceptional surface finish",
-      "Tight dimensional control",
-      "High production efficiency",
-      "Quality consistency"
+      "Easy operation interface",
+      "High precision turning",
+      "Consistent accuracy",
+      "Reliable performance"
     ],
     keyFeatures: [
-      "CNC turning centers",
-      "Live tooling capability",
-      "Automatic bar feeding",
-      "In-process measurement"
+      "User-friendly CNC control",
+      "High precision spindle",
+      "Automatic tool changer",
+      "Rigid machine construction"
     ],
     specifications: [
-      "Diameter capacity: 3-500mm",
-      "Length capacity: Up to 1500mm",
-      "Surface finish: Ra 0.4 μm"
+      "Model: TMT L-290M",
+      "Origin: Made in Taiwan",
+      "Max turning diameter: 290mm",
+      "Spindle speed: Up to 3500 RPM"
     ],
-    iconType: "drill",
+    iconType: "cog",
     status: "active",
-    createdAt: "2026-01-29T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-02-03T09:00:00Z"
+    createdAt: "2026-01-16T09:00:00Z",
+    updatedAt: "2026-02-08T14:15:00Z",
+    publishedAt: "2026-01-22T10:30:00Z"
   },
   {
     id: "s16",
-    title: "Precision Milling",
+    title: "DMGT NC Turning Machine",
     category: "Precision Metal Designing and Machining",
-    shortDescription: "Advanced precision milling services for complex geometries and multi-axis machining requirements.",
-    detailedDescription: "Sophisticated precision milling capabilities for producing complex components with intricate geometries and multi-axis machining requirements.",
+    shortDescription: "DMTG Model CKE 6150Z - Made in China. Easy to operate with automatic forced lubrication.",
+    detailedDescription: "Reliable NC turning machine with automatic forced lubrication system for consistent performance and easy operation in production environments.",
     benefits: [
-      "Complex geometry capability",
-      "Multi-axis machining",
-      "High material removal rates",
-      "Excellent surface quality"
+      "Easy operation",
+      "Automatic forced lubrication",
+      "Consistent performance",
+      "Production reliability"
     ],
     keyFeatures: [
-      "5-axis milling centers",
-      "High-speed machining",
-      "Advanced tooling systems",
-      "Precision workholding"
+      "NC control system",
+      "Forced lubrication system",
+      "Production efficiency",
+      "Reliable operation"
     ],
     specifications: [
-      "Work envelope: 2000x1500x1000mm",
-      "Spindle speed: 15,000 RPM",
-      "Positioning accuracy: ±0.003mm"
+      "Model: DMTG CKE 6150Z",
+      "Origin: Made in China",
+      "Max turning diameter: 500mm",
+      "Chuck size: 250mm"
     ],
     iconType: "cog",
     status: "active",
-    createdAt: "2026-01-30T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-02-04T09:00:00Z"
+    createdAt: "2026-01-18T11:30:00Z",
+    updatedAt: "2026-02-09T16:45:00Z",
+    publishedAt: "2026-01-24T12:15:00Z"
   },
   {
     id: "s17",
-    title: "Wire EDM Services",
+    title: "Pinnacle CNC Milling Machine (LV126)",
     category: "Precision Metal Designing and Machining",
-    shortDescription: "Wire electrical discharge machining services for intricate cuts and complex shapes in hardened materials.",
-    detailedDescription: "Precision wire EDM services for creating intricate cuts, complex shapes, and fine details in hardened materials with exceptional accuracy.",
+    shortDescription: "Pinnacle, LV126 - Made in Taiwan. High accuracy of positioning and repeatability.",
+    detailedDescription: "High-precision CNC milling machine with exceptional positioning accuracy and repeatability for demanding machining applications.",
     benefits: [
-      "Hardened material capability",
-      "Intricate shape cutting",
-      "No mechanical stress",
-      "Excellent surface finish"
+      "High positioning accuracy",
+      "Excellent repeatability",
+      "Precision machining capability",
+      "Reliable performance"
     ],
     keyFeatures: [
-      "CNC wire EDM machines",
-      "Automatic wire threading",
-      "Submerged cutting capability",
-      "Multi-axis positioning"
+      "CNC milling capability",
+      "High accuracy positioning",
+      "Repeatability excellence",
+      "Precision control"
     ],
     specifications: [
-      "Wire diameter: 0.1-0.3mm",
-      "Workpiece thickness: Up to 400mm",
-      "Cutting accuracy: ±0.002mm"
-    ],
-    iconType: "zap",
-    status: "active",
-    createdAt: "2026-01-31T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-02-05T09:00:00Z"
-  },
-  {
-    id: "s18",
-    title: "Surface Grinding",
-    category: "Precision Metal Designing and Machining",
-    shortDescription: "Precision surface grinding services for achieving superior flatness and surface finish on critical components.",
-    detailedDescription: "High-precision surface grinding services to achieve exceptional flatness, parallelism, and surface finish on critical machined components.",
-    benefits: [
-      "Superior surface finish",
-      "Exceptional flatness",
-      "Tight dimensional control",
-      "Consistent quality output"
-    ],
-    keyFeatures: [
-      "CNC surface grinders",
-      "Automatic dressing systems",
-      "In-process measurement",
-      "Various grinding wheels"
-    ],
-    specifications: [
-      "Table size: 1000x500mm",
-      "Grinding accuracy: ±0.001mm",
-      "Surface finish: Ra 0.1 μm"
-    ],
-    iconType: "settings",
-    status: "active",
-    createdAt: "2026-02-01T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-02-06T09:00:00Z"
-  },
-  {
-    id: "s19",
-    title: "Cylindrical Grinding",
-    category: "Precision Metal Designing and Machining",
-    shortDescription: "Precision cylindrical grinding services for shafts, pins, and cylindrical components requiring tight tolerances.",
-    detailedDescription: "Advanced cylindrical grinding capabilities for producing high-precision shafts, pins, and cylindrical components with exceptional roundness and surface finish.",
-    benefits: [
-      "Exceptional roundness",
-      "Superior surface finish",
-      "Tight tolerance capability",
-      "High production rates"
-    ],
-    keyFeatures: [
-      "CNC cylindrical grinders",
-      "Automatic loading systems",
-      "In-process gauging",
-      "Various grinding methods"
-    ],
-    specifications: [
-      "Diameter range: 5-500mm",
-      "Length capacity: Up to 2000mm",
-      "Roundness: 0.001mm"
-    ],
-    iconType: "drill",
-    status: "active",
-    createdAt: "2026-02-02T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-02-07T09:00:00Z"
-  },
-  {
-    id: "s20",
-    title: "Gear Manufacturing",
-    category: "Precision Metal Designing and Machining",
-    shortDescription: "Precision gear manufacturing services for industrial gearboxes and power transmission applications.",
-    detailedDescription: "Specialized gear manufacturing services producing high-quality gears for industrial applications with precise tooth profiles and superior quality.",
-    benefits: [
-      "Precise tooth profiles",
-      "Superior gear quality",
-      "Various gear types",
-      "Quality testing included"
-    ],
-    keyFeatures: [
-      "CNC gear cutting machines",
-      "Gear grinding capability",
-      "Quality inspection systems",
-      "Heat treatment services"
-    ],
-    specifications: [
-      "Module range: 0.5-10",
-      "Diameter: Up to 1000mm",
-      "Quality grade: DIN 6"
+      "Model: Pinnacle LV126",
+      "Origin: Made in Taiwan",
+      "Table size: 1300mm x 600mm",
+      "Spindle speed: Up to 8000 RPM"
     ],
     iconType: "cog",
     status: "active",
-    createdAt: "2026-02-03T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-02-08T09:00:00Z"
+    createdAt: "2026-01-20T13:45:00Z",
+    updatedAt: "2026-02-11T09:30:00Z",
+    publishedAt: "2026-01-26T14:00:00Z"
+  },
+  {
+    id: "s18",
+    title: "Pinnacle CNC Milling Machine (LV105)",
+    category: "Precision Metal Designing and Machining",
+    shortDescription: "Pinnacle, LV105 - Made in Taiwan. High accuracy of positioning and repeatability.",
+    detailedDescription: "Compact CNC milling machine with high accuracy positioning and repeatability for precision machining of smaller components.",
+    benefits: [
+      "High positioning accuracy",
+      "Excellent repeatability",
+      "Compact design",
+      "Precision machining"
+    ],
+    keyFeatures: [
+      "CNC milling capability",
+      "Compact footprint",
+      "High accuracy positioning",
+      "Repeatability excellence"
+    ],
+    specifications: [
+      "Model: Pinnacle LV105",
+      "Origin: Made in Taiwan",
+      "Table size: 1050mm x 500mm",
+      "Spindle speed: Up to 8000 RPM"
+    ],
+    iconType: "cog",
+    status: "active",
+    createdAt: "2026-01-22T15:20:00Z",
+    updatedAt: "2026-02-12T11:45:00Z",
+    publishedAt: "2026-01-28T16:30:00Z"
+  },
+  {
+    id: "s19",
+    title: "NC Surface Grinding Machine (SD6120AA)",
+    category: "Precision Metal Designing and Machining",
+    shortDescription: "PROTH Model SD6120AA - Made in Taiwan. Surface grinding is one of the oldest and widely used grinding process.",
+    detailedDescription: "Professional NC surface grinding machine utilizing one of the oldest and most widely used grinding processes for precision surface finishing.",
+    benefits: [
+      "Proven grinding technology",
+      "Precision surface finishing",
+      "Wide application range",
+      "Reliable operation"
+    ],
+    keyFeatures: [
+      "NC control system",
+      "Surface grinding capability",
+      "Precision finishing",
+      "Wide process application"
+    ],
+    specifications: [
+      "Model: PROTH SD6120AA",
+      "Origin: Made in Taiwan",
+      "Table size: 600mm x 1200mm",
+      "Grinding wheel: 355mm diameter"
+    ],
+    iconType: "settings",
+    status: "active",
+    createdAt: "2026-01-24T10:15:00Z",
+    updatedAt: "2026-02-13T14:30:00Z",
+    publishedAt: "2026-01-30T11:45:00Z"
+  },
+  {
+    id: "s20",
+    title: "DMG MORI CNC Milling Machine (DMU 50)",
+    category: "Precision Metal Designing and Machining",
+    shortDescription: "DMG MORI Model: DMU 50 - Made in Germany. 5-axis universal milling with positioning and simultaneous capabilities.",
+    detailedDescription: "Advanced 5-axis universal milling machine with both positioning and simultaneous capabilities for complex component manufacturing.",
+    benefits: [
+      "5-axis milling capability",
+      "Universal machining",
+      "Positioning and simultaneous modes",
+      "German engineering quality"
+    ],
+    keyFeatures: [
+      "5-axis universal milling",
+      "Positioning capabilities",
+      "Simultaneous machining",
+      "Complex geometry production"
+    ],
+    specifications: [
+      "Model: DMG MORI DMU 50",
+      "Origin: Made in Germany",
+      "5-axis capability",
+      "Spindle speed: Up to 18000 RPM"
+    ],
+    iconType: "cog",
+    status: "featured",
+    createdAt: "2026-01-26T12:30:00Z",
+    updatedAt: "2026-02-14T16:15:00Z",
+    publishedAt: "2026-02-01T13:00:00Z"
   },
   {
     id: "s21",
-    title: "Quality Inspection Services",
+    title: "DMG MORI CNC Turn Mill Machine (DMU 125)",
     category: "Precision Metal Designing and Machining",
-    shortDescription: "Comprehensive quality inspection and measurement services using advanced metrology equipment.",
-    detailedDescription: "Professional quality inspection services using state-of-the-art metrology equipment to ensure component quality and dimensional accuracy.",
+    shortDescription: "DMG MORI Model: DMU 125 - Made in Germany. 5-axis universal turn mill with positioning and simultaneous capabilities.",
+    detailedDescription: "Premium 5-axis universal turn mill machine combining turning and milling operations with positioning and simultaneous capabilities for ultimate precision.",
     benefits: [
-      "Accurate measurements",
-      "Quality assurance",
-      "Detailed reporting",
-      "Traceability documentation"
+      "5-axis turn mill capability",
+      "Universal machining operations",
+      "Positioning and simultaneous modes",
+      "Premium German engineering"
     ],
     keyFeatures: [
-      "CMM measurement systems",
-      "Optical measurement tools",
-      "Surface roughness testing",
-      "Dimensional reporting"
+      "5-axis turn mill operations",
+      "Universal machining capability",
+      "Positioning and simultaneous modes",
+      "Complex component production"
     ],
     specifications: [
-      "CMM accuracy: ±0.001mm",
-      "Measurement volume: 1000x800x600mm",
-      "Temperature controlled: ±0.5°C"
+      "Model: DMG MORI DMU 125",
+      "Origin: Made in Germany",
+      "5-axis turn mill capability",
+      "Max turning diameter: 500mm"
     ],
-    iconType: "award",
-    status: "active",
-    createdAt: "2026-02-04T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-02-09T09:00:00Z"
+    iconType: "cog",
+    status: "featured",
+    createdAt: "2026-01-28T14:45:00Z",
+    updatedAt: "2026-02-15T10:20:00Z",
+    publishedAt: "2026-02-03T15:30:00Z"
   },
 
   // Category 5: Sacrificial Anode Installation and Specialized Coating (2 services)
@@ -828,185 +800,184 @@ const mockServices: Service[] = [
     id: "s22",
     title: "Sacrificial Anode Installation",
     category: "Sacrificial Anode Installation and Specialized Coating",
-    shortDescription: "Professional installation of sacrificial anodes on coated pipelines for cathodic protection systems.",
-    detailedDescription: "Expert installation services for sacrificial anodes on coated pipelines, supporting major pipeline coating applicators since 2001 with proven cathodic protection solutions.",
+    shortDescription: "Sacrificial anode is part of the defensive system to ensure continuous integrity of a pipeline system. Bredero Shaw Sdn Bhd and PPSC Industries Sdn Bhd are among our major customers in this field of interest.",
+    detailedDescription: "RWNA has been supporting major pipeline coating applicators since 2001 for installation of sacrificial anode on the coated line pipes.",
     benefits: [
+      "Continuous pipeline integrity",
+      "Corrosion protection system",
       "Proven track record since 2001",
-      "Expert installation techniques",
-      "Cathodic protection optimization",
-      "Extended pipeline life"
+      "Major industry partnerships"
     ],
     keyFeatures: [
-      "Various anode types supported",
-      "Precision installation methods",
-      "Quality assurance testing",
-      "Installation documentation"
+      "Defensive corrosion system",
+      "Pipeline integrity assurance",
+      "Coated line pipe compatibility",
+      "Industry standard installation"
     ],
     specifications: [
+      "Installation method: Welded attachment",
       "Anode types: Aluminum, Zinc, Magnesium",
-      "Pipeline diameter: 4\" to 48\"",
-      "Installation depth: Up to 30m"
+      "Pipeline compatibility: All standard sizes",
+      "Coating systems: Compatible with major applicators"
     ],
     iconType: "zap",
     status: "featured",
-    createdAt: "2026-02-05T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-02-10T09:00:00Z"
+    createdAt: "2026-01-06T13:00:00Z",
+    updatedAt: "2026-02-03T09:15:00Z",
+    publishedAt: "2026-01-11T10:45:00Z"
   },
   {
     id: "s23",
-    title: "Specialized Pipeline Coating",
+    title: "Specialized Coatings and Pin Brazing",
     category: "Sacrificial Anode Installation and Specialized Coating",
-    shortDescription: "Advanced pipeline coating services for corrosion protection in marine and industrial environments.",
-    detailedDescription: "Comprehensive pipeline coating services providing superior corrosion protection for pipelines in challenging marine and industrial environments.",
+    shortDescription: "We also provide services in specialized coatings and pin brazing to complement our anode installation services.",
+    detailedDescription: "Comprehensive coating and pin brazing services that complement our sacrificial anode installation capabilities for complete pipeline protection.",
     benefits: [
-      "Superior corrosion protection",
-      "Extended service life",
-      "Environmental resistance",
-      "Cost-effective protection"
+      "Complete protection system",
+      "Complementary services",
+      "Specialized coating expertise",
+      "Integrated solution approach"
     ],
     keyFeatures: [
-      "Multiple coating systems",
-      "Surface preparation services",
-      "Quality control testing",
-      "Application expertise"
+      "Specialized coating application",
+      "Pin brazing technology",
+      "Anode installation integration",
+      "Complete system approach"
     ],
     specifications: [
-      "Coating types: FBE, 3LPE, 3LPP",
-      "Thickness range: 200-3000 μm",
-      "Temperature rating: Up to 120°C"
+      "Coating types: Epoxy, Polyethylene, FBE",
+      "Pin brazing: Copper-silver alloy",
+      "Temperature range: Up to 200°C",
+      "Application method: Spray, brush, dip"
     ],
-    iconType: "shield",
+    iconType: "award",
     status: "active",
-    createdAt: "2026-02-06T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-02-11T09:00:00Z"
+    createdAt: "2026-01-09T10:30:00Z",
+    updatedAt: "2026-02-05T14:20:00Z",
+    publishedAt: "2026-01-16T11:15:00Z"
   },
 
   // Category 6: Fabrication and Maintenance (2 services)
   {
     id: "s24",
-    title: "Structural Fabrication",
+    title: "Fabrication and Installation Services",
     category: "Fabrication and Maintenance (Onshore and Offshore)",
-    shortDescription: "Comprehensive structural fabrication services for onshore and offshore industrial applications.",
-    detailedDescription: "Professional structural fabrication services providing complete solutions for piping systems, structural frameworks, and mechanical equipment in both onshore and offshore environments.",
+    shortDescription: "Complete fabrication and installation services for various industrial applications.",
+    detailedDescription: "Comprehensive fabrication, installation, and maintenance services for piping, structures, and mechanical equipment both onshore and offshore.",
     benefits: [
+      "Complete project solutions",
       "Onshore and offshore capability",
-      "Complete fabrication solutions",
-      "Quality workmanship",
-      "Project management expertise"
+      "Quality fabrication standards",
+      "Timely project delivery"
     ],
     keyFeatures: [
-      "Structural steel fabrication",
-      "Piping system fabrication",
-      "Mechanical equipment assembly",
+      "Structural fabrication",
+      "Piping system installation",
+      "Mechanical equipment setup",
       "Quality assurance programs"
     ],
     specifications: [
-      "Steel grades: A36, A572, A992",
-      "Welding standards: AWS D1.1, API 1104",
-      "Capacity: Up to 500 tons"
+      "Fabrication standards: ASME, API, AWS",
+      "Material types: Carbon steel, Stainless steel, Alloys",
+      "Welding processes: SMAW, GMAW, GTAW, SAW",
+      "Capacity: Up to 500 tons per project"
     ],
     iconType: "drill",
     status: "active",
-    createdAt: "2026-02-07T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-02-12T09:00:00Z"
+    createdAt: "2026-01-11T15:00:00Z",
+    updatedAt: "2026-02-08T12:30:00Z",
+    publishedAt: "2026-01-17T13:45:00Z"
   },
   {
     id: "s25",
-    title: "Industrial Maintenance Services",
+    title: "Plant Maintenance and Equipment Services",
     category: "Fabrication and Maintenance (Onshore and Offshore)",
-    shortDescription: "Comprehensive maintenance services for industrial equipment and infrastructure in onshore and offshore facilities.",
-    detailedDescription: "Complete maintenance solutions for industrial equipment, piping systems, and infrastructure, ensuring optimal performance and extended service life in demanding environments.",
+    shortDescription: "Comprehensive maintenance and equipment services for industrial plants and facilities.",
+    detailedDescription: "Complete maintenance solutions for industrial plants including preventive maintenance, equipment overhaul, and emergency repair services.",
     benefits: [
-      "Comprehensive maintenance solutions",
       "Reduced downtime",
-      "Extended equipment life",
-      "Cost-effective service delivery"
+      "Preventive maintenance programs",
+      "Emergency response capability",
+      "Equipment life extension"
     ],
     keyFeatures: [
-      "Preventive maintenance programs",
-      "Emergency repair services",
-      "Equipment refurbishment",
-      "Condition monitoring"
+      "Scheduled maintenance programs",
+      "Equipment overhaul services",
+      "Emergency repair response",
+      "Condition monitoring systems"
     ],
     specifications: [
-      "Service coverage: 24/7 availability",
-      "Response time: <4 hours emergency",
-      "Maintenance types: Preventive, corrective, predictive"
+      "Response time: 24/7 emergency service",
+      "Equipment types: Pumps, Compressors, Heat exchangers",
+      "Maintenance standards: ISO 14224, API 510/570/653",
+      "Service locations: Onshore and offshore facilities"
     ],
-    iconType: "wrench",
+    iconType: "settings",
     status: "active",
-    createdAt: "2026-02-08T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-02-13T09:00:00Z"
+    createdAt: "2026-01-13T12:00:00Z",
+    updatedAt: "2026-02-09T16:00:00Z",
+    publishedAt: "2026-01-20T08:30:00Z"
   },
 
-  // Category 7: Power Boilers & Pressure Vessels (1 service)
+  // Category 7: Manufacture, Assembly, Repairs & Alteration of Power Boilers (1 service)
   {
     id: "s26",
-    title: "ASME Boiler & Pressure Vessel Services",
+    title: "ASME Certified Services",
     category: "Manufacture, Assembly, Repairs & Alteration of Power Boilers (S) & Pressure Vessels (U,U2)",
-    shortDescription: "ASME certified manufacturing, assembly, repair and alteration services for power boilers and pressure vessels.",
-    detailedDescription: "Complete ASME certified services for power boilers and pressure vessels, including manufacturing, assembly, repairs, and alterations in compliance with ASME Boiler and Pressure Vessel Code.",
+    shortDescription: "Complete ASME certified services for power boilers and pressure vessels with proper documentation and compliance.",
+    detailedDescription: "ASME certified manufacturing, assembly, repair and alteration services for power boilers and pressure vessels with comprehensive documentation and regulatory compliance.",
     benefits: [
       "ASME certification compliance",
-      "Complete service portfolio",
-      "Quality assurance programs",
-      "Regulatory compliance support"
+      "Complete documentation",
+      "Regulatory compliance",
+      "Quality assurance"
     ],
     keyFeatures: [
-      "ASME S, U, U2 stamp authority",
-      "Design and engineering services",
+      "Power boiler services",
+      "Pressure vessel expertise",
       "Manufacturing capabilities",
-      "Inspection and testing services"
+      "Assembly and repair services"
     ],
     specifications: [
-      "Pressure rating: Up to 1500 PSI",
-      "Temperature rating: Up to 650°C",
-      "Capacity: Up to 100,000 lbs/hr steam"
+      "Certifications: ASME S, U, U2 stamps",
+      "Pressure ratings: Up to 2500 PSI",
+      "Temperature ratings: Up to 650°C",
+      "Documentation: Complete ASME compliance"
     ],
     iconType: "award",
     status: "featured",
-    createdAt: "2026-02-09T10:00:00Z",
-    updatedAt: "2026-02-10T14:30:00Z",
-    publishedAt: "2026-02-14T09:00:00Z"
+    createdAt: "2026-01-30T16:00:00Z",
+    updatedAt: "2026-02-15T12:45:00Z",
+    publishedAt: "2026-02-05T14:15:00Z"
   }
 ];
 
 export default function Services() {
-  // State management
   const [services, setServices] = useState<Service[]>(mockServices);
   const [categories, setCategories] = useState<ServiceCategory[]>(mockCategories);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("all");
-  const [statusFilter, setStatusFilter] = useState("all");
-  
-  // Dialog states
+  const [searchQuery, setSearchQuery] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
-  const [isCategoryDialogOpen, setIsCategoryDialogOpen] = useState(false);
   const [editingService, setEditingService] = useState<Service | null>(null);
   const [viewingService, setViewingService] = useState<Service | null>(null);
+  
+  // Category management states
+  const [isCategoryDialogOpen, setIsCategoryDialogOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<ServiceCategory | null>(null);
+  const [draggedCategory, setDraggedCategory] = useState<ServiceCategory | null>(null);
   
   // Form state for arrays
   const [benefitsInput, setBenefitsInput] = useState('');
   const [keyFeaturesInput, setKeyFeaturesInput] = useState('');
   const [specificationsInput, setSpecificationsInput] = useState('');
-  
-  // Delete confirmation states
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const [serviceToDelete, setServiceToDelete] = useState<Service | null>(null);
 
   // Get category options without numbering
   const categoryOptions = categories.sort((a, b) => a.order - b.order).map(cat => cat.name);
 
-  // Filter services (exclude deleted services from main view)
-  const activeServices = services.filter(service => !service.isDeleted);
-  
-  const filteredServices = activeServices.filter(service => {
+  // Filter services
+  const filteredServices = services.filter(service => {
     const matchesSearch = service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          service.shortDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          service.category.toLowerCase().includes(searchQuery.toLowerCase());
@@ -1016,33 +987,101 @@ export default function Services() {
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
-  // Trash system functions
-  const handleDeleteService = (service: Service) => {
-    setServiceToDelete(service);
-    setIsDeleteDialogOpen(true);
+  // Category management functions
+  const handleAddCategory = () => {
+    setEditingCategory(null);
+    setIsCategoryDialogOpen(true);
   };
 
-  const confirmMoveToTrash = () => {
-    if (!serviceToDelete) return;
-    
-    const now = new Date();
-    
-    setServices(services.map(s => s.id === serviceToDelete.id ? {
-      ...s,
-      isDeleted: true,
-      deletedAt: now.toISOString(),
-      deletedBy: "Current User", // In real app, get from auth context
-      updatedAt: now.toISOString()
-    } : s));
-    
-    setIsDeleteDialogOpen(false);
-    const serviceName = serviceToDelete.title;
-    setServiceToDelete(null);
-    toast.success(`"${serviceName}" moved to trash. Will be permanently deleted in 7 days.`);
+  const handleEditCategory = (category: ServiceCategory) => {
+    setEditingCategory(category);
+    setIsCategoryDialogOpen(true);
   };
 
+  const handleDeleteCategory = (categoryId: string) => {
+    const category = categories.find(c => c.id === categoryId);
+    if (category && category.serviceCount > 0) {
+      toast.error(`Cannot delete category "${category.name}" - it has ${category.serviceCount} services assigned`);
+      return;
+    }
+    
+    setCategories(categories.filter(c => c.id !== categoryId));
+    toast.success("Category deleted successfully");
+  };
 
-  // Other service functions
+  const handleCategorySubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    
+    const categoryData = {
+      name: formData.get("name") as string,
+      description: formData.get("description") as string,
+      iconType: formData.get("iconType") as string,
+    };
+
+    if (editingCategory) {
+      setCategories(categories.map(c => c.id === editingCategory.id ? {
+        ...c,
+        ...categoryData,
+        updatedAt: new Date().toISOString()
+      } : c));
+      toast.success("Category updated successfully");
+    } else {
+      const newCategory: ServiceCategory = {
+        id: `cat${categories.length + 1}`,
+        ...categoryData,
+        order: categories.length + 1,
+        serviceCount: 0,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      setCategories([...categories, newCategory]);
+      toast.success("Category created successfully");
+    }
+
+    setIsCategoryDialogOpen(false);
+    setEditingCategory(null);
+  };
+
+  // Drag and drop functions
+  const handleDragStart = (e: React.DragEvent, category: ServiceCategory) => {
+    setDraggedCategory(category);
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleDrop = (e: React.DragEvent, targetCategory: ServiceCategory) => {
+    e.preventDefault();
+    
+    if (!draggedCategory || draggedCategory.id === targetCategory.id) {
+      setDraggedCategory(null);
+      return;
+    }
+
+    const draggedIndex = categories.findIndex(c => c.id === draggedCategory.id);
+    const targetIndex = categories.findIndex(c => c.id === targetCategory.id);
+    
+    const newCategories = [...categories];
+    const [removed] = newCategories.splice(draggedIndex, 1);
+    newCategories.splice(targetIndex, 0, removed);
+    
+    // Update order numbers
+    const updatedCategories = newCategories.map((cat, index) => ({
+      ...cat,
+      order: index + 1,
+      updatedAt: new Date().toISOString()
+    }));
+    
+    setCategories(updatedCategories);
+    setDraggedCategory(null);
+    toast.success("Category order updated");
+  };
+
+  // Service management functions (existing)
   const handleAddService = () => {
     setEditingService(null);
     setBenefitsInput('');
@@ -1053,9 +1092,9 @@ export default function Services() {
 
   const handleEditService = (service: Service) => {
     setEditingService(service);
-    setBenefitsInput(service.benefits.join('\n'));
-    setKeyFeaturesInput(service.keyFeatures.join('\n'));
-    setSpecificationsInput(service.specifications.join('\n'));
+    setBenefitsInput(service.benefits.join('\\n'));
+    setKeyFeaturesInput(service.keyFeatures.join('\\n'));
+    setSpecificationsInput(service.specifications.join('\\n'));
     setIsDialogOpen(true);
   };
 
@@ -1064,13 +1103,18 @@ export default function Services() {
     setIsViewDialogOpen(true);
   };
 
+  const handleDeleteService = (serviceId: string) => {
+    setServices(services.filter(s => s.id !== serviceId));
+    toast.success("Service deleted successfully");
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     
-    const benefitsArray = benefitsInput.split('\n').map(b => b.trim()).filter(b => b);
-    const keyFeaturesArray = keyFeaturesInput.split('\n').map(f => f.trim()).filter(f => f);
-    const specificationsArray = specificationsInput.split('\n').map(s => s.trim()).filter(s => s);
+    const benefitsArray = benefitsInput.split('\\n').map(b => b.trim()).filter(b => b);
+    const keyFeaturesArray = keyFeaturesInput.split('\\n').map(f => f.trim()).filter(f => f);
+    const specificationsArray = specificationsInput.split('\\n').map(s => s.trim()).filter(s => s);
     
     const serviceData = {
       title: formData.get("title") as string,
@@ -1137,122 +1181,26 @@ export default function Services() {
       settings: <Settings className="h-5 w-5" />,
       award: <Award className="h-5 w-5" />,
     };
-    return iconMap[iconType] || <Wrench className="h-5 w-5" />;
+    return iconMap[iconType] || <Settings className="h-5 w-5" />;
   };
 
-  const getCategoryIcon = (categoryName: string) => {
-    const category = categories.find(cat => cat.name === categoryName);
-    return category ? getIcon(category.iconType) : <Wrench className="h-4 w-4" />;
-  };
-
-  // Category management functions
-  const handleAddCategory = () => {
-    setEditingCategory(null);
-    setIsCategoryDialogOpen(true);
-  };
-
-  const handleEditCategory = (category: ServiceCategory) => {
-    setEditingCategory(category);
-    setIsCategoryDialogOpen(true);
-  };
-
-  const handleDeleteCategory = (categoryId: string) => {
-    const category = categories.find(c => c.id === categoryId);
-    const servicesInCategory = services.filter(s => s.category === category?.name);
-    
-    if (servicesInCategory.length > 0) {
-      toast.error(`Cannot delete category "${category?.name}" because it contains ${servicesInCategory.length} service(s). Please move or delete the services first.`);
-      return;
+  const getCategoryIcon = (category: string) => {
+    const categoryData = categories.find(c => c.name === category);
+    if (categoryData) {
+      return getIcon(categoryData.iconType);
     }
-    
-    setCategories(categories.filter(c => c.id !== categoryId));
-    toast.success(`Category "${category?.name}" deleted successfully`);
-  };
-
-  const handleCategorySubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    
-    const categoryData = {
-      name: formData.get("name") as string,
-      description: formData.get("description") as string,
-      iconType: formData.get("iconType") as string,
-    };
-
-    if (editingCategory) {
-      setCategories(categories.map(c => c.id === editingCategory.id ? {
-        ...c,
-        ...categoryData,
-        updatedAt: new Date().toISOString()
-      } : c));
-      toast.success("Category updated successfully");
-    } else {
-      const newCategory: ServiceCategory = {
-        id: `cat${categories.length + 1}`,
-        ...categoryData,
-        order: categories.length + 1,
-        serviceCount: 0,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      };
-      setCategories([...categories, newCategory]);
-      toast.success("Category created successfully");
-    }
-
-    setIsCategoryDialogOpen(false);
-    setEditingCategory(null);
-  };
-
-  // Drag and drop for categories
-  const handleDragStart = (e: React.DragEvent, categoryId: string) => {
-    e.dataTransfer.setData("text/plain", categoryId);
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e: React.DragEvent, targetCategoryId: string) => {
-    e.preventDefault();
-    const draggedCategoryId = e.dataTransfer.getData("text/plain");
-    
-    if (draggedCategoryId === targetCategoryId) return;
-
-    const draggedCategory = categories.find(c => c.id === draggedCategoryId);
-    const targetCategory = categories.find(c => c.id === targetCategoryId);
-    
-    if (!draggedCategory || !targetCategory) return;
-
-    const newCategories = [...categories];
-    const draggedIndex = newCategories.findIndex(c => c.id === draggedCategoryId);
-    const targetIndex = newCategories.findIndex(c => c.id === targetCategoryId);
-    
-    // Remove dragged category and insert at target position
-    const [removed] = newCategories.splice(draggedIndex, 1);
-    newCategories.splice(targetIndex, 0, removed);
-    
-    // Update order numbers
-    const updatedCategories = newCategories.map((category, index) => ({
-      ...category,
-      order: index + 1,
-      updatedAt: new Date().toISOString()
-    }));
-    
-    setCategories(updatedCategories);
-    toast.success("Category order updated successfully");
+    return <Settings className="h-4 w-4" />;
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-in fade-in duration-500">
       {/* Header */}
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Services</h1>
-            <p className="text-muted-foreground">
-              Manage RWNA Engineering service offerings and categories
-            </p>
-          </div>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-3xl font-bold tracking-tight">Services</h1>
+          <p className="text-muted-foreground">
+            Manage RWNA Engineering service offerings and technical capabilities.
+          </p>
         </div>
       </div>
 
@@ -1263,49 +1211,50 @@ export default function Services() {
           <TabsTrigger value="categories">Categories Management</TabsTrigger>
         </TabsList>
 
-        {/* Services Management Tab */}
+        {/* Services Tab */}
         <TabsContent value="services" className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex flex-col gap-2">
-              <h2 className="text-2xl font-bold tracking-tight">Services Management</h2>
-              <p className="text-muted-foreground">
-                (Showing {filteredServices.length} of {activeServices.length} services)
-              </p>
-            </div>
-            <Button onClick={handleAddService} className="flex items-center gap-2">
-              <Plus className="h-4 w-4" />
-              Add New Service
-            </Button>
-          </div>
-
-          {/* Filters */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="flex-1">
+            <p className="text-muted-foreground">
+              <span className="text-sm font-medium text-primary">
+                (Showing {filteredServices.length} of {services.length} services)
+              </span>
+            </p>
+            <div className="flex items-center gap-2">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                 <Input
                   placeholder="Search services..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 w-64"
                 />
               </div>
+              <Button onClick={handleAddService}>
+                <Plus className="h-4 w-4 mr-2" />
+                Add Service
+              </Button>
+            </div>
+          </div>
+
+          {/* Filters */}
+          <div className="flex flex-wrap items-center gap-4 p-4 bg-muted/30 rounded-lg">
+            <div className="flex items-center gap-2">
+              <Filter className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm font-medium">Filters:</span>
             </div>
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger className="w-full sm:w-[200px]">
+              <SelectTrigger className="w-80">
                 <SelectValue placeholder="All Categories" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Categories</SelectItem>
-                {categoryOptions.map((category) => (
-                  <SelectItem key={category} value={category}>
-                    {category}
-                  </SelectItem>
+                {categoryOptions.map(category => (
+                  <SelectItem key={category} value={category}>{category}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-full sm:w-[150px]">
+              <SelectTrigger className="w-40">
                 <SelectValue placeholder="All Status" />
               </SelectTrigger>
               <SelectContent>
@@ -1342,50 +1291,68 @@ export default function Services() {
                         {getIcon(service.iconType)}
                       </div>
                       <div className="flex flex-col">
-                        <CardTitle className="text-lg leading-tight">
-                          {service.title}
-                        </CardTitle>
+                        <CardTitle className="text-lg leading-tight">{service.title}</CardTitle>
                         <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
                           {getCategoryIcon(service.category)}
                           <span className="truncate">{service.category}</span>
                         </div>
                       </div>
                     </div>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                          <MoreVertical className="h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem onClick={() => handleViewService(service)}>
-                          <Eye className="h-4 w-4 mr-2" />
-                          View Details
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => handleEditService(service)}>
-                          <Edit className="h-4 w-4 mr-2" />
-                          Edit Service
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => handleDeleteService(service)}
-                          className="text-destructive"
-                        >
-                          <Trash2 className="h-4 w-4 mr-2" />
-                          Move to Trash
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    <div className="flex items-center gap-2">
+                      {getStatusBadge(service.status)}
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                            <MoreVertical className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem onClick={() => handleViewService(service)}>
+                            <Eye className="h-4 w-4 mr-2" />
+                            View Details
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handleEditService(service)}>
+                            <Edit className="h-4 w-4 mr-2" />
+                            Edit
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => handleDeleteService(service.id)}
+                            className="text-destructive"
+                          >
+                            <Trash2 className="h-4 w-4 mr-2" />
+                            Delete
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    {getStatusBadge(service.status)}
-                  </div>
-                  <p className="text-sm text-muted-foreground line-clamp-3">
+                  <CardDescription className="text-sm leading-relaxed line-clamp-3">
                     {service.shortDescription}
-                  </p>
-                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  </CardDescription>
+                  
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-medium">Key Features ({service.keyFeatures.length}):</h4>
+                    <div className="flex flex-wrap gap-1">
+                      {service.keyFeatures.slice(0, 3).map((feature, index) => (
+                        <Badge key={index} variant="outline" className="text-xs">
+                          {feature.length > 20 ? `${feature.substring(0, 20)}...` : feature}
+                        </Badge>
+                      ))}
+                      {service.keyFeatures.length > 3 && (
+                        <Badge variant="outline" className="text-xs">
+                          +{service.keyFeatures.length - 3} more
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between pt-2 text-xs text-muted-foreground">
                     <span>Updated: {new Date(service.updatedAt).toLocaleDateString()}</span>
+                    <Button variant="ghost" size="sm" onClick={() => handleViewService(service)}>
+                      <ExternalLink className="h-3 w-3" />
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -1399,32 +1366,37 @@ export default function Services() {
               </div>
               <h3 className="text-lg font-semibold mb-2">No services found</h3>
               <p className="text-muted-foreground mb-4">
-                {searchQuery || categoryFilter !== 'all' || statusFilter !== 'all'
-                  ? "Try adjusting your search criteria or filters."
-                  : "Get started by creating your first service."}
+                Try adjusting your search criteria or filters to find what you're looking for.
               </p>
-              {(!searchQuery && categoryFilter === 'all' && statusFilter === 'all') && (
-                <Button onClick={handleAddService}>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Add First Service
-                </Button>
-              )}
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  setCategoryFilter('all');
+                  setStatusFilter('all');
+                  setSearchQuery('');
+                }}
+              >
+                Clear All Filters
+              </Button>
             </div>
           )}
         </TabsContent>
 
-        {/* Categories Management Tab */}
+        {/* Categories Tab */}
         <TabsContent value="categories" className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex flex-col gap-2">
-              <h2 className="text-2xl font-bold tracking-tight">Categories Management</h2>
+              <h2 className="text-2xl font-bold tracking-tight">Category Management</h2>
               <p className="text-muted-foreground">
-                Manage service categories and their organization. Drag and drop to reorder.
+                Manage service categories with drag & drop sorting.
+                <span className="ml-2 text-sm font-medium text-primary">
+                  ({categories.length} categories)
+                </span>
               </p>
             </div>
-            <Button onClick={handleAddCategory} className="flex items-center gap-2">
-              <FolderPlus className="h-4 w-4" />
-              Add New Category
+            <Button onClick={handleAddCategory}>
+              <FolderPlus className="h-4 w-4 mr-2" />
+              Add Category
             </Button>
           </div>
 
@@ -1435,117 +1407,76 @@ export default function Services() {
                 key={category.id} 
                 className="group hover:shadow-md transition-all duration-200 cursor-move"
                 draggable
-                onDragStart={(e) => handleDragStart(e, category.id)}
+                onDragStart={(e) => handleDragStart(e, category)}
                 onDragOver={handleDragOver}
-                onDrop={(e) => handleDrop(e, category.id)}
+                onDrop={(e) => handleDrop(e, category)}
               >
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3">
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <GripVertical className="h-4 w-4" />
-                        <span className="text-sm font-medium">#{category.order}</span>
+                        <span className="text-sm font-mono">#{category.order}</span>
                       </div>
                       <div className="p-2 rounded-lg bg-primary/10 text-primary">
                         {getIcon(category.iconType)}
                       </div>
                       <div className="flex flex-col">
-                        <CardTitle className="text-lg">
-                          {category.name}
-                        </CardTitle>
-                        <p className="text-sm text-muted-foreground">
-                          {category.serviceCount} services
-                        </p>
+                        <CardTitle className="text-lg leading-tight">{category.name}</CardTitle>
+                        <CardDescription className="text-sm">
+                          {category.description}
+                        </CardDescription>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleEditCategory(category)}
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleDeleteCategory(category.id)}
-                        className="text-destructive hover:text-destructive"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                      <Badge variant="outline">
+                        {category.serviceCount} services
+                      </Badge>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                            <MoreVertical className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem onClick={() => handleEditCategory(category)}>
+                            <Edit className="h-4 w-4 mr-2" />
+                            Edit Category
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => handleDeleteCategory(category.id)}
+                            className="text-destructive"
+                            disabled={category.serviceCount > 0}
+                          >
+                            <Trash2 className="h-4 w-4 mr-2" />
+                            Delete Category
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    {category.description}
-                  </p>
-                  <div className="flex items-center justify-between text-xs text-muted-foreground mt-3">
-                    <span>Created: {new Date(category.createdAt).toLocaleDateString()}</span>
-                    <span>Updated: {new Date(category.updatedAt).toLocaleDateString()}</span>
-                  </div>
-                </CardContent>
               </Card>
             ))}
           </div>
-        </TabsContent>
 
-      </Tabs>
-
-      {/* Delete Confirmation Dialog */}
-      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-destructive" />
-              Move to Trash?
-            </DialogTitle>
-            <DialogDescription>
-              Are you sure you want to move "{serviceToDelete?.title}" to trash?
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="space-y-4">
-            <div className="p-4 bg-muted/50 rounded-lg border">
-              <div className="flex items-start gap-3">
-                <Trash className="h-5 w-5 text-muted-foreground mt-0.5" />
-                <div className="space-y-2">
-                  <h4 className="font-medium">What happens next:</h4>
-                  <ul className="text-sm text-muted-foreground space-y-1">
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                      Service will be moved to trash
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                      You can restore it within 7 days
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-destructive rounded-full" />
-                      After 7 days, it will be permanently deleted
-                    </li>
-                  </ul>
-                </div>
+          {categories.length === 0 && (
+            <div className="text-center py-12">
+              <div className="mx-auto w-24 h-24 bg-muted rounded-full flex items-center justify-center mb-4">
+                <FolderPlus className="h-8 w-8 text-muted-foreground" />
               </div>
+              <h3 className="text-lg font-semibold mb-2">No categories found</h3>
+              <p className="text-muted-foreground mb-4">
+                Create your first service category to get started.
+              </p>
+              <Button onClick={handleAddCategory}>
+                <FolderPlus className="h-4 w-4 mr-2" />
+                Add Category
+              </Button>
             </div>
-          </div>
-
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
-              Cancel
-            </Button>
-            <Button 
-              variant="destructive" 
-              onClick={confirmMoveToTrash}
-              className="flex items-center gap-2"
-            >
-              <Trash2 className="h-4 w-4" />
-              Move to Trash
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          )}
+        </TabsContent>
+      </Tabs>
 
       {/* Category Add/Edit Dialog */}
       <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>
@@ -1558,30 +1489,31 @@ export default function Services() {
               {editingCategory ? 'Update category information.' : 'Create a new service category.'}
             </DialogDescription>
           </DialogHeader>
-          <form onSubmit={handleCategorySubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <form onSubmit={handleCategorySubmit} className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Category Name</Label>
                 <Input
                   id="name"
                   name="name"
-                  defaultValue={editingCategory?.name}
-                  placeholder="Enter category name"
+                  defaultValue={editingCategory?.name || ""}
+                  placeholder="On-site Machining Services"
                   required
                 />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="iconType">Icon</Label>
-                <Select name="iconType" defaultValue={editingCategory?.iconType || 'wrench'}>
+                <Select name="iconType" defaultValue={editingCategory?.iconType || ""} required>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select an icon" />
+                    <SelectValue placeholder="Select icon" />
                   </SelectTrigger>
                   <SelectContent>
-                    {iconOptions.map((option) => (
+                    {iconOptions.map(option => (
                       <SelectItem key={option.value} value={option.value}>
                         <div className="flex items-center gap-2">
                           {option.icon}
-                          <span>{option.label}</span>
+                          {option.label}
                         </div>
                       </SelectItem>
                     ))}
@@ -1589,23 +1521,25 @@ export default function Services() {
                 </Select>
               </div>
             </div>
+
             <div className="space-y-2">
               <Label htmlFor="description">Description</Label>
               <Textarea
                 id="description"
                 name="description"
-                defaultValue={editingCategory?.description}
-                placeholder="Enter category description"
+                defaultValue={editingCategory?.description || ""}
+                placeholder="Brief description of this service category..."
                 rows={3}
                 required
               />
             </div>
+
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => setIsCategoryDialogOpen(false)}>
                 Cancel
               </Button>
-              <Button type="submit" className="flex items-center gap-2">
-                <Save className="h-4 w-4" />
+              <Button type="submit">
+                <Save className="h-4 w-4 mr-2" />
                 {editingCategory ? 'Update Category' : 'Create Category'}
               </Button>
             </DialogFooter>
@@ -1624,7 +1558,8 @@ export default function Services() {
               {editingService ? 'Update service information and detailed content.' : 'Create a new service offering for RWNA Engineering with complete details.'}
             </DialogDescription>
           </DialogHeader>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          
+          <form onSubmit={handleSubmit}>
             <Tabs defaultValue="basic" className="space-y-4">
               <TabsList className="grid w-full grid-cols-4">
                 <TabsTrigger value="basic">Basic Info</TabsTrigger>
@@ -1632,46 +1567,47 @@ export default function Services() {
                 <TabsTrigger value="details">Details</TabsTrigger>
                 <TabsTrigger value="specs">Specifications</TabsTrigger>
               </TabsList>
-              
+
               <TabsContent value="basic" className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="title">Service Title</Label>
                     <Input
                       id="title"
                       name="title"
-                      defaultValue={editingService?.title}
-                      placeholder="Enter service title"
+                      defaultValue={editingService?.title || ""}
+                      placeholder="Cold Cutting & Bevelling"
                       required
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="category">Category</Label>
-                    <Select name="category" defaultValue={editingService?.category}>
+                    <Select name="category" defaultValue={editingService?.category || ""} required>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a category" />
+                        <SelectValue placeholder="Select category" />
                       </SelectTrigger>
                       <SelectContent>
-                        {categoryOptions.map((category) => (
-                          <SelectItem key={category} value={category}>
-                            {category}
-                          </SelectItem>
+                        {categoryOptions.map(category => (
+                          <SelectItem key={category} value={category}>{category}</SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
                   </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="iconType">Icon</Label>
-                    <Select name="iconType" defaultValue={editingService?.iconType || 'wrench'}>
+                    <Select name="iconType" defaultValue={editingService?.iconType || ""} required>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select an icon" />
+                        <SelectValue placeholder="Select icon" />
                       </SelectTrigger>
                       <SelectContent>
-                        {iconOptions.map((option) => (
+                        {iconOptions.map(option => (
                           <SelectItem key={option.value} value={option.value}>
                             <div className="flex items-center gap-2">
                               {option.icon}
-                              <span>{option.label}</span>
+                              {option.label}
                             </div>
                           </SelectItem>
                         ))}
@@ -1680,7 +1616,7 @@ export default function Services() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="status">Status</Label>
-                    <Select name="status" defaultValue={editingService?.status || 'draft'}>
+                    <Select name="status" defaultValue={editingService?.status || "draft"} required>
                       <SelectTrigger>
                         <SelectValue placeholder="Select status" />
                       </SelectTrigger>
@@ -1693,85 +1629,99 @@ export default function Services() {
                     </Select>
                   </div>
                 </div>
+
                 <div className="space-y-2">
-                  <Label htmlFor="photo">Photo URL (Optional)</Label>
+                  <Label htmlFor="photo">Service Photo URL</Label>
                   <Input
                     id="photo"
                     name="photo"
-                    defaultValue={editingService?.photo}
-                    placeholder="Enter photo URL"
+                    defaultValue={editingService?.photo || ""}
+                    placeholder="https://example.com/service-photo.jpg"
                   />
+                  <p className="text-xs text-muted-foreground">
+                    Enter the URL of the service photo or upload to your media library
+                  </p>
                 </div>
               </TabsContent>
-              
+
               <TabsContent value="content" className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="shortDescription">Short Description</Label>
                   <Textarea
                     id="shortDescription"
                     name="shortDescription"
-                    defaultValue={editingService?.shortDescription}
-                    placeholder="Enter a brief description (1-2 sentences)"
+                    defaultValue={editingService?.shortDescription || ""}
+                    placeholder="Brief description shown on service cards..."
                     rows={3}
                     required
                   />
                 </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="detailedDescription">Detailed Description</Label>
                   <Textarea
                     id="detailedDescription"
                     name="detailedDescription"
-                    defaultValue={editingService?.detailedDescription}
-                    placeholder="Enter detailed service description"
+                    defaultValue={editingService?.detailedDescription || ""}
+                    placeholder="Comprehensive description with technical details and overview..."
                     rows={5}
                     required
                   />
                 </div>
               </TabsContent>
-              
+
               <TabsContent value="details" className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="benefits">Benefits (One per line)</Label>
+                  <Label htmlFor="benefits">Benefits</Label>
                   <Textarea
                     id="benefits"
                     value={benefitsInput}
                     onChange={(e) => setBenefitsInput(e.target.value)}
-                    placeholder="Enter each benefit on a new line"
+                    placeholder="Enter each benefit on a new line..."
                     rows={6}
                   />
+                  <p className="text-xs text-muted-foreground">
+                    Enter each benefit on a separate line
+                  </p>
                 </div>
+
                 <div className="space-y-2">
-                  <Label htmlFor="keyFeatures">Key Features (One per line)</Label>
+                  <Label htmlFor="keyFeatures">Key Features</Label>
                   <Textarea
                     id="keyFeatures"
                     value={keyFeaturesInput}
                     onChange={(e) => setKeyFeaturesInput(e.target.value)}
-                    placeholder="Enter each key feature on a new line"
+                    placeholder="Enter each key feature on a new line..."
                     rows={6}
                   />
+                  <p className="text-xs text-muted-foreground">
+                    Enter each key feature on a separate line
+                  </p>
                 </div>
               </TabsContent>
-              
+
               <TabsContent value="specs" className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="specifications">Technical Specifications (One per line)</Label>
+                  <Label htmlFor="specifications">Technical Specifications</Label>
                   <Textarea
                     id="specifications"
                     value={specificationsInput}
                     onChange={(e) => setSpecificationsInput(e.target.value)}
-                    placeholder="Enter each specification on a new line"
+                    placeholder="Enter each specification on a new line..."
                     rows={8}
                   />
+                  <p className="text-xs text-muted-foreground">
+                    Enter each technical specification on a separate line
+                  </p>
                 </div>
               </TabsContent>
             </Tabs>
-            
-            <DialogFooter>
+
+            <DialogFooter className="mt-6">
               <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                 Cancel
               </Button>
-              <Button type="submit" className="flex items-center gap-2">
-                <Save className="h-4 w-4" />
+              <Button type="submit">
                 {editingService ? 'Update Service' : 'Create Service'}
               </Button>
             </DialogFooter>
@@ -1782,154 +1732,61 @@ export default function Services() {
       {/* Service View Dialog (existing - truncated for brevity) */}
       <Dialog open={isViewDialogOpen} onOpenChange={setIsViewDialogOpen}>
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-3">
-              {viewingService && (
-                <>
+          {viewingService && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-3">
                   <div className="p-2 rounded-lg bg-primary/10 text-primary">
                     {getIcon(viewingService.iconType)}
                   </div>
-                  {viewingService.title}
-                </>
-              )}
-            </DialogTitle>
-            <DialogDescription>
-              {viewingService?.category} • {viewingService && getStatusBadge(viewingService.status)}
-            </DialogDescription>
-          </DialogHeader>
-          
-          {viewingService && (
-            <Tabs defaultValue="overview" className="space-y-4">
-              <TabsList className="grid w-full grid-cols-5">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="benefits">Benefits</TabsTrigger>
-                <TabsTrigger value="features">Features</TabsTrigger>
-                <TabsTrigger value="specs">Specs</TabsTrigger>
-                <TabsTrigger value="metadata">Metadata</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="overview" className="space-y-4">
-                <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold mb-2">Short Description</h4>
-                    <p className="text-muted-foreground">{viewingService.shortDescription}</p>
+                    <DialogTitle>{viewingService.title}</DialogTitle>
+                    <DialogDescription className="flex items-center gap-2">
+                      {getCategoryIcon(viewingService.category)}
+                      {viewingService.category}
+                    </DialogDescription>
                   </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Detailed Description</h4>
-                    <p className="text-muted-foreground">{viewingService.detailedDescription}</p>
-                  </div>
-                  {viewingService.photo && (
-                    <div>
-                      <h4 className="font-semibold mb-2">Photo</h4>
-                      <img 
-                        src={viewingService.photo} 
-                        alt={viewingService.title}
-                        className="max-w-full h-auto rounded-lg border"
-                      />
-                    </div>
-                  )}
                 </div>
-              </TabsContent>
+              </DialogHeader>
               
-              <TabsContent value="benefits" className="space-y-4">
-                <div>
-                  <h4 className="font-semibold mb-3">Benefits</h4>
-                  <ul className="space-y-2">
-                    {viewingService.benefits.map((benefit, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
+              <div className="space-y-4">
+                <div className="flex items-center gap-2">
+                  {getStatusBadge(viewingService.status)}
                 </div>
-              </TabsContent>
-              
-              <TabsContent value="features" className="space-y-4">
+
                 <div>
-                  <h4 className="font-semibold mb-3">Key Features</h4>
-                  <ul className="space-y-2">
+                  <h4 className="font-medium mb-2">Description</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {viewingService.shortDescription}
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-medium mb-2">Key Features</h4>
+                  <div className="flex flex-wrap gap-2">
                     {viewingService.keyFeatures.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <Star className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
-                      </li>
+                      <Badge key={index} variant="outline">
+                        {feature}
+                      </Badge>
                     ))}
-                  </ul>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="specs" className="space-y-4">
-                <div>
-                  <h4 className="font-semibold mb-3">Technical Specifications</h4>
-                  <ul className="space-y-2">
-                    {viewingService.specifications.map((spec, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <Clipboard className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">{spec}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="metadata" className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-3">
-                    <div>
-                      <Label className="text-sm font-medium">Service ID</Label>
-                      <p className="text-sm text-muted-foreground">{viewingService.id}</p>
-                    </div>
-                    <div>
-                      <Label className="text-sm font-medium">Status</Label>
-                      <div className="mt-1">{getStatusBadge(viewingService.status)}</div>
-                    </div>
-                    <div>
-                      <Label className="text-sm font-medium">Category</Label>
-                      <p className="text-sm text-muted-foreground">{viewingService.category}</p>
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <div>
-                      <Label className="text-sm font-medium">Created</Label>
-                      <p className="text-sm text-muted-foreground">
-                        {new Date(viewingService.createdAt).toLocaleString()}
-                      </p>
-                    </div>
-                    <div>
-                      <Label className="text-sm font-medium">Last Updated</Label>
-                      <p className="text-sm text-muted-foreground">
-                        {new Date(viewingService.updatedAt).toLocaleString()}
-                      </p>
-                    </div>
-                    {viewingService.publishedAt && (
-                      <div>
-                        <Label className="text-sm font-medium">Published</Label>
-                        <p className="text-sm text-muted-foreground">
-                          {new Date(viewingService.publishedAt).toLocaleString()}
-                        </p>
-                      </div>
-                    )}
                   </div>
                 </div>
-              </TabsContent>
-            </Tabs>
+              </div>
+
+              <DialogFooter>
+                <Button variant="outline" onClick={() => setIsViewDialogOpen(false)}>
+                  Close
+                </Button>
+                <Button onClick={() => {
+                  setIsViewDialogOpen(false);
+                  handleEditService(viewingService);
+                }}>
+                  <Edit className="h-4 w-4 mr-2" />
+                  Edit Service
+                </Button>
+              </DialogFooter>
+            </>
           )}
-          
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsViewDialogOpen(false)}>
-              Close
-            </Button>
-            {viewingService && (
-              <Button onClick={() => {
-                setIsViewDialogOpen(false);
-                handleEditService(viewingService);
-              }} className="flex items-center gap-2">
-                <Edit className="h-4 w-4" />
-                Edit Service
-              </Button>
-            )}
-          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

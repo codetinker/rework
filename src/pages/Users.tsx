@@ -5,15 +5,13 @@ import {
   Mail, 
   Clock, 
   UserCheck, 
-  UserX,
-  Trash2,
+  UserX, 
   ShieldAlert,
   ShieldCheck,
   Info,
   Activity,
   Search,
-  Plus,
-  AlertTriangle
+  Plus
 } from "lucide-react";
 import { 
   User, 
@@ -75,10 +73,6 @@ export default function Users() {
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const { toast } = useToast();
-  
-  // Delete confirmation states
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const [userToDelete, setUserToDelete] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -217,30 +211,11 @@ export default function Users() {
   };
 
   const handleDelete = (user: User) => {
-    setUserToDelete(user);
-    setIsDeleteDialogOpen(true);
-  };
-
-  const confirmMoveToTrash = () => {
-    if (!userToDelete) return;
-    
-    const now = new Date();
-    
-    setUsers(users.map(u => u.id === userToDelete.id ? {
-      ...u,
-      isDeleted: true,
-      deletedAt: now.toISOString(),
-      deletedBy: "Current User", // In real app, get from auth context
-      updatedAt: now.toISOString()
-    } : u));
-    
-    setIsDeleteDialogOpen(false);
-    const userName = userToDelete.name;
-    setUserToDelete(null);
     toast({
-      title: "User moved to trash",
-      description: `"${userName}" moved to trash. Will be permanently deleted in 7 days.`,
+      title: "User access restricted",
+      description: `${user.name} has been set to inactive status.`,
     });
+    setUsers(prev => prev.map(u => u.id === user.id ? { ...u, status: "inactive" } : u));
   };
 
   const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
@@ -269,9 +244,8 @@ export default function Users() {
     setIsDialogOpen(false);
   };
 
-  // Filter users based on search query (exclude deleted users)
-  const activeUsers = users.filter(user => !user.isDeleted);
-  const filteredUsers = activeUsers.filter(user => 
+  // Filter users based on search query
+  const filteredUsers = users.filter(user => 
     user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     user.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -422,60 +396,6 @@ export default function Users() {
               </Button>
             </DialogFooter>
           </form>
-        </DialogContent>
-      </Dialog>
-
-      {/* Delete Confirmation Dialog */}
-      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-destructive" />
-              Move to Trash?
-            </DialogTitle>
-            <DialogDescription>
-              Are you sure you want to move "{userToDelete?.name}" to trash?
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="space-y-4">
-            <div className="p-4 bg-muted/50 rounded-lg border">
-              <div className="flex items-start gap-3">
-                <Trash2 className="h-5 w-5 text-muted-foreground mt-0.5" />
-                <div className="space-y-2">
-                  <h4 className="font-medium">What happens next:</h4>
-                  <ul className="text-sm text-muted-foreground space-y-1">
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                      User account will be moved to trash
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                      You can restore it within 7 days
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-destructive rounded-full" />
-                      After 7 days, it will be permanently deleted
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
-              Cancel
-            </Button>
-            <Button 
-              variant="destructive" 
-              onClick={confirmMoveToTrash}
-              className="flex items-center gap-2"
-            >
-              <Trash2 className="h-4 w-4" />
-              Move to Trash
-            </Button>
-          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

@@ -12,10 +12,7 @@ import {
   Archive,
   Image as ImageIcon,
   AlertCircle,
-  Search,
-  Trash2,
-  Edit,
-  AlertTriangle
+  Search
 } from "lucide-react";
 import { 
   NewsItem, 
@@ -78,10 +75,6 @@ export default function News() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<NewsItem | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  
-  // Delete confirmation states
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const [newsToDelete, setNewsToDelete] = useState<NewsItem | null>(null);
 
   const form = useForm<NewsFormValues>({ 
     resolver: zodResolver(newsSchema),
@@ -131,27 +124,10 @@ export default function News() {
   };
 
   const handleDelete = (item: NewsItem) => {
-    setNewsToDelete(item);
-    setIsDeleteDialogOpen(true);
-  };
-
-  const confirmMoveToTrash = () => {
-    if (!newsToDelete) return;
-    
-    const now = new Date();
-    
-    setNews(news.map(n => n.id === newsToDelete.id ? {
-      ...n,
-      isDeleted: true,
-      deletedAt: now.toISOString(),
-      deletedBy: "Current User", // In real app, get from auth context
-      updatedAt: now.toISOString()
-    } : n));
-    
-    setIsDeleteDialogOpen(false);
-    const newsTitle = newsToDelete.title;
-    setNewsToDelete(null);
-    toast.success(`"${newsTitle}" moved to trash. Will be permanently deleted in 7 days.`);
+    if (confirm(`Are you sure you want to delete "${item.title}"?`)) {
+      setNews(news.filter((n) => n.id !== item.id));
+      toast.success("News item deleted successfully");
+    }
   };
 
   const handleArchive = (id: string) => {
@@ -305,9 +281,8 @@ export default function News() {
     },
   ];
 
-  // Filter news based on search query (exclude deleted news)
-  const activeNews = news.filter(item => !item.isDeleted);
-  const filteredNews = activeNews.filter(item => 
+  // Filter news based on search query
+  const filteredNews = news.filter(item => 
     item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.author.toLowerCase().includes(searchQuery.toLowerCase())
@@ -606,60 +581,6 @@ export default function News() {
               </DialogFooter>
             </form>
           </Form>
-        </DialogContent>
-      </Dialog>
-
-      {/* Delete Confirmation Dialog */}
-      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-destructive" />
-              Move to Trash?
-            </DialogTitle>
-            <DialogDescription>
-              Are you sure you want to move "{newsToDelete?.title}" to trash?
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="space-y-4">
-            <div className="p-4 bg-muted/50 rounded-lg border">
-              <div className="flex items-start gap-3">
-                <Trash2 className="h-5 w-5 text-muted-foreground mt-0.5" />
-                <div className="space-y-2">
-                  <h4 className="font-medium">What happens next:</h4>
-                  <ul className="text-sm text-muted-foreground space-y-1">
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                      News article will be moved to trash
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                      You can restore it within 7 days
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-destructive rounded-full" />
-                      After 7 days, it will be permanently deleted
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
-              Cancel
-            </Button>
-            <Button 
-              variant="destructive" 
-              onClick={confirmMoveToTrash}
-              className="flex items-center gap-2"
-            >
-              <Trash2 className="h-4 w-4" />
-              Move to Trash
-            </Button>
-          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

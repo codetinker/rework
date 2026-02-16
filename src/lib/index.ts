@@ -18,7 +18,6 @@ export const ROUTE_PATHS = {
   ROLES: "/roles",
   API_DEMO: "/api-demo",
   FILE_MANAGER: "/files",
-  TRASH: "/trash",
 } as const;
 
 export enum UserRole {
@@ -41,11 +40,6 @@ export interface User {
   avatar?: string;
   lastLogin?: string;
   status: "active" | "inactive";
-  // Trash system properties
-  isDeleted?: boolean;
-  deletedAt?: string;
-  deletedBy?: string;
-  updatedAt?: string;
 }
 
 export interface Role {
@@ -56,10 +50,6 @@ export interface Role {
   isSystem: boolean;
   createdAt: string;
   updatedAt: string;
-  // Trash system properties
-  isDeleted?: boolean;
-  deletedAt?: string;
-  deletedBy?: string;
 }
 
 export interface Permission {
@@ -85,11 +75,6 @@ export interface Project {
   imageKey: string;
   startDate?: string;
   completionDate?: string;
-  // Trash system properties
-  isDeleted?: boolean;
-  deletedAt?: string;
-  deletedBy?: string;
-  updatedAt?: string;
 }
 
 export interface Client {
@@ -102,11 +87,6 @@ export interface Client {
   email: string;
   website?: string;
   projectCount: number;
-  // Trash system properties
-  isDeleted?: boolean;
-  deletedAt?: string;
-  deletedBy?: string;
-  updatedAt?: string;
 }
 
 export interface ChatMessage {
@@ -131,11 +111,6 @@ export interface JobPosting {
   status: "open" | "closed" | "draft";
   postedAt: string;
   applicationCount: number;
-  // Trash system properties
-  isDeleted?: boolean;
-  deletedAt?: string;
-  deletedBy?: string;
-  updatedAt?: string;
 }
 
 export interface JobApplication {
@@ -181,11 +156,6 @@ export interface TrainingProgram {
   endDate?: string;
   closeApplicationDate?: string;
   trainingMapUrl?: string;
-  // Trash system properties
-  isDeleted?: boolean;
-  deletedAt?: string;
-  deletedBy?: string;
-  updatedAt?: string;
 }
 
 export interface TrainingParticipant {
@@ -264,11 +234,6 @@ export interface NewsItem {
   imageKey: string;
   isFeatured: boolean;
   status: "published" | "draft" | "archived";
-  // Trash system properties
-  isDeleted?: boolean;
-  deletedAt?: string;
-  deletedBy?: string;
-  updatedAt?: string;
 }
 
 export interface Inquiry {

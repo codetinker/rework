@@ -59,10 +59,6 @@ export default function RoleManagement() {
     description: '',
     permissions: {} as Record<string, Permission[]>
   });
-  
-  // Delete confirmation states
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const [roleToDelete, setRoleToDelete] = useState<Role | null>(null);
 
   useEffect(() => {
     if (!hasPermission('roles', 'read')) {
@@ -167,28 +163,14 @@ export default function RoleManagement() {
     }
   };
 
-  const handleDeleteRole = (role: Role) => {
-    setRoleToDelete(role);
-    setIsDeleteDialogOpen(true);
-  };
-
-  const confirmMoveToTrash = () => {
-    if (!roleToDelete) return;
-    
-    const now = new Date();
-    
-    setRoles(roles.map(r => r.id === roleToDelete.id ? {
-      ...r,
-      isDeleted: true,
-      deletedAt: now.toISOString(),
-      deletedBy: "Current User", // In real app, get from auth context
-      updatedAt: now.toISOString()
-    } : r));
-    
-    setIsDeleteDialogOpen(false);
-    const roleName = roleToDelete.name;
-    setRoleToDelete(null);
-    toast.success(`"${roleName}" moved to trash. Will be permanently deleted in 7 days.`);
+  const handleDeleteRole = async (role: Role) => {
+    try {
+      await rolesAPI.delete(role.id);
+      toast.success('Role deleted successfully');
+      fetchRoles();
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to delete role');
+    }
   };
 
   const getPermissionSummary = (permissions: Record<string, Permission[]>) => {
@@ -352,9 +334,8 @@ export default function RoleManagement() {
     </div>
   );
 
-  // Filter roles based on search query (exclude deleted roles)
-  const activeRoles = roles.filter(role => !role.isDeleted);
-  const filteredRoles = activeRoles.filter(role => 
+  // Filter roles based on search query
+  const filteredRoles = roles.filter(role => 
     role.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     role.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -549,60 +530,6 @@ export default function RoleManagement() {
             </Button>
             <Button onClick={() => handleSubmit(true)} disabled={selectedRole?.isSystem}>
               Update Role
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
-      {/* Delete Confirmation Dialog */}
-      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-destructive" />
-              Move to Trash?
-            </DialogTitle>
-            <DialogDescription>
-              Are you sure you want to move "{roleToDelete?.name}" to trash?
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="space-y-4">
-            <div className="p-4 bg-muted/50 rounded-lg border">
-              <div className="flex items-start gap-3">
-                <Trash2 className="h-5 w-5 text-muted-foreground mt-0.5" />
-                <div className="space-y-2">
-                  <h4 className="font-medium">What happens next:</h4>
-                  <ul className="text-sm text-muted-foreground space-y-1">
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                      Role will be moved to trash
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                      You can restore it within 7 days
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 bg-destructive rounded-full" />
-                      After 7 days, it will be permanently deleted
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
-              Cancel
-            </Button>
-            <Button 
-              variant="destructive" 
-              onClick={confirmMoveToTrash}
-              className="flex items-center gap-2"
-            >
-              <Trash2 className="h-4 w-4" />
-              Move to Trash
             </Button>
           </DialogFooter>
         </DialogContent>
