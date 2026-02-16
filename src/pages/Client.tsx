@@ -255,7 +255,7 @@ export default function Client() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button size="lg" asChild className="px-8 py-6 rounded-xl">
-                <Link to={ROUTE_PATHS.INQUIRIES}>
+                <Link to={ROUTE_PATHS.CONTACT}>
                   Contact Our Team
                 </Link>
               </Button>

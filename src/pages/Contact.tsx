@@ -215,7 +215,7 @@ export default function Contact() {
                       <div className="flex items-center gap-2">
                         <Phone className="w-4 h-4 text-muted-foreground" />
                         <div className="text-sm">
-                          {office.phone.map((phoneNumber: string, index: number) => (
+                          {office.phone.map((phoneNumber, index) => (
                             <div key={index} className="leading-relaxed">
                               {phoneNumber}
                             </div>
@@ -226,7 +226,7 @@ export default function Contact() {
                         <div className="flex items-center gap-2">
                           <Printer className="w-4 h-4 text-muted-foreground" />
                           <div className="text-sm">
-                            {office.fax.map((faxNumber: string, index: number) => (
+                            {office.fax.map((faxNumber, index) => (
                               <div key={index} className="leading-relaxed">
                                 {faxNumber}
                               </div>

@@ -1,30 +1,10 @@
-import { Service, Project, Client } from "@/lib/index";
+import { Service, Policy, Project, Client, Office } from "@/lib/index";
 import { IMAGES } from "@/assets/images";
-
-export interface Policy {
-  id: string;
-  title: string;
-  imageKey: string;
-  description: string;
-}
-
-export interface Office {
-  id: string;
-  city: string;
-  name: string;
-  address: string;
-  phone: string[];
-  fax: string[];
-  coordinates: { lat: number; lng: number };
-  mapUrl: string;
-}
 
 export const services: Service[] = [
   {
     id: "on-site-machining",
     title: "On-site Machining",
-    category: "Machining",
-    isActive: true,
     shortDescription: "Comprehensive cold cutting, flange facing, and precision pipe end preparation services.",
     fullDescription: [
       "Cold cutting and bevelling of pipes from 2\" to 120\" diameter.",
@@ -39,8 +19,6 @@ export const services: Service[] = [
   {
     id: "subsea-cutting",
     title: "Subsea Pipeline & Structure Cutting",
-    category: "Subsea",
-    isActive: true,
     shortDescription: "Advanced subsea cutting solutions using Diamond Wire Saws and hydraulic split frames.",
     fullDescription: [
       "Diamond Wire Saw (DWS) operations for subsea pipelines and structures.",
@@ -54,8 +32,6 @@ export const services: Service[] = [
   {
     id: "w3p-enclosure",
     title: "W3P Enclosure System",
-    category: "Safety",
-    isActive: true,
     shortDescription: "SIRIM certified welding habitat designed for safe hot work in hazardous environments.",
     fullDescription: [
       "Pressurized welding habitat system for Zone 1 and Zone 2 environments.",
@@ -69,8 +45,6 @@ export const services: Service[] = [
   {
     id: "precision-machining",
     title: "Precision Metal Designing & Machining",
-    category: "Machining",
-    isActive: true,
     shortDescription: "High-end CNC machining and custom component manufacturing at our IPC center.",
     fullDescription: [
       "CNC Turning and Milling for high-precision components.",
@@ -84,8 +58,6 @@ export const services: Service[] = [
   {
     id: "anode-installation",
     title: "Sacrificial Anode Installation",
-    category: "Subsea",
-    isActive: true,
     shortDescription: "Specialized cathodic protection and coating services for subsea assets.",
     fullDescription: [
       "Installation of sacrificial anodes on pipelines and subsea structures.",
@@ -99,8 +71,6 @@ export const services: Service[] = [
   {
     id: "fabrication-maintenance",
     title: "Fabrication & Maintenance",
-    category: "Fabrication",
-    isActive: true,
     shortDescription: "Onshore and offshore structural fabrication and equipment maintenance.",
     fullDescription: [
       "Structural steel fabrication for offshore platforms.",
@@ -174,8 +144,6 @@ export const projects: Project[] = [
   {
     id: "cold-cutting-72-pipe",
     title: "Cold Cutting 72\" OD Pipe",
-    category: "Fabrication",
-    status: "completed",
     description: "Cold cutting operations for large diameter pipe at RWNA Fabrication Yard.",
     location: "RWNA Fabrication Yard",
     client: "Internal Project",
@@ -184,8 +152,6 @@ export const projects: Project[] = [
   {
     id: "cutting-bevel-62-bfw",
     title: "Cutting & \"J\" Bevel of 62\" OD E-18-02A/B/C BFW Preheated",
-    category: "Fabrication",
-    status: "completed",
     description: "Precision cutting and bevelling operations for large diameter preheated pipes.",
     location: "Tepat Teknik Klang, Selangor, Malaysia",
     client: "Tapat Teknik Sdn Bhd, Petronas Fertilizer Kedah, Malaysia",
@@ -194,8 +160,6 @@ export const projects: Project[] = [
   {
     id: "gwf-1-cutting-16-cra",
     title: "GWF-1 Cutting of 16\" [CRA] OD Pipe",
-    category: "Fabrication",
-    status: "completed",
     description: "Specialized cutting operations for Corrosion Resistant Alloy (CRA) pipes.",
     location: "RWNA Fabrication Yard",
     client: "Bredero Shaw (M) Sdn Bhd / Woodside Energy Limited",
@@ -204,8 +168,6 @@ export const projects: Project[] = [
   {
     id: "yamal-europipe-gas",
     title: "Yamal Europipe Gas Cutting & \"J\" Bevel of 56\" OD Pipe",
-    category: "Fabrication",
-    status: "completed",
     description: "Large diameter pipe cutting and bevelling for international gas pipeline project.",
     location: "Malaysia",
     client: "Bredero Shaw (M) Sdn Bhd / Nippon Steel Japan",
@@ -214,8 +176,6 @@ export const projects: Project[] = [
   {
     id: "wheatstone-upstream",
     title: "Wheatstone Upstream External Pipe End Machining of 24\" OD Pipe",
-    category: "Onshore",
-    status: "completed",
     description: "External pipe end machining for upstream operations in major Australian gas project.",
     location: "Bredero Shaw Kuantan, Malaysia",
     client: "Bredero Shaw (M) Sdn Bhd / Chevron Australia PTL Ltd",
@@ -224,8 +184,6 @@ export const projects: Project[] = [
   {
     id: "gon-upstream-boring",
     title: "GON Upstream Internal Boring of 7.626\" & 9.626\" OD Pipe",
-    category: "Onshore",
-    status: "completed",
     description: "Internal boring operations for upstream pipeline infrastructure.",
     location: "Malaysia",
     client: "Coatings (M) Sdn Bhd / Chevron Australia Pty Ltd",
@@ -234,8 +192,6 @@ export const projects: Project[] = [
   {
     id: "gumusut-kakap-cutback",
     title: "Gumusut Kakap Cutback Configuration (Shaving)",
-    category: "Subsea",
-    status: "completed",
     description: "Specialized cutback configuration and shaving operations for subsea pipeline project.",
     location: "Serimax Yard Pelabuhan Kuantan, Malaysia",
     client: "Serimax Welding Services (M) Sdn Bhd / Sapura Kencana-Sapura Acergy / Sabah Shell Petroleum Company",
@@ -244,8 +200,6 @@ export const projects: Project[] = [
   {
     id: "flange-resurface-pedestal",
     title: "Flange Resurface Pedestal Crane Column of 110\" for Barge H131 & H132",
-    category: "Offshore",
-    status: "completed",
     description: "Large diameter flange resurfacing for pedestal crane columns on marine barges.",
     location: "Boustead Shipyard Pulau Jerejak, Penang, Malaysia",
     client: "Srimultex Engineering / Boustead Naval Shipyard / Pacific Singapore",
@@ -254,8 +208,6 @@ export const projects: Project[] = [
   {
     id: "w3p-enclosure-dulang",
     title: "W3P Enclosure System (Habitat for Welding)",
-    category: "Offshore",
-    status: "completed",
     description: "Deployment of W3P welding habitat system for safe hot work operations.",
     location: "Dulang Platform",
     client: "Tanjung Offshore Services Sdn. Bhd.",
@@ -264,8 +216,6 @@ export const projects: Project[] = [
   {
     id: "subsea-concrete-cutting",
     title: "Subsea Concrete Coated Linepipe Cutting at Bekok C",
-    category: "Subsea",
-    status: "completed",
     description: "Subsea cutting operations for concrete coated pipeline at offshore location.",
     location: "Bekok C Platform",
     client: "GOM / Petronas Carigali Sdn Bhd",
@@ -274,8 +224,6 @@ export const projects: Project[] = [
   {
     id: "fabrication-maintenance",
     title: "Fabrication & Maintenance (Onshore & Offshore)",
-    category: "Offshore",
-    status: "ongoing",
     description: "Comprehensive fabrication and maintenance services for onshore and offshore facilities.",
     location: "Various Locations",
     client: "Multiple Clients",
@@ -284,8 +232,6 @@ export const projects: Project[] = [
   {
     id: "valve-grinding-ytl",
     title: "Onsite Valve Grinding & Lapping for 10\" X 2500# Gate Valve",
-    category: "Onshore",
-    status: "completed",
     description: "On-site valve grinding and lapping services for high-pressure gate valve.",
     location: "YTL Power Station",
     client: "YTL Power Station",
@@ -294,8 +240,6 @@ export const projects: Project[] = [
   {
     id: "valve-grinding-cufk",
     title: "Onsite Valve Grinding and Lapping Services for Various Size of Valve for CUFK TA 2017",
-    category: "Onshore",
-    status: "completed",
     description: "Comprehensive valve grinding and lapping services during turnaround operations.",
     location: "CUFK Facility",
     client: "Enproserve (M) Sdn. Bhd.",
@@ -304,8 +248,6 @@ export const projects: Project[] = [
   {
     id: "valve-grinding-24-gate",
     title: "Onsite Valve Grinding and Lapping Services for 24\" X 150# Gate Valve",
-    category: "Onshore",
-    status: "completed",
     description: "Large diameter gate valve grinding and lapping services.",
     location: "Tati Production Facility",
     client: "Tati Production Sdn. Bhd.",
@@ -314,8 +256,6 @@ export const projects: Project[] = [
   {
     id: "valve-grinding-pcasb",
     title: "Onsite Valve Grinding and Lapping Services for Various Size of Valve for PCASB TA 2017",
-    category: "Onshore",
-    status: "completed",
     description: "Multi-size valve grinding and lapping services during planned turnaround.",
     location: "PCASB Facility",
     client: "Enproserve (M) Sdn. Bhd.",
@@ -323,224 +263,215 @@ export const projects: Project[] = [
   }
 ];
 
-const defaultClientProps = {
-  industry: "Oil & Gas",
-  logoKey: "CLIENT_LOGO",
-  contactPerson: "Procurement Department",
-  position: "Procurement Manager",
-  email: "info@rwna.com.my",
-  projectCount: 1,
-};
-
 export const clients: Client[] = [
   // A
-  { id: "aker-solutions", name: "AKER SOLUTIONS (M) SDN BHD", ...defaultClientProps },
-  { id: "anz-engineering", name: "ANZ ENGINEERING SDN BHD", ...defaultClientProps },
-  { id: "asturi-metal", name: "ASTURI METAL BUILDERS (M) SDN BHD", ...defaultClientProps },
-  { id: "al-jaami", name: "AL-JAAMI ENG & DEV SDN BHD", ...defaultClientProps },
-  { id: "amc", name: "AMALGAMATED METAL CORPORATION (M) SDN BHD (AMC)", ...defaultClientProps },
-  { id: "alam-dingin", name: "ALAM DINGIN AIR CONDITIONING ENGINEERING", ...defaultClientProps },
-  { id: "alam-swiber", name: "ALAM SWIBER OFFSHORE (M) SDN BHD", ...defaultClientProps },
-  { id: "allied-marine", name: "ALLIED MARINE & EQUIPMENT SDN BHD", ...defaultClientProps },
-  { id: "aans-technical", name: "AANS TECHNICAL & SERVICES SDN BHD", ...defaultClientProps },
-  { id: "altus-oil", name: "ALTUS OIL AND GAS SERVICES", ...defaultClientProps },
-  { id: "anggerik-laksana", name: "ANGGERIK LAKSANA SDN BHD", ...defaultClientProps },
-  { id: "air-products", name: "AIR PRODUCTS SPECIALISED PROCESS EQUIPME", ...defaultClientProps },
-  { id: "allseas", name: "ALLSEAS CONSTRUCTION CONTRACTORS S.A.", ...defaultClientProps },
-  { id: "alstom-tnb", name: "ALSTOM - TNB JANAMANJUNG SDN BHD", ...defaultClientProps },
+  { id: "aker-solutions", name: "AKER SOLUTIONS (M) SDN BHD" },
+  { id: "anz-engineering", name: "ANZ ENGINEERING SDN BHD" },
+  { id: "asturi-metal", name: "ASTURI METAL BUILDERS (M) SDN BHD" },
+  { id: "al-jaami", name: "AL-JAAMI ENG & DEV SDN BHD" },
+  { id: "amc", name: "AMALGAMATED METAL CORPORATION (M) SDN BHD (AMC)" },
+  { id: "alam-dingin", name: "ALAM DINGIN AIR CONDITIONING ENGINEERING" },
+  { id: "alam-swiber", name: "ALAM SWIBER OFFSHORE (M) SDN BHD" },
+  { id: "allied-marine", name: "ALLIED MARINE & EQUIPMENT SDN BHD" },
+  { id: "aans-technical", name: "AANS TECHNICAL & SERVICES SDN BHD" },
+  { id: "altus-oil", name: "ALTUS OIL AND GAS SERVICES" },
+  { id: "anggerik-laksana", name: "ANGGERIK LAKSANA SDN BHD" },
+  { id: "air-products", name: "AIR PRODUCTS SPECIALISED PROCESS EQUIPME" },
+  { id: "allseas", name: "ALLSEAS CONSTRUCTION CONTRACTORS S.A." },
+  { id: "alstom-tnb", name: "ALSTOM - TNB JANAMANJUNG SDN BHD" },
   
   // B
-  { id: "bredero-shaw", name: "BREDERO SHAW (MALAYSIA) SDN BHD", ...defaultClientProps },
-  { id: "barmada-mcdermott", name: "BARMADA MC DERMOTT", ...defaultClientProps },
-  { id: "bjs-offshore", name: "BJS OFFSHORE SDN BHD", ...defaultClientProps },
-  { id: "basf-petronas", name: "BASF PETRONAS CHEMICALS SDN BHD", ...defaultClientProps },
-  { id: "bicara-sepakat", name: "BICARA SEPAKAT SDN BHD", ...defaultClientProps },
-  { id: "barisan-samudera", name: "BARISAN SAMUDERA SDN BHD", ...defaultClientProps },
-  { id: "bukit-fraser", name: "BUKIT FRASER THERMAL TECHNOLOGY SDN BHD", ...defaultClientProps },
-  { id: "bumi-focus", name: "BUMI FOCUS SDN BHD", ...defaultClientProps },
-  { id: "boilermaster", name: "BOILERMASTER SDN BHD", ...defaultClientProps },
-  { id: "bayu-punama", name: "BAYU PUNAMA SDN BHD", ...defaultClientProps },
-  { id: "baxtech", name: "BAXTECH RESOURCES SDN BHD", ...defaultClientProps },
+  { id: "bredero-shaw", name: "BREDERO SHAW (MALAYSIA) SDN BHD" },
+  { id: "barmada-mcdermott", name: "BARMADA MC DERMOTT" },
+  { id: "bjs-offshore", name: "BJS OFFSHORE SDN BHD" },
+  { id: "basf-petronas", name: "BASF PETRONAS CHEMICALS SDN BHD" },
+  { id: "bicara-sepakat", name: "BICARA SEPAKAT SDN BHD" },
+  { id: "barisan-samudera", name: "BARISAN SAMUDERA SDN BHD" },
+  { id: "bukit-fraser", name: "BUKIT FRASER THERMAL TECHNOLOGY SDN BHD" },
+  { id: "bumi-focus", name: "BUMI FOCUS SDN BHD" },
+  { id: "boilermaster", name: "BOILERMASTER SDN BHD" },
+  { id: "bayu-punama", name: "BAYU PUNAMA SDN BHD" },
+  { id: "baxtech", name: "BAXTECH RESOURCES SDN BHD" },
   
   // C
-  { id: "campbell-asia", name: "CAMPBELL ASIA PACIFIC", ...defaultClientProps },
-  { id: "canadoil", name: "CANADOIL COATING LTD", ...defaultClientProps },
-  { id: "cuf-kerteh", name: "CENTRALISE UTILITIES FACILITIES KERTEH", ...defaultClientProps },
-  { id: "cuf-gebeng", name: "CENTRALISE UTILITIES FACILITIES GEBENG", ...defaultClientProps },
-  { id: "carimin", name: "CARIMIN ENGINEERING SVS SDN BHD", ...defaultClientProps },
-  { id: "calidad", name: "CALIDAD SDN BHD", ...defaultClientProps },
-  { id: "combine-engineering", name: "COMBINE ENGINEERING AND SERVICES", ...defaultClientProps },
-  { id: "cr-asia", name: "CR ASIA (MALAYSIA) SDN BHD", ...defaultClientProps },
-  { id: "ckj-engineering", name: "CKJ ENGINEERING & SERVICES SDN BHD", ...defaultClientProps },
-  { id: "coral-alliance", name: "CORAL ALLIANCE SDN BHD", ...defaultClientProps },
+  { id: "campbell-asia", name: "CAMPBELL ASIA PACIFIC" },
+  { id: "canadoil", name: "CANADOIL COATING LTD" },
+  { id: "cuf-kerteh", name: "CENTRALISE UTILITIES FACILITIES KERTEH" },
+  { id: "cuf-gebeng", name: "CENTRALISE UTILITIES FACILITIES GEBENG" },
+  { id: "carimin", name: "CARIMIN ENGINEERING SVS SDN BHD" },
+  { id: "calidad", name: "CALIDAD SDN BHD" },
+  { id: "combine-engineering", name: "COMBINE ENGINEERING AND SERVICES" },
+  { id: "cr-asia", name: "CR ASIA (MALAYSIA) SDN BHD" },
+  { id: "ckj-engineering", name: "CKJ ENGINEERING & SERVICES SDN BHD" },
+  { id: "coral-alliance", name: "CORAL ALLIANCE SDN BHD" },
   
   // D
-  { id: "dynamic-engineering", name: "DYNAMIC ENGINEERING & PLANT SERVICES", ...defaultClientProps },
-  { id: "dipetro-synergy", name: "DIPETRO SYNERGY ENGINEERING SDN BHD", ...defaultClientProps },
-  { id: "dayang-enterprise", name: "DAYANG ENTERPRISE SDN BHD", ...defaultClientProps },
-  { id: "duta-klasik", name: "DUTA KLASIK SDN BHD", ...defaultClientProps },
-  { id: "dialog-plant", name: "DIALOG PLANT SERVICES SDN BHD", ...defaultClientProps },
-  { id: "dan-marine", name: "DAN MARINE TRADING SDN BHD", ...defaultClientProps },
-  { id: "dynaciate", name: "DYNACIATE ENGINEERING SDN BHD", ...defaultClientProps },
-  { id: "dominant-energy", name: "DOMINANT ENERGY SDN BHD", ...defaultClientProps },
+  { id: "dynamic-engineering", name: "DYNAMIC ENGINEERING & PLANT SERVICES" },
+  { id: "dipetro-synergy", name: "DIPETRO SYNERGY ENGINEERING SDN BHD" },
+  { id: "dayang-enterprise", name: "DAYANG ENTERPRISE SDN BHD" },
+  { id: "duta-klasik", name: "DUTA KLASIK SDN BHD" },
+  { id: "dialog-plant", name: "DIALOG PLANT SERVICES SDN BHD" },
+  { id: "dan-marine", name: "DAN MARINE TRADING SDN BHD" },
+  { id: "dynaciate", name: "DYNACIATE ENGINEERING SDN BHD" },
+  { id: "dominant-energy", name: "DOMINANT ENERGY SDN BHD" },
   
   // E
-  { id: "ecis-malaysia", name: "ECIS MALAYSIA SDN BHD", ...defaultClientProps },
-  { id: "epic-mushtari", name: "EPIC MUSHTARI ENGINEERING SDN BHD", ...defaultClientProps },
-  { id: "edaran-fokus", name: "EDARAN FOKUS SDN BHD", ...defaultClientProps },
-  { id: "exxonmobil", name: "EXXONMOBIL EXPLORATION AND PRODUCTION", ...defaultClientProps },
-  { id: "eco-tower", name: "ECO TOWER SDN BHD", ...defaultClientProps },
-  { id: "eastwing", name: "EASTWING CONSTRUCTOR SDN BHD", ...defaultClientProps },
-  { id: "emas-ams", name: "EMAS-AMS PTE LTD", ...defaultClientProps },
-  { id: "ellatec", name: "ELLATEC (MALAYSIA)SDN BHD", ...defaultClientProps },
-  { id: "eversendai", name: "EVERSENDAI OIL & GAS (M) SDN BHD", ...defaultClientProps },
-  { id: "eastern-soldar", name: "EASTERN SOLDAR ENGINEERING & CONSTRUCTION SDN BHD", ...defaultClientProps },
+  { id: "ecis-malaysia", name: "ECIS MALAYSIA SDN BHD" },
+  { id: "epic-mushtari", name: "EPIC MUSHTARI ENGINEERING SDN BHD" },
+  { id: "edaran-fokus", name: "EDARAN FOKUS SDN BHD" },
+  { id: "exxonmobil", name: "EXXONMOBIL EXPLORATION AND PRODUCTION" },
+  { id: "eco-tower", name: "ECO TOWER SDN BHD" },
+  { id: "eastwing", name: "EASTWING CONSTRUCTOR SDN BHD" },
+  { id: "emas-ams", name: "EMAS-AMS PTE LTD" },
+  { id: "ellatec", name: "ELLATEC (MALAYSIA)SDN BHD" },
+  { id: "eversendai", name: "EVERSENDAI OIL & GAS (M) SDN BHD" },
+  { id: "eastern-soldar", name: "EASTERN SOLDAR ENGINEERING & CONSTRUCTION SDN BHD" },
   
   // F
-  { id: "fpg-oleochemicals", name: "FPG OLEOCHEMICALS SDN BHD", ...defaultClientProps },
-  { id: "fumiko", name: "FUMIKO SDN BHD", ...defaultClientProps },
-  { id: "flexsys", name: "FLEXSYS CHEMICALS (M) SDN BHD", ...defaultClientProps },
-  { id: "fmc-wellhead", name: "FMC WELLHEAD EQUIPMENT SDN BHD", ...defaultClientProps },
-  { id: "fmc-technologies", name: "FMC TECHNOLOGIES GLOBAL SUPPLY SDN BHD", ...defaultClientProps },
-  { id: "fpso-ventures", name: "FPSO VENTURES SDN BHD", ...defaultClientProps },
+  { id: "fpg-oleochemicals", name: "FPG OLEOCHEMICALS SDN BHD" },
+  { id: "fumiko", name: "FUMIKO SDN BHD" },
+  { id: "flexsys", name: "FLEXSYS CHEMICALS (M) SDN BHD" },
+  { id: "fmc-wellhead", name: "FMC WELLHEAD EQUIPMENT SDN BHD" },
+  { id: "fmc-technologies", name: "FMC TECHNOLOGIES GLOBAL SUPPLY SDN BHD" },
+  { id: "fpso-ventures", name: "FPSO VENTURES SDN BHD" },
   
   // G
-  { id: "gatom", name: "GATOM ENGINEERING & SERVICES SDN BHD", ...defaultClientProps },
-  { id: "gas-processing", name: "GAS PROCESSING PLANTS", ...defaultClientProps },
-  { id: "gom-resources", name: "GOM RESOURCES SDN BHD", ...defaultClientProps },
+  { id: "gatom", name: "GATOM ENGINEERING & SERVICES SDN BHD" },
+  { id: "gas-processing", name: "GAS PROCESSING PLANTS" },
+  { id: "gom-resources", name: "GOM RESOURCES SDN BHD" },
   
   // H
-  { id: "hse-resources", name: "HSE RESOURCES SDN BHD", ...defaultClientProps },
-  { id: "hamdan-abdullah", name: "HAMDAN ABDULLAH SDN BHD", ...defaultClientProps },
-  { id: "highbase", name: "HIGHBASE STRATEGIC SDN BHD", ...defaultClientProps },
-  { id: "hyundai", name: "HYUNDAI ENGINEERING CO. LTD.", ...defaultClientProps },
+  { id: "hse-resources", name: "HSE RESOURCES SDN BHD" },
+  { id: "hamdan-abdullah", name: "HAMDAN ABDULLAH SDN BHD" },
+  { id: "highbase", name: "HIGHBASE STRATEGIC SDN BHD" },
+  { id: "hyundai", name: "HYUNDAI ENGINEERING CO. LTD." },
   
   // I
-  { id: "iev-engineering", name: "IEV ENGINEERING SDN BHD", ...defaultClientProps },
-  { id: "impian-bumiria", name: "IMPIAN BUMIRIA SDN BHD", ...defaultClientProps },
+  { id: "iev-engineering", name: "IEV ENGINEERING SDN BHD" },
+  { id: "impian-bumiria", name: "IMPIAN BUMIRIA SDN BHD" },
   
   // J
-  { id: "juara-muda", name: "JUARA MUDA INDUSTRI SDN BHD", ...defaultClientProps },
+  { id: "juara-muda", name: "JUARA MUDA INDUSTRI SDN BHD" },
   
   // K
-  { id: "knm-ogpet", name: "KNM OGPET (EAST COAST) SDN BHD", ...defaultClientProps },
-  { id: "kencana-hl", name: "KENCANA HL SDN BHD", ...defaultClientProps },
-  { id: "knm-process", name: "KNM PROCESS SYSTEMS SDN BHD", ...defaultClientProps },
-  { id: "kencana-jayamas", name: "KENCANA JAYAMAS SDN BHD", ...defaultClientProps },
-  { id: "kencana-torsco", name: "KENCANA TORSCO SDN BHD", ...defaultClientProps },
-  { id: "kencana-pinewell", name: "KENCANA PINEWELL SDN BHD", ...defaultClientProps },
-  { id: "kuasa-fleksibel", name: "KUASA FLEKSIBEL SDN BHD", ...defaultClientProps },
-  { id: "ketengah-jaya", name: "KETENGAH JAYA MAINTENANCE & SERVICES", ...defaultClientProps },
-  { id: "khd-humboldt", name: "KHD HUMBOLDT WEDAQ", ...defaultClientProps },
-  { id: "kejuruteraan-qks", name: "KEJURUTERAAN QKS SDN BHD", ...defaultClientProps },
-  { id: "knm-exotic", name: "KNM EXOTIC EQUIPMENT SDN BHD", ...defaultClientProps },
+  { id: "knm-ogpet", name: "KNM OGPET (EAST COAST) SDN BHD" },
+  { id: "kencana-hl", name: "KENCANA HL SDN BHD" },
+  { id: "knm-process", name: "KNM PROCESS SYSTEMS SDN BHD" },
+  { id: "kencana-jayamas", name: "KENCANA JAYAMAS SDN BHD" },
+  { id: "kencana-torsco", name: "KENCANA TORSCO SDN BHD" },
+  { id: "kencana-pinewell", name: "KENCANA PINEWELL SDN BHD" },
+  { id: "kuasa-fleksibel", name: "KUASA FLEKSIBEL SDN BHD" },
+  { id: "ketengah-jaya", name: "KETENGAH JAYA MAINTENANCE & SERVICES" },
+  { id: "khd-humboldt", name: "KHD HUMBOLDT WEDAQ" },
+  { id: "kejuruteraan-qks", name: "KEJURUTERAAN QKS SDN BHD" },
+  { id: "knm-exotic", name: "KNM EXOTIC EQUIPMENT SDN BHD" },
   
   // L
-  { id: "local-engineering", name: "LOCAL ENGINEERING (M) SDN BHD", ...defaultClientProps },
-  { id: "lotte-chemical", name: "LOTTE CHEMICAL TITAN (M) SDN BHD", ...defaultClientProps },
+  { id: "local-engineering", name: "LOCAL ENGINEERING (M) SDN BHD" },
+  { id: "lotte-chemical", name: "LOTTE CHEMICAL TITAN (M) SDN BHD" },
   
   // M
-  { id: "mushtari-maintenance", name: "MUSHTARI MAINTENANCE SERVICES SDN BHD", ...defaultClientProps },
-  { id: "mtbe-malaysia", name: "MTBE MALAYSIA SDN BHD", ...defaultClientProps },
-  { id: "mset-engineering", name: "MSET ENGINEERING CORPORATION SDN BHD", ...defaultClientProps },
-  { id: "m3nergy-jda", name: "M3NERGY JDA SDN BHD", ...defaultClientProps },
-  { id: "m3nergy-fpso", name: "M3NERGY FPSO PERINTIS SDN BHD", ...defaultClientProps },
-  { id: "marubeni-steel", name: "MARUBENI ITOCHU STEEL INC.", ...defaultClientProps },
-  { id: "marubeni-tubulars", name: "MARUBENI ITOCHU TUBULARS ASIA PTE LTD", ...defaultClientProps },
-  { id: "mmhe", name: "MALAYSIA MARINE AND HEAVY ENGINEERING HOLDINGS BERHAD", ...defaultClientProps },
-  { id: "majutera", name: "MAJUTERA SENDIRIAN BERHAD", ...defaultClientProps },
-  { id: "master-scaff", name: "MASTER SCAFF SUPPLY SERVICES MAINTENANCE", ...defaultClientProps },
-  { id: "malakoff", name: "MALAKOFF CORPORATION BERHAD", ...defaultClientProps },
+  { id: "mushtari-maintenance", name: "MUSHTARI MAINTENANCE SERVICES SDN BHD" },
+  { id: "mtbe-malaysia", name: "MTBE MALAYSIA SDN BHD" },
+  { id: "mset-engineering", name: "MSET ENGINEERING CORPORATION SDN BHD" },
+  { id: "m3nergy-jda", name: "M3NERGY JDA SDN BHD" },
+  { id: "m3nergy-fpso", name: "M3NERGY FPSO PERINTIS SDN BHD" },
+  { id: "marubeni-steel", name: "MARUBENI ITOCHU STEEL INC." },
+  { id: "marubeni-tubulars", name: "MARUBENI ITOCHU TUBULARS ASIA PTE LTD" },
+  { id: "mmhe", name: "MALAYSIA MARINE AND HEAVY ENGINEERING HOLDINGS BERHAD" },
+  { id: "majutera", name: "MAJUTERA SENDIRIAN BERHAD" },
+  { id: "master-scaff", name: "MASTER SCAFF SUPPLY SERVICES MAINTENANCE" },
+  { id: "malakoff", name: "MALAKOFF CORPORATION BERHAD" },
   
   // N
-  { id: "newwin-engineering", name: "NEWWIN ENGINEERING PAKA SDN BHD", ...defaultClientProps },
-  { id: "nufa-engineering", name: "NUFA ENGINEERING & CONSULTANCY SDN BHD", ...defaultClientProps },
-  { id: "newfield", name: "NEWFIELD PENINSULAR MALAYSIA INC", ...defaultClientProps },
+  { id: "newwin-engineering", name: "NEWWIN ENGINEERING PAKA SDN BHD" },
+  { id: "nufa-engineering", name: "NUFA ENGINEERING & CONSULTANCY SDN BHD" },
+  { id: "newfield", name: "NEWFIELD PENINSULAR MALAYSIA INC" },
   
   // O
-  { id: "ombak-marine", name: "OMBAK MARINE GROUP SDN BHD", ...defaultClientProps },
-  { id: "optimal-chemical", name: "OPTIMAL CHEMICAL (M) SDN BHD", ...defaultClientProps },
-  { id: "og-works", name: "O&G WORKS SDN BHD", ...defaultClientProps },
+  { id: "ombak-marine", name: "OMBAK MARINE GROUP SDN BHD" },
+  { id: "optimal-chemical", name: "OPTIMAL CHEMICAL (M) SDN BHD" },
+  { id: "og-works", name: "O&G WORKS SDN BHD" },
   
   // P
-  { id: "pfce-engineering", name: "PFCE ENGINEERING SDN BHD", ...defaultClientProps },
-  { id: "petronas-gas", name: "PETRONAS GAS BERHAD", ...defaultClientProps },
-  { id: "pioneer-engineering", name: "PIONEER ENGINEERING SDN BHD", ...defaultClientProps },
-  { id: "petronas-terengganu", name: "PETRONAS PENAPISAN TERENGGANU SDN BHD", ...defaultClientProps },
-  { id: "petronas-kedah", name: "PETRONAS FERTILIZER (KEDAH) SDN BHD", ...defaultClientProps },
-  { id: "petronas-carigali", name: "PETRONAS CARIGALI SDN BHD", ...defaultClientProps },
-  { id: "petra-resources", name: "PETRA RESOURCES SDN BHD", ...defaultClientProps },
-  { id: "petronas-melaka", name: "PETRONAS PENAPISAN MELAKA SDN BHD", ...defaultClientProps },
-  { id: "polyplastic", name: "POLYPLASTIC ASIA PACIFIC SDN BHD", ...defaultClientProps },
-  { id: "petronas-ldpe", name: "PETRONAS CHEMICALS LDPE SDN BHD", ...defaultClientProps },
-  { id: "pfce-integrated", name: "PFCE INTERGRATED FACILITY COMPLEX", ...defaultClientProps },
-  { id: "premier-viable", name: "PREMIER VIABLE SDN BHD", ...defaultClientProps },
-  { id: "petronas-ammonia", name: "PETRONAS AMMONIA SDN BHD", ...defaultClientProps },
-  { id: "petrofac-malaysia", name: "PETROFAC MALAYSIA", ...defaultClientProps },
-  { id: "pfmap", name: "PFMAP SDN BHD", ...defaultClientProps },
-  { id: "pioneer-pegasus", name: "PIONEER PEGASUS SDN BHD", ...defaultClientProps },
-  { id: "petrofac-ec", name: "PETROFAC E&C SDN BHD", ...defaultClientProps },
-  { id: "pasca-bina", name: "PASCA BINA SDN BHD", ...defaultClientProps },
-  { id: "puncak-jaya", name: "PUNCAK JAYA PETROLEUM SDN BHD", ...defaultClientProps },
-  { id: "pbjv-group", name: "PBJV GROUP SDN BHD", ...defaultClientProps },
-  { id: "paras-saksama", name: "PARAS SAKSAMA SDN BHD", ...defaultClientProps },
-  { id: "promat-esm", name: "PROMAT ESM (M) SDN BHD", ...defaultClientProps },
-  { id: "petronas-polyethylene", name: "PETRONAS CHEMMICALS POLYETHYLENE SDN BHD", ...defaultClientProps },
-  { id: "petronas-ethylene", name: "PETRONAS CHEMMICALS ETHYLENE SDN BHD", ...defaultClientProps },
+  { id: "pfce-engineering", name: "PFCE ENGINEERING SDN BHD" },
+  { id: "petronas-gas", name: "PETRONAS GAS BERHAD" },
+  { id: "pioneer-engineering", name: "PIONEER ENGINEERING SDN BHD" },
+  { id: "petronas-terengganu", name: "PETRONAS PENAPISAN TERENGGANU SDN BHD" },
+  { id: "petronas-kedah", name: "PETRONAS FERTILIZER (KEDAH) SDN BHD" },
+  { id: "petronas-carigali", name: "PETRONAS CARIGALI SDN BHD" },
+  { id: "petra-resources", name: "PETRA RESOURCES SDN BHD" },
+  { id: "petronas-melaka", name: "PETRONAS PENAPISAN MELAKA SDN BHD" },
+  { id: "polyplastic", name: "POLYPLASTIC ASIA PACIFIC SDN BHD" },
+  { id: "petronas-ldpe", name: "PETRONAS CHEMICALS LDPE SDN BHD" },
+  { id: "pfce-integrated", name: "PFCE INTERGRATED FACILITY COMPLEX" },
+  { id: "premier-viable", name: "PREMIER VIABLE SDN BHD" },
+  { id: "petronas-ammonia", name: "PETRONAS AMMONIA SDN BHD" },
+  { id: "petrofac-malaysia", name: "PETROFAC MALAYSIA" },
+  { id: "pfmap", name: "PFMAP SDN BHD" },
+  { id: "pioneer-pegasus", name: "PIONEER PEGASUS SDN BHD" },
+  { id: "petrofac-ec", name: "PETROFAC E&C SDN BHD" },
+  { id: "pasca-bina", name: "PASCA BINA SDN BHD" },
+  { id: "puncak-jaya", name: "PUNCAK JAYA PETROLEUM SDN BHD" },
+  { id: "pbjv-group", name: "PBJV GROUP SDN BHD" },
+  { id: "paras-saksama", name: "PARAS SAKSAMA SDN BHD" },
+  { id: "promat-esm", name: "PROMAT ESM (M) SDN BHD" },
+  { id: "petronas-polyethylene", name: "PETRONAS CHEMMICALS POLYETHYLENE SDN BHD" },
+  { id: "petronas-ethylene", name: "PETRONAS CHEMMICALS ETHYLENE SDN BHD" },
   
   // Q
-  { id: "qasturie", name: "QASTURIE OFFSHORE ENGINEERING SDN BHD", ...defaultClientProps },
+  { id: "qasturie", name: "QASTURIE OFFSHORE ENGINEERING SDN BHD" },
   
   // R
-  { id: "rp-chemical", name: "RP CHEMICAL (M) SDN BHD", ...defaultClientProps },
-  { id: "rms-engineering", name: "RMS ENGINEERING & SERVICES", ...defaultClientProps },
-  { id: "red-sea", name: "RED SEA ENGINEERING (M) SDN BHD", ...defaultClientProps },
-  { id: "rhea-offshore", name: "RHEA OFFSHORE SDN BHD", ...defaultClientProps },
-  { id: "rotomech", name: "ROTOMECH SDN BHD", ...defaultClientProps },
+  { id: "rp-chemical", name: "RP CHEMICAL (M) SDN BHD" },
+  { id: "rms-engineering", name: "RMS ENGINEERING & SERVICES" },
+  { id: "red-sea", name: "RED SEA ENGINEERING (M) SDN BHD" },
+  { id: "rhea-offshore", name: "RHEA OFFSHORE SDN BHD" },
+  { id: "rotomech", name: "ROTOMECH SDN BHD" },
   
   // S
-  { id: "science-tech", name: "SCIENCE-TECH SOLUTION SDN BHD", ...defaultClientProps },
-  { id: "sigur-ros", name: "SIGUR ROS SDN BHD", ...defaultClientProps },
-  { id: "shapadu", name: "SHAPADU ENERGY & ENGINEERING SDN BHD", ...defaultClientProps },
-  { id: "sapura-acergy", name: "SAPURA ACERGY SDN BHD", ...defaultClientProps },
-  { id: "saluran-pasifik", name: "SALURAN PASIFIK SDN BHD", ...defaultClientProps },
-  { id: "srimultec", name: "SRIMULTEC ENGINEERING SDN BHD", ...defaultClientProps },
-  { id: "serimax", name: "SERIMAX MALAYSIA", ...defaultClientProps },
-  { id: "swis-resources", name: "SWIS RESOURCES SDN BHD", ...defaultClientProps },
-  { id: "shinko-plantech", name: "SHINKO PLANTECH MALAYSIA BRANCH", ...defaultClientProps },
-  { id: "saa-engineering", name: "SAA ENGINEERING & MARINE SDN BHD", ...defaultClientProps },
-  { id: "saipem", name: "SAIPEM ASIA SDN BHD", ...defaultClientProps },
-  { id: "shineversendai", name: "SHINEVERSENDAI ENG (M) SDN.BHD.", ...defaultClientProps },
-  { id: "samudra-oil", name: "SAMUDRA OIL SERVICES SDN BHD", ...defaultClientProps },
-  { id: "seri-dinamik", name: "SERI DINAMIK ENGINEERING SDN. BHD.", ...defaultClientProps },
-  { id: "sankyu", name: "SANKYU (M) SDN BHD", ...defaultClientProps },
-  { id: "serba-dinamik", name: "SERBA DINAMIK SDN BHD", ...defaultClientProps },
-  { id: "semi-hermatics", name: "SEMI HERMATICS ENGINEERING SDN BHD", ...defaultClientProps },
-  { id: "steelcon", name: "SYARIKAT STEELCON SDN BHD", ...defaultClientProps },
+  { id: "science-tech", name: "SCIENCE-TECH SOLUTION SDN BHD" },
+  { id: "sigur-ros", name: "SIGUR ROS SDN BHD" },
+  { id: "shapadu", name: "SHAPADU ENERGY & ENGINEERING SDN BHD" },
+  { id: "sapura-acergy", name: "SAPURA ACERGY SDN BHD" },
+  { id: "saluran-pasifik", name: "SALURAN PASIFIK SDN BHD" },
+  { id: "srimultec", name: "SRIMULTEC ENGINEERING SDN BHD" },
+  { id: "serimax", name: "SERIMAX MALAYSIA" },
+  { id: "swis-resources", name: "SWIS RESOURCES SDN BHD" },
+  { id: "shinko-plantech", name: "SHINKO PLANTECH MALAYSIA BRANCH" },
+  { id: "saa-engineering", name: "SAA ENGINEERING & MARINE SDN BHD" },
+  { id: "saipem", name: "SAIPEM ASIA SDN BHD" },
+  { id: "shineversendai", name: "SHINEVERSENDAI ENG (M) SDN.BHD." },
+  { id: "samudra-oil", name: "SAMUDRA OIL SERVICES SDN BHD" },
+  { id: "seri-dinamik", name: "SERI DINAMIK ENGINEERING SDN. BHD." },
+  { id: "sankyu", name: "SANKYU (M) SDN BHD" },
+  { id: "serba-dinamik", name: "SERBA DINAMIK SDN BHD" },
+  { id: "semi-hermatics", name: "SEMI HERMATICS ENGINEERING SDN BHD" },
+  { id: "steelcon", name: "SYARIKAT STEELCON SDN BHD" },
   
   // T
-  { id: "tanjung-maintenance", name: "TANJUNG MAINTENANCE SERVICES SDN BHD", ...defaultClientProps },
-  { id: "transwater", name: "TRANSWATER API SDN BHD", ...defaultClientProps },
-  { id: "turcomp", name: "TURCOMP ENGINEERING SDN BHD", ...defaultClientProps },
-  { id: "tl-offshore", name: "TL OFFSHORE SDN BHD", ...defaultClientProps },
-  { id: "tmm-engineering", name: "TMM ENGINEERING SERVICES SDN BHD", ...defaultClientProps },
-  { id: "talisman", name: "TALISMAN MALAYSIA LIMITED", ...defaultClientProps },
-  { id: "tepat-teknik", name: "TEPAT TEKNIK SDN BHD", ...defaultClientProps },
-  { id: "tenaga-tiub", name: "TENAGA TIUB SDN BHD", ...defaultClientProps },
-  { id: "target-energy", name: "TARGET ENERGY CO.(M)SDN BHD", ...defaultClientProps },
-  { id: "toray-basf", name: "TORAY BASF PBT RESIN SDN BHD", ...defaultClientProps },
-  { id: "tanjung-offshore", name: "TANJUNG OFFSHORE SERVICES SDN. BHD", ...defaultClientProps },
-  { id: "ttes-team", name: "TTES TEAM & SPECIALIST SDN BHD", ...defaultClientProps },
-  { id: "toyo-engineering", name: "TOYO ENGINEERING & CONSTRUCTION SDN BHD", ...defaultClientProps },
-  { id: "tnb-repair", name: "TNB REPAIR AND MAINTANANCE SDN BHD", ...defaultClientProps },
+  { id: "tanjung-maintenance", name: "TANJUNG MAINTENANCE SERVICES SDN BHD" },
+  { id: "transwater", name: "TRANSWATER API SDN BHD" },
+  { id: "turcomp", name: "TURCOMP ENGINEERING SDN BHD" },
+  { id: "tl-offshore", name: "TL OFFSHORE SDN BHD" },
+  { id: "tmm-engineering", name: "TMM ENGINEERING SERVICES SDN BHD" },
+  { id: "talisman", name: "TALISMAN MALAYSIA LIMITED" },
+  { id: "tepat-teknik", name: "TEPAT TEKNIK SDN BHD" },
+  { id: "tenaga-tiub", name: "TENAGA TIUB SDN BHD" },
+  { id: "target-energy", name: "TARGET ENERGY CO.(M)SDN BHD" },
+  { id: "toray-basf", name: "TORAY BASF PBT RESIN SDN BHD" },
+  { id: "tanjung-offshore", name: "TANJUNG OFFSHORE SERVICES SDN. BHD" },
+  { id: "ttes-team", name: "TTES TEAM & SPECIALIST SDN BHD" },
+  { id: "toyo-engineering", name: "TOYO ENGINEERING & CONSTRUCTION SDN BHD" },
+  { id: "tnb-repair", name: "TNB REPAIR AND MAINTANANCE SDN BHD" },
   
   // V
-  { id: "vinyl-chloride", name: "VINYL CHLORIDE (MALAYSIA) SDN BHD", ...defaultClientProps },
-  { id: "vh-energy", name: "VH ENERGY SDN BHD", ...defaultClientProps },
+  { id: "vinyl-chloride", name: "VINYL CHLORIDE (MALAYSIA) SDN BHD" },
+  { id: "vh-energy", name: "VH ENERGY SDN BHD" },
   
   // W
-  { id: "wing-hup-hing", name: "WING HUP HING ENGINEERING SDN BHD", ...defaultClientProps },
-  { id: "welfield", name: "WELFIELD SERVICES SDN BHD", ...defaultClientProps }
+  { id: "wing-hup-hing", name: "WING HUP HING ENGINEERING SDN BHD" },
+  { id: "welfield", name: "WELFIELD SERVICES SDN BHD" }
 ];
 
 export const offices: Office[] = [

@@ -190,7 +190,6 @@ export const IMAGES = {
   SCREENSHOT7455_58: "/images/Screenshot7455.png",
   SCREENSHOT7470_102: "/images/Screenshot7470.png",
   SCREENSHOT7472_252: "/images/Screenshot7472.png",
-  SCREENSHOT7583_265: "/images/Screenshot7583.png",
   SCREENSHOT7769_103: "/images/Screenshot7769.png",
   SCREENSHOT7796_232: "/images/Screenshot7796.png",
   SCREENSHOT7896_246: "/images/Screenshot7896.png",

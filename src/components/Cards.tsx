@@ -4,18 +4,11 @@ import { ArrowRight, Eye, Settings, Waves, ShieldCheck, Cpu, Zap, Wrench } from 
 import { Link } from "react-router-dom";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { Service, Project, Client, ROUTE_PATHS } from "@/lib/index";
+import { Service, Policy, Project, Client, ROUTE_PATHS } from "@/lib/index";
 import { IMAGES } from "@/assets/images";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
-export interface Policy {
-  id: string;
-  title: string;
-  description: string;
-  imageKey: string;
-}
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
