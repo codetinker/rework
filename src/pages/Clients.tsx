@@ -8,7 +8,10 @@ import {
   Search, 
   MoreVertical,
   Briefcase,
-  ExternalLink
+  ExternalLink,
+  Trash2,
+  Edit,
+  AlertTriangle
 } from "lucide-react";
 import { Client, ROUTE_PATHS } from "@/lib/index";
 import { mockClients, clientsAPI } from "@/services/mockData";
@@ -39,6 +42,10 @@ export default function Clients() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingClient, setEditingClient] = useState<Client | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  
+  // Delete confirmation states
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [clientToDelete, setClientToDelete] = useState<Client | null>(null);
 
   useEffect(() => {
     const fetchClients = async () => {
@@ -143,10 +150,27 @@ export default function Clients() {
   };
 
   const handleDeleteClient = (client: Client) => {
-    if (window.confirm(`Are you sure you want to delete ${client.name}?`)) {
-      setClients(clients.filter((c) => c.id !== client.id));
-      toast.success("Client removed successfully");
-    }
+    setClientToDelete(client);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const confirmMoveToTrash = () => {
+    if (!clientToDelete) return;
+    
+    const now = new Date();
+    
+    setClients(clients.map(c => c.id === clientToDelete.id ? {
+      ...c,
+      isDeleted: true,
+      deletedAt: now.toISOString(),
+      deletedBy: "Current User", // In real app, get from auth context
+      updatedAt: now.toISOString()
+    } : c));
+    
+    setIsDeleteDialogOpen(false);
+    const clientName = clientToDelete.name;
+    setClientToDelete(null);
+    toast.success(`"${clientName}" moved to trash. Will be permanently deleted in 7 days.`);
   };
 
   const handleSaveClient = (e: React.FormEvent<HTMLFormElement>) => {
@@ -178,8 +202,9 @@ export default function Clients() {
     setIsDialogOpen(false);
   };
 
-  // Filter clients based on search query
-  const filteredClients = clients.filter(client => 
+  // Filter clients based on search query (exclude deleted clients)
+  const activeClients = clients.filter(client => !client.isDeleted);
+  const filteredClients = activeClients.filter(client => 
     client.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     client.industry.toLowerCase().includes(searchQuery.toLowerCase()) ||
     client.contactPerson.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -327,6 +352,60 @@ export default function Clients() {
               </Button>
             </DialogFooter>
           </form>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-destructive" />
+              Move to Trash?
+            </DialogTitle>
+            <DialogDescription>
+              Are you sure you want to move "{clientToDelete?.name}" to trash?
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div className="p-4 bg-muted/50 rounded-lg border">
+              <div className="flex items-start gap-3">
+                <Trash2 className="h-5 w-5 text-muted-foreground mt-0.5" />
+                <div className="space-y-2">
+                  <h4 className="font-medium">What happens next:</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                      Client will be moved to trash
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                      You can restore it within 7 days
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-destructive rounded-full" />
+                      After 7 days, it will be permanently deleted
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive" 
+              onClick={confirmMoveToTrash}
+              className="flex items-center gap-2"
+            >
+              <Trash2 className="h-4 w-4" />
+              Move to Trash
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

@@ -21,7 +21,8 @@ import {
   User,
   Activity,
   Database,
-  FolderOpen
+  FolderOpen,
+  Trash2
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ROUTE_PATHS, UserRole } from "@/lib/index";
@@ -66,6 +67,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Inquiries", path: ROUTE_PATHS.INQUIRIES, icon: MessageSquare },
   { label: "Live Chat", path: ROUTE_PATHS.CHAT, icon: MessageCircle },
   { label: "File Manager", path: ROUTE_PATHS.FILE_MANAGER, icon: FolderOpen },
+  { label: "Trash", path: ROUTE_PATHS.TRASH, icon: Trash2 },
   { label: "User Management", path: ROUTE_PATHS.USERS, icon: ShieldCheck },
   { label: "API Demo", path: ROUTE_PATHS.API_DEMO, icon: Database },
 ];

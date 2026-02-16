@@ -1,5 +1,5 @@
 /**
- * RWNA CMS API Service - Socket-based Communication
+ * RWNA CMS API Service - Mock Data (Socket Disabled)
  * Custom token authentication with single sendAPI function
  * © 2026 RWNA Engineering Sdn. Bhd.
  */
@@ -26,6 +26,8 @@ export interface PaginationParams {
   limit: number;
 }
 
+// SOCKET SERVICE COMMENTED OUT - USING MOCK DATA FOR NOW
+/*
 // Socket connection management
 class SocketAPIManager {
   private socket: WebSocket | null = null;
@@ -133,40 +135,56 @@ class SocketAPIManager {
 
 // Global socket manager instance
 const socketManager = new SocketAPIManager();
+*/
 
 /**
- * Main API function - sends all requests through socket/HTTP
+ * Main API function - MOCK VERSION (Socket disabled)
  * @param request - API request with route and data
  * @returns Promise<APIResponse>
  */
 export const sendAPI = async (request: APIRequest): Promise<APIResponse> => {
-  try {
-    const response = await socketManager.send(request);
-    return response;
-  } catch (error) {
-    console.error('API request failed:', error);
-    return {
-      route: request.route,
-      error: error.message || 'Unknown error occurred',
-      data: null
-    };
+  // Mock response for development
+  console.log('Mock API call:', request);
+  
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        route: request.route,
+        error: null,
+        data: { success: true, message: 'Mock response - Socket service disabled' }
+      });
+    }, 100);
+  });
+};
+
+/**
+ * Handle API Response - Mock version
+ */
+export const handleAPIResponse = (response: APIResponse, onSuccess?: (data: any) => void, onError?: (error: string) => void) => {
+  if (response.error) {
+    console.error('API Error:', response.error);
+    if (onError) onError(response.error);
+  } else {
+    console.log('API Success:', response.data);
+    if (onSuccess) onSuccess(response.data);
   }
 };
 
 // Authentication helpers
 export const authAPI = {
   login: async (email: string, password: string): Promise<APIResponse> => {
-    const response = await sendAPI({
+    // Mock login
+    const mockUser = { id: '1', email, name: 'Admin User', role: 'admin' };
+    const mockToken = 'mock_token_' + Date.now();
+    
+    localStorage.setItem(API_TOKEN_KEY, mockToken);
+    localStorage.setItem('currentUser', JSON.stringify(mockUser));
+    
+    return {
       route: '/auth/login',
-      data: { email, password }
-    });
-    
-    if (!response.error && response.data?.token) {
-      localStorage.setItem(API_TOKEN_KEY, response.data.token);
-      localStorage.setItem('currentUser', JSON.stringify(response.data.user));
-    }
-    
-    return response;
+      error: null,
+      data: { token: mockToken, user: mockUser }
+    };
   },
 
   logout: (): void => {
@@ -184,371 +202,152 @@ export const authAPI = {
   }
 };
 
-// Users API
+// Mock API functions - all return success responses
 export const usersAPI = {
   getAll: async (pagi: PaginationParams = { page: 1, keyword: '', limit: 20 }): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/users',
-      data: { pagi }
-    });
+    return { route: '/users', error: null, data: { users: [], total: 0 } };
   },
-
   getById: async (id: string): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/users/get',
-      data: { _id: id }
-    });
+    return { route: '/users/get', error: null, data: { user: null } };
   },
-
   create: async (userData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/users/create',
-      data: userData
-    });
+    return { route: '/users/create', error: null, data: { success: true } };
   },
-
   update: async (id: string, userData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/users/update',
-      data: { _id: id, ...userData }
-    });
+    return { route: '/users/update', error: null, data: { success: true } };
   },
-
   delete: async (id: string): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/users/delete',
-      data: { _id: id }
-    });
+    return { route: '/users/delete', error: null, data: { success: true } };
   }
 };
 
-// Roles API
 export const rolesAPI = {
   getAll: async (pagi: PaginationParams = { page: 1, keyword: '', limit: 20 }): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/roles',
-      data: { pagi }
-    });
+    return { route: '/roles', error: null, data: { roles: [], total: 0 } };
   },
-
   getById: async (id: string): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/roles/get',
-      data: { _id: id }
-    });
+    return { route: '/roles/get', error: null, data: { role: null } };
   },
-
   create: async (roleData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/roles/create',
-      data: roleData
-    });
+    return { route: '/roles/create', error: null, data: { success: true } };
   },
-
   update: async (id: string, roleData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/roles/update',
-      data: { _id: id, ...roleData }
-    });
+    return { route: '/roles/update', error: null, data: { success: true } };
   },
-
   delete: async (id: string): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/roles/delete',
-      data: { _id: id }
-    });
+    return { route: '/roles/delete', error: null, data: { success: true } };
   }
 };
 
-// Projects API
 export const projectsAPI = {
   getAll: async (pagi: PaginationParams = { page: 1, keyword: '', limit: 20 }): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/projects',
-      data: { pagi }
-    });
+    return { route: '/projects', error: null, data: { projects: [], total: 0 } };
   },
-
   getById: async (id: string): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/projects/get',
-      data: { _id: id }
-    });
+    return { route: '/projects/get', error: null, data: { project: null } };
   },
-
   create: async (projectData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/projects/create',
-      data: projectData
-    });
+    return { route: '/projects/create', error: null, data: { success: true } };
   },
-
   update: async (id: string, projectData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/projects/update',
-      data: { _id: id, ...projectData }
-    });
+    return { route: '/projects/update', error: null, data: { success: true } };
   },
-
   delete: async (id: string): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/projects/delete',
-      data: { _id: id }
-    });
+    return { route: '/projects/delete', error: null, data: { success: true } };
   }
 };
 
-// Clients API
 export const clientsAPI = {
   getAll: async (pagi: PaginationParams = { page: 1, keyword: '', limit: 20 }): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/clients',
-      data: { pagi }
-    });
+    return { route: '/clients', error: null, data: { clients: [], total: 0 } };
   },
-
   getById: async (id: string): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/clients/get',
-      data: { _id: id }
-    });
+    return { route: '/clients/get', error: null, data: { client: null } };
   },
-
   create: async (clientData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/clients/create',
-      data: clientData
-    });
+    return { route: '/clients/create', error: null, data: { success: true } };
   },
-
   update: async (id: string, clientData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/clients/update',
-      data: { _id: id, ...clientData }
-    });
+    return { route: '/clients/update', error: null, data: { success: true } };
   },
-
   delete: async (id: string): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/clients/delete',
-      data: { _id: id }
-    });
+    return { route: '/clients/delete', error: null, data: { success: true } };
   }
 };
 
-// News API
 export const newsAPI = {
   getAll: async (pagi: PaginationParams = { page: 1, keyword: '', limit: 20 }): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/news',
-      data: { pagi }
-    });
+    return { route: '/news', error: null, data: { news: [], total: 0 } };
   },
-
   getById: async (id: string): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/news/get',
-      data: { _id: id }
-    });
+    return { route: '/news/get', error: null, data: { news: null } };
   },
-
   create: async (newsData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/news/create',
-      data: newsData
-    });
+    return { route: '/news/create', error: null, data: { success: true } };
   },
-
   update: async (id: string, newsData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/news/update',
-      data: { _id: id, ...newsData }
-    });
+    return { route: '/news/update', error: null, data: { success: true } };
   },
-
   delete: async (id: string): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/news/delete',
-      data: { _id: id }
-    });
+    return { route: '/news/delete', error: null, data: { success: true } };
   }
 };
 
-// Inquiries API
-export const inquiriesAPI = {
-  getAll: async (pagi: PaginationParams = { page: 1, keyword: '', limit: 20 }): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/inquiries',
-      data: { pagi }
-    });
-  },
-
-  getById: async (id: string): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/inquiries/get',
-      data: { _id: id }
-    });
-  },
-
-  create: async (inquiryData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/inquiries/create',
-      data: inquiryData
-    });
-  },
-
-  update: async (id: string, inquiryData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/inquiries/update',
-      data: { _id: id, ...inquiryData }
-    });
-  },
-
-  delete: async (id: string): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/inquiries/delete',
-      data: { _id: id }
-    });
-  }
-};
-
-// Career API
 export const careerAPI = {
   getAll: async (pagi: PaginationParams = { page: 1, keyword: '', limit: 20 }): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/career',
-      data: { pagi }
-    });
+    return { route: '/career', error: null, data: { jobs: [], total: 0 } };
   },
-
+  getById: async (id: string): Promise<APIResponse> => {
+    return { route: '/career/get', error: null, data: { job: null } };
+  },
   create: async (jobData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/career/create',
-      data: jobData
-    });
+    return { route: '/career/create', error: null, data: { success: true } };
   },
-
   update: async (id: string, jobData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/career/update',
-      data: { _id: id, ...jobData }
-    });
+    return { route: '/career/update', error: null, data: { success: true } };
   },
-
   delete: async (id: string): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/career/delete',
-      data: { _id: id }
-    });
+    return { route: '/career/delete', error: null, data: { success: true } };
   }
 };
 
-// Training API
 export const trainingAPI = {
   getAll: async (pagi: PaginationParams = { page: 1, keyword: '', limit: 20 }): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/training',
-      data: { pagi }
-    });
+    return { route: '/training', error: null, data: { trainings: [], total: 0 } };
   },
-
+  getById: async (id: string): Promise<APIResponse> => {
+    return { route: '/training/get', error: null, data: { training: null } };
+  },
   create: async (trainingData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/training/create',
-      data: trainingData
-    });
+    return { route: '/training/create', error: null, data: { success: true } };
   },
-
   update: async (id: string, trainingData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/training/update',
-      data: { _id: id, ...trainingData }
-    });
+    return { route: '/training/update', error: null, data: { success: true } };
   },
-
   delete: async (id: string): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/training/delete',
-      data: { _id: id }
-    });
+    return { route: '/training/delete', error: null, data: { success: true } };
   }
 };
 
-// Chat API
-export const chatAPI = {
-  getConversations: async (pagi: PaginationParams = { page: 1, keyword: '', limit: 20 }): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/chat/conversations',
-      data: { pagi }
-    });
-  },
-
-  getMessages: async (conversationId: string, pagi: PaginationParams = { page: 1, keyword: '', limit: 50 }): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/chat/messages',
-      data: { conversationId, pagi }
-    });
-  },
-
-  sendMessage: async (messageData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/chat/send',
-      data: messageData
-    });
-  }
-};
-
-// Access Logs API
+// Access Logs API (Mock)
 export const accessLogsAPI = {
-  getAll: async (pagi: PaginationParams = { page: 1, keyword: '', limit: 50 }): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/access-logs',
-      data: { pagi }
-    });
+  getAll: async (pagi: PaginationParams = { page: 1, keyword: '', limit: 20 }): Promise<APIResponse> => {
+    return { route: '/access-logs', error: null, data: { logs: [], total: 0 } };
   },
-
+  getById: async (id: string): Promise<APIResponse> => {
+    return { route: '/access-logs/get', error: null, data: { log: null } };
+  },
+  create: async (logData: any): Promise<APIResponse> => {
+    return { route: '/access-logs/create', error: null, data: { success: true } };
+  },
+  update: async (id: string, logData: any): Promise<APIResponse> => {
+    return { route: '/access-logs/update', error: null, data: { success: true } };
+  },
+  delete: async (id: string): Promise<APIResponse> => {
+    return { route: '/access-logs/delete', error: null, data: { success: true } };
+  },
   log: async (logData: any): Promise<APIResponse> => {
-    return sendAPI({
-      route: '/access-logs/create',
-      data: logData
-    });
+    console.log('Mock access log:', logData);
+    return { route: '/access-logs/log', error: null, data: { success: true } };
   }
 };
-
-// Utility functions for handling API responses
-export const handleAPIResponse = (response: APIResponse) => {
-  if (response.error) {
-    throw new Error(response.error);
-  }
-  return response.data;
-};
-
-export const handleAPIError = (error: any): { error: string; data: null } => {
-  console.error('API Error:', error);
-  return {
-    error: error.message || 'Unknown error occurred',
-    data: null
-  };
-};
-
-// Token management
-export const tokenAPI = {
-  setToken: (token: string) => {
-    localStorage.setItem(API_TOKEN_KEY, token);
-  },
-
-  getToken: (): string | null => {
-    return localStorage.getItem(API_TOKEN_KEY);
-  },
-
-  removeToken: () => {
-    localStorage.removeItem(API_TOKEN_KEY);
-  },
-
-  isAuthenticated: (): boolean => {
-    return !!localStorage.getItem(API_TOKEN_KEY);
-  }
-};
-
-// Export the main API function
-export default sendAPI;

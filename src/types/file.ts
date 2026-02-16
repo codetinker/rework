@@ -18,6 +18,11 @@ export interface FileItem {
     created: string;
     updated: string;
   };
+  // Trash system properties
+  isDeleted?: boolean;
+  deletedAt?: string;
+  deletedBy?: string;
+  updatedAt?: string;
 }
 
 export interface FileUploadData {

@@ -29,6 +29,7 @@ import AccessLogs from "@/pages/AccessLogs";
 import RoleManagement from "@/pages/RoleManagement";
 import APIDemo from "@/pages/APIDemo";
 import FileManager from "@/pages/FileManager";
+import Trash from "@/pages/Trash";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -180,6 +181,15 @@ const App = () => {
               element={
                 <Layout>
                   <Services />
+                </Layout>
+              }
+/>
+
+            <Route
+              path={ROUTE_PATHS.TRASH}
+              element={
+                <Layout>
+                  <Trash />
                 </Layout>
               }
             />

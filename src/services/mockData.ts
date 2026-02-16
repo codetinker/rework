@@ -442,7 +442,7 @@ export const mockInquiries: Inquiry[] = [
     subject: "RFQ for Flange Facing Service",
     message: "Requesting a quote for 24-inch flange facing on 15 offshore joints in Bintulu field.",
     status: "new",
-    receivedAt: "2026-02-13T16:20:00Z",
+    receivedAt: "2026-02-13T16:20:00Z"
   },
   {
     id: "inq2",
@@ -453,8 +453,8 @@ export const mockInquiries: Inquiry[] = [
     message: "Are your cold cutting training programs HRDF claimable?",
     status: "in-progress",
     receivedAt: "2026-02-14T08:45:00Z",
-    assignedTo: "u3",
-  },
+    assignedTo: "u3"
+  }
 ];
 
 // API Mock Services

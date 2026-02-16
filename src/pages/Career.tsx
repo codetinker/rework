@@ -10,7 +10,8 @@ import {
   Trash2, 
   Eye,
   TrendingUp,
-  Clock
+  Clock,
+  AlertTriangle
 } from "lucide-react";
 import { 
   ROUTE_PATHS, 
@@ -62,6 +63,10 @@ export default function Career() {
   const [currentResponseType, setCurrentResponseType] = useState<string>('');
   const [isTemplateEditMode, setIsTemplateEditMode] = useState(false);
   const [activeTab, setActiveTab] = useState('jobs');
+  
+  // Delete confirmation states
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [jobToDelete, setJobToDelete] = useState<JobPosting | null>(null);
   const [careerSettings, setCareerSettings] = useState({
     sendByEmail: true,
     sendByWhatsApp: false,
@@ -142,10 +147,27 @@ export default function Career() {
   };
 
   const handleDelete = (job: JobPosting) => {
-    if (confirm(`Are you sure you want to delete the position: ${job.title}?`)) {
-      setJobs(prev => prev.filter(j => j.id !== job.id));
-      toast.success("Job posting deleted successfully");
-    }
+    setJobToDelete(job);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const confirmMoveToTrash = () => {
+    if (!jobToDelete) return;
+    
+    const now = new Date();
+    
+    setJobs(jobs.map(j => j.id === jobToDelete.id ? {
+      ...j,
+      isDeleted: true,
+      deletedAt: now.toISOString(),
+      deletedBy: "Current User", // In real app, get from auth context
+      updatedAt: now.toISOString()
+    } : j));
+    
+    setIsDeleteDialogOpen(false);
+    const jobTitle = jobToDelete.title;
+    setJobToDelete(null);
+    toast.success(`"${jobTitle}" moved to trash. Will be permanently deleted in 7 days.`);
   };
 
   const handleViewApplications = (job: JobPosting) => {
@@ -260,8 +282,9 @@ export default function Career() {
     toast.success(editingJob ? "Job updated successfully" : "New job posted successfully");
   };
 
-  // Filter jobs based on search query
-  const filteredJobs = jobs.filter(job => 
+  // Filter jobs based on search query (exclude deleted jobs)
+  const activeJobs = jobs.filter(job => !job.isDeleted);
+  const filteredJobs = activeJobs.filter(job => 
     job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     job.department.toLowerCase().includes(searchQuery.toLowerCase()) ||
     job.location.toLowerCase().includes(searchQuery.toLowerCase())
@@ -809,6 +832,60 @@ export default function Career() {
             </Button>
             <Button onClick={handleSendResponse} className="bg-primary">
               {isTemplateEditMode ? 'Save Template' : 'Send Notification'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-destructive" />
+              Move to Trash?
+            </DialogTitle>
+            <DialogDescription>
+              Are you sure you want to move "{jobToDelete?.title}" to trash?
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div className="p-4 bg-muted/50 rounded-lg border">
+              <div className="flex items-start gap-3">
+                <Trash2 className="h-5 w-5 text-muted-foreground mt-0.5" />
+                <div className="space-y-2">
+                  <h4 className="font-medium">What happens next:</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                      Job posting will be moved to trash
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                      You can restore it within 7 days
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-destructive rounded-full" />
+                      After 7 days, it will be permanently deleted
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive" 
+              onClick={confirmMoveToTrash}
+              className="flex items-center gap-2"
+            >
+              <Trash2 className="h-4 w-4" />
+              Move to Trash
             </Button>
           </DialogFooter>
         </DialogContent>

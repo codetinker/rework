@@ -28,7 +28,8 @@ import {
   CheckCircle,
   XCircle,
   MessageSquare,
-  Filter
+  Filter,
+  AlertTriangle
 } from "lucide-react";
 import { TrainingProgram, Inquiry, TrainingParticipant, TrainingInquiry, EmailTemplate, TrainingSettings, ROUTE_PATHS } from "@/lib/index";
 import { mockTrainingPrograms, mockInquiries } from "@/services/mockData";
@@ -161,6 +162,10 @@ export default function Training() {
   const [templateEditorTab, setTemplateEditorTab] = useState<'write' | 'preview'>('write');
   const [courseStatus, setCourseStatus] = useState<string>('participate');
   const [responseTemplateTab, setResponseTemplateTab] = useState<'write' | 'preview'>('write');
+  
+  // Delete confirmation states
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [programToDelete, setProgramToDelete] = useState<TrainingProgram | null>(null);
 
   // Mock data for participants
   const mockParticipants: TrainingParticipant[] = [
@@ -277,10 +282,11 @@ export default function Training() {
     pendingInquiries: mockInquiries.filter(i => i.status === "new" || i.status === "in-progress").length
   }), [programs]);
 
-  // Filter programs based on search query
+  // Filter programs based on search query (exclude deleted programs)
   const filteredPrograms = useMemo(() => {
-    if (!searchQuery) return programs;
-    return programs.filter(program => 
+    const activePrograms = programs.filter(program => !program.isDeleted);
+    if (!searchQuery) return activePrograms;
+    return activePrograms.filter(program => 
       program.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
       program.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       program.description.toLowerCase().includes(searchQuery.toLowerCase())
@@ -340,26 +346,28 @@ export default function Training() {
   };
 
   // Handle delete
-  const handleDelete = async (program: TrainingProgram) => {
-    if (!confirm(`Are you sure you want to delete "${program.title}"?`)) return;
+  const handleDelete = (program: TrainingProgram) => {
+    setProgramToDelete(program);
+    setIsDeleteDialogOpen(true);
+  };
 
-    try {
-      setIsLoading(true);
-      const response = await trainingAPI.delete(program.id);
-      
-      if (response.error) {
-        toast.error(response.error);
-        return;
-      }
-
-      setPrograms(prev => prev.filter(p => p.id !== program.id));
-      toast.success('Training program deleted successfully');
-    } catch (error) {
-      console.error('Delete error:', error);
-      toast.error('Failed to delete training program');
-    } finally {
-      setIsLoading(false);
-    }
+  const confirmMoveToTrash = () => {
+    if (!programToDelete) return;
+    
+    const now = new Date();
+    
+    setPrograms(programs.map(p => p.id === programToDelete.id ? {
+      ...p,
+      isDeleted: true,
+      deletedAt: now.toISOString(),
+      deletedBy: "Current User", // In real app, get from auth context
+      updatedAt: now.toISOString()
+    } : p));
+    
+    setIsDeleteDialogOpen(false);
+    const programTitle = programToDelete.title;
+    setProgramToDelete(null);
+    toast.success(`"${programTitle}" moved to trash. Will be permanently deleted in 7 days.`);
   };
 
   // Handle accept inquiry
@@ -2094,6 +2102,60 @@ export default function Training() {
             }}>
               <Settings className="w-4 h-4 mr-2" />
               Save Template
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-destructive" />
+              Move to Trash?
+            </DialogTitle>
+            <DialogDescription>
+              Are you sure you want to move "{programToDelete?.title}" to trash?
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div className="p-4 bg-muted/50 rounded-lg border">
+              <div className="flex items-start gap-3">
+                <Trash2 className="h-5 w-5 text-muted-foreground mt-0.5" />
+                <div className="space-y-2">
+                  <h4 className="font-medium">What happens next:</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                      Training program will be moved to trash
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                      You can restore it within 7 days
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-destructive rounded-full" />
+                      After 7 days, it will be permanently deleted
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive" 
+              onClick={confirmMoveToTrash}
+              className="flex items-center gap-2"
+            >
+              <Trash2 className="h-4 w-4" />
+              Move to Trash
             </Button>
           </DialogFooter>
         </DialogContent>

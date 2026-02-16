@@ -10,7 +10,9 @@ import {
   Building2,
   Calendar,
   Trash2,
-  Edit
+  Edit,
+  AlertTriangle,
+  RotateCcw
 } from 'lucide-react';
 import { Project } from '@/lib/index';
 import { projectsAPI, mockProjects, mockClients } from '@/services/mockData';
@@ -43,6 +45,10 @@ export default function Projects() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [currentProject, setCurrentProject] = useState<Partial<Project> | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  
+  // Delete confirmation states
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [projectToDelete, setProjectToDelete] = useState<Project | null>(null);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -76,14 +82,28 @@ export default function Projects() {
     setIsDialogOpen(true);
   };
 
-  const handleDeleteProject = async (project: Project) => {
-    if (window.confirm(`Are you sure you want to delete "${project.title}"?`)) {
-      const success = await projectsAPI.delete(project.id);
-      if (success) {
-        setProjects(prev => prev.filter(p => p.id !== project.id));
-        toast.success('Project deleted successfully');
-      }
-    }
+  const handleDeleteProject = (project: Project) => {
+    setProjectToDelete(project);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const confirmMoveToTrash = () => {
+    if (!projectToDelete) return;
+    
+    const now = new Date();
+    
+    setProjects(projects.map(p => p.id === projectToDelete.id ? {
+      ...p,
+      isDeleted: true,
+      deletedAt: now.toISOString(),
+      deletedBy: "Current User", // In real app, get from auth context
+      updatedAt: now.toISOString()
+    } : p));
+    
+    setIsDeleteDialogOpen(false);
+    const projectName = projectToDelete.title;
+    setProjectToDelete(null);
+    toast.success(`"${projectName}" moved to trash. Will be permanently deleted in 7 days.`);
   };
 
   const handleSaveProject = async () => {
@@ -169,8 +189,9 @@ export default function Projects() {
     }
   ];
 
-  // Filter projects based on search query
-  const filteredProjects = projects.filter(project => 
+  // Filter projects based on search query (exclude deleted projects)
+  const activeProjects = projects.filter(project => !project.isDeleted);
+  const filteredProjects = activeProjects.filter(project => 
     project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     project.client.toLowerCase().includes(searchQuery.toLowerCase()) ||
     project.location.toLowerCase().includes(searchQuery.toLowerCase())
@@ -335,6 +356,60 @@ export default function Projects() {
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
             <Button onClick={handleSaveProject}>Save Project</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-destructive" />
+              Move to Trash?
+            </DialogTitle>
+            <DialogDescription>
+              Are you sure you want to move "{projectToDelete?.title}" to trash?
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div className="p-4 bg-muted/50 rounded-lg border">
+              <div className="flex items-start gap-3">
+                <Trash2 className="h-5 w-5 text-muted-foreground mt-0.5" />
+                <div className="space-y-2">
+                  <h4 className="font-medium">What happens next:</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                      Project will be moved to trash
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                      You can restore it within 7 days
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-destructive rounded-full" />
+                      After 7 days, it will be permanently deleted
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive" 
+              onClick={confirmMoveToTrash}
+              className="flex items-center gap-2"
+            >
+              <Trash2 className="h-4 w-4" />
+              Move to Trash
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

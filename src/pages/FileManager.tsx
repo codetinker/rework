@@ -21,7 +21,8 @@ import {
   X,
   Calendar,
   Tag,
-  HardDrive
+  HardDrive,
+  AlertTriangle
 } from 'lucide-react';
 import { FileItem, FileUploadData } from '@/types/file';
 import { sendAPI } from '@/services/api';
@@ -128,10 +129,14 @@ export default function FileManager() {
     tags: []
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
+  // Delete confirmation states
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [fileToDelete, setFileToDelete] = useState<FileItem | null>(null);
 
-  // Filter files based on search and type
+  // Filter files based on search and type (exclude deleted files)
   React.useEffect(() => {
-    let filtered = files;
+    let filtered = files.filter(file => !file.isDeleted);
 
     if (searchQuery) {
       filtered = filtered.filter(file =>
@@ -256,26 +261,28 @@ export default function FileManager() {
     toast.success(`Downloading ${file.name}`);
   };
 
-  const handleDelete = async (fileId: string) => {
-    if (!confirm('Are you sure you want to delete this file?')) return;
+  const handleDelete = (file: FileItem) => {
+    setFileToDelete(file);
+    setIsDeleteDialogOpen(true);
+  };
 
-    try {
-      const response = await sendAPI({
-        route: '/files/delete',
-        data: { _id: fileId }
-      });
-
-      if (response.error) {
-        console.error('Delete failed:', response.error);
-      }
-
-      setFiles(prev => prev.filter(f => f._id !== fileId));
-      setSelectedFiles(prev => prev.filter(id => id !== fileId));
-      toast.success('File deleted successfully');
-    } catch (error) {
-      console.error('Delete error:', error);
-      toast.error('Failed to delete file');
-    }
+  const confirmMoveToTrash = async () => {
+    if (!fileToDelete) return;
+    
+    const now = new Date();
+    
+    setFiles(files.map(f => f._id === fileToDelete._id ? {
+      ...f,
+      isDeleted: true,
+      deletedAt: now.toISOString(),
+      deletedBy: "Current User", // In real app, get from auth context
+      updatedAt: now.toISOString()
+    } : f));
+    
+    setIsDeleteDialogOpen(false);
+    const fileName = fileToDelete.name;
+    setFileToDelete(null);
+    toast.success(`"${fileName}" moved to trash. Will be permanently deleted in 7 days.`);
   };
 
   const handleEdit = (file: FileItem) => {
@@ -508,11 +515,11 @@ export default function FileManager() {
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem 
-                              onClick={() => handleDelete(file._id)}
+                              onClick={() => handleDelete(file)}
                               className="text-destructive"
                             >
                               <Trash2 className="w-4 h-4 mr-2" />
-                              Delete
+                              Move to Trash
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -607,11 +614,11 @@ export default function FileManager() {
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem 
-                          onClick={() => handleDelete(file._id)}
+                          onClick={() => handleDelete(file)}
                           className="text-destructive"
                         >
                           <Trash2 className="w-4 h-4 mr-2" />
-                          Delete
+                          Move to Trash
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -755,6 +762,60 @@ export default function FileManager() {
               </Button>
               <Button onClick={handleEditSubmit}>
                 Save Changes
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        {/* Delete Confirmation Dialog */}
+        <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2">
+                <AlertTriangle className="h-5 w-5 text-destructive" />
+                Move to Trash?
+              </DialogTitle>
+              <DialogDescription>
+                Are you sure you want to move "{fileToDelete?.name}" to trash?
+              </DialogDescription>
+            </DialogHeader>
+            
+            <div className="space-y-4">
+              <div className="p-4 bg-muted/50 rounded-lg border">
+                <div className="flex items-start gap-3">
+                  <Trash2 className="h-5 w-5 text-muted-foreground mt-0.5" />
+                  <div className="space-y-2">
+                    <h4 className="font-medium">What happens next:</h4>
+                    <ul className="text-sm text-muted-foreground space-y-1">
+                      <li className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                        File will be moved to trash
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                        You can restore it within 7 days
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 bg-destructive rounded-full" />
+                        After 7 days, it will be permanently deleted
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+                Cancel
+              </Button>
+              <Button 
+                variant="destructive" 
+                onClick={confirmMoveToTrash}
+                className="flex items-center gap-2"
+              >
+                <Trash2 className="h-4 w-4" />
+                Move to Trash
               </Button>
             </DialogFooter>
           </DialogContent>
