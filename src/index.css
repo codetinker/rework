@@ -81,42 +81,649 @@
 }
 
 .dark {
-  --background: oklch(0.12 0.02 225);
-  --foreground: oklch(0.92 0.01 225);
-  --card: oklch(0.15 0.03 225);
-  --card-foreground: oklch(0.92 0.01 225);
-  --popover: oklch(0.12 0.02 225);
-  --popover-foreground: oklch(0.92 0.01 225);
-  --primary: oklch(0.65 0.18 210);
-  --primary-foreground: oklch(0.1 0.04 210);
-  --secondary: oklch(0.22 0.04 225);
-  --secondary-foreground: oklch(0.92 0.01 225);
-  --muted: oklch(0.22 0.04 225);
-  --muted-foreground: oklch(0.65 0.04 225);
-  --accent: oklch(0.25 0.06 210);
-  --accent-foreground: oklch(0.95 0.02 210);
-  --destructive: oklch(0.45 0.16 25);
-  --destructive-foreground: oklch(0.95 0.01 25);
-  --border: oklch(0.25 0.04 225);
-  --input: oklch(0.25 0.04 225);
-  --ring: oklch(0.65 0.18 210);
+  /* Enhanced Dark Mode - Better Contrast & Readability */
+  --background: oklch(0.08 0.01 240);          /* Darker, more neutral background */
+  --foreground: oklch(0.95 0.005 240);         /* Higher contrast text */
+  --card: oklch(0.12 0.015 240);               /* Subtle card background */
+  --card-foreground: oklch(0.94 0.005 240);    /* High contrast card text */
+  --popover: oklch(0.10 0.01 240);             /* Darker popover */
+  --popover-foreground: oklch(0.95 0.005 240); /* Clear popover text */
+  --primary: oklch(0.70 0.15 220);             /* Brighter, more vibrant primary */
+  --primary-foreground: oklch(0.05 0.02 220);  /* Dark text on primary */
+  --secondary: oklch(0.18 0.02 240);           /* Subtle secondary background */
+  --secondary-foreground: oklch(0.90 0.01 240); /* Clear secondary text */
+  --muted: oklch(0.16 0.02 240);               /* Muted background */
+  --muted-foreground: oklch(0.70 0.02 240);    /* Better muted text contrast */
+  --accent: oklch(0.22 0.03 220);              /* Subtle accent background */
+  --accent-foreground: oklch(0.92 0.01 220);   /* Clear accent text */
+  --destructive: oklch(0.55 0.18 15);          /* Brighter red for visibility */
+  --destructive-foreground: oklch(0.98 0.005 15); /* White text on red */
+  --border: oklch(0.22 0.02 240);              /* More visible borders */
+  --input: oklch(0.14 0.015 240);              /* Darker input backgrounds */
+  --ring: oklch(0.70 0.15 220);                /* Bright focus rings */
   
-  /* Chart Tokens */
-  --chart-1: oklch(0.65 0.18 210);
-  --chart-2: oklch(0.55 0.15 180);
-  --chart-3: oklch(0.75 0.12 240);
-  --chart-4: oklch(0.50 0.14 200);
-  --chart-5: oklch(0.60 0.16 190);
+  /* Enhanced Chart Colors for Dark Mode */
+  --chart-1: oklch(0.75 0.15 220);             /* Bright blue */
+  --chart-2: oklch(0.70 0.18 160);             /* Vibrant green */
+  --chart-3: oklch(0.80 0.12 280);             /* Purple */
+  --chart-4: oklch(0.75 0.16 40);              /* Orange */
+  --chart-5: oklch(0.70 0.14 320);             /* Pink */
   
-  /* Sidebar Tokens */
-  --sidebar: oklch(0.10 0.02 225);
-  --sidebar-foreground: oklch(0.92 0.01 225);
-  --sidebar-primary: oklch(0.65 0.18 210);
-  --sidebar-primary-foreground: oklch(0.1 0.04 210);
-  --sidebar-accent: oklch(0.18 0.04 225);
-  --sidebar-accent-foreground: oklch(0.92 0.01 225);
-  --sidebar-border: oklch(0.20 0.04 225);
-  --sidebar-ring: oklch(0.65 0.18 210);
+  /* Enhanced Sidebar for Dark Mode */
+  --sidebar: oklch(0.06 0.01 240);             /* Very dark sidebar */
+  --sidebar-foreground: oklch(0.92 0.005 240); /* High contrast sidebar text */
+  --sidebar-primary: oklch(0.70 0.15 220);     /* Bright primary in sidebar */
+  --sidebar-primary-foreground: oklch(0.05 0.02 220); /* Dark text on primary */
+  --sidebar-accent: oklch(0.14 0.02 240);      /* Subtle sidebar accent */
+  --sidebar-accent-foreground: oklch(0.90 0.01 240); /* Clear accent text */
+  --sidebar-border: oklch(0.18 0.02 240);      /* Visible sidebar borders */
+  --sidebar-ring: oklch(0.70 0.15 220);        /* Bright focus rings */
+}
+
+/* Enhanced Dark Mode Component Styles */
+.dark {
+  /* Better card shadows and depth */
+  .shadow-sm {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  }
+  
+  .shadow {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  }
+  
+  .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Better hover states */
+  .hover\:bg-accent:hover {
+    background-color: oklch(0.18 0.025 240);
+  }
+  
+  /* Enhanced table styling */
+  .border-border {
+    border-color: oklch(0.25 0.02 240);
+  }
+  
+  /* Better focus states */
+  .focus\:ring-2:focus {
+    ring-color: oklch(0.70 0.15 220);
+  }
+  
+  /* Enhanced scrollbar for dark mode */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: oklch(0.12 0.01 240);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.30 0.02 240);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.40 0.03 240);
+  }
+}
+
+/* Enhanced Dark Mode Color Utilities */
+.dark {
+  /* Better colored backgrounds for dark mode */
+  .bg-blue-50 {
+    background-color: oklch(0.15 0.03 240) !important;
+  }
+  
+  .bg-green-50 {
+    background-color: oklch(0.15 0.03 160) !important;
+  }
+  
+  .bg-orange-50 {
+    background-color: oklch(0.15 0.03 40) !important;
+  }
+  
+  .bg-purple-50 {
+    background-color: oklch(0.15 0.03 280) !important;
+  }
+  
+  .bg-red-50 {
+    background-color: oklch(0.15 0.03 15) !important;
+  }
+  
+  .bg-yellow-50 {
+    background-color: oklch(0.15 0.03 80) !important;
+  }
+  
+  /* Better colored text for dark mode */
+  .text-blue-800 {
+    color: oklch(0.80 0.12 240) !important;
+  }
+  
+  .text-green-800 {
+    color: oklch(0.80 0.12 160) !important;
+  }
+  
+  .text-orange-800 {
+    color: oklch(0.80 0.12 40) !important;
+  }
+  
+  .text-purple-800 {
+    color: oklch(0.80 0.12 280) !important;
+  }
+  
+  .text-red-800 {
+    color: oklch(0.80 0.12 15) !important;
+  }
+  
+  .text-yellow-800 {
+    color: oklch(0.80 0.12 80) !important;
+  }
+  
+  /* Better borders for dark mode */
+  .border-blue-200 {
+    border-color: oklch(0.25 0.04 240) !important;
+  }
+  
+  .border-green-200 {
+    border-color: oklch(0.25 0.04 160) !important;
+  }
+  
+  .border-orange-200 {
+    border-color: oklch(0.25 0.04 40) !important;
+  }
+  
+  .border-purple-200 {
+    border-color: oklch(0.25 0.04 280) !important;
+  }
+  
+  /* Better white backgrounds for dark mode */
+  .bg-white\/50 {
+    background-color: oklch(0.18 0.01 240) !important;
+  }
+  
+  .bg-white\/20 {
+    background-color: oklch(0.15 0.01 240) !important;
+  }
+  
+  /* Better gray backgrounds */
+  .bg-gray-200 {
+    background-color: oklch(0.25 0.01 240) !important;
+  }
+  
+  .bg-gray-100 {
+    background-color: oklch(0.20 0.01 240) !important;
+  }
+}
+
+/* Enhanced Dark Mode Gradients and Special Effects */
+.dark {
+  /* Better gradient backgrounds */
+  .bg-gradient-to-r.from-primary\/5.to-primary\/10 {
+    background: linear-gradient(to right, 
+      oklch(0.15 0.02 220), 
+      oklch(0.18 0.025 220)) !important;
+  }
+  
+  .bg-gradient-to-br.from-blue-600.to-blue-700 {
+    background: linear-gradient(to bottom right, 
+      oklch(0.20 0.08 240), 
+      oklch(0.16 0.06 240)) !important;
+  }
+  
+  /* Better card hover effects */
+  .hover\:shadow-md:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Enhanced badge styling */
+  .bg-blue-100.text-blue-800.border-blue-200 {
+    background-color: oklch(0.20 0.04 240) !important;
+    color: oklch(0.85 0.08 240) !important;
+    border-color: oklch(0.30 0.04 240) !important;
+  }
+  
+  .bg-green-100.text-green-800.border-green-200 {
+    background-color: oklch(0.20 0.04 160) !important;
+    color: oklch(0.85 0.08 160) !important;
+    border-color: oklch(0.30 0.04 160) !important;
+  }
+  
+  .bg-red-100.text-red-800.border-red-200 {
+    background-color: oklch(0.20 0.04 15) !important;
+    color: oklch(0.85 0.08 15) !important;
+    border-color: oklch(0.30 0.04 15) !important;
+  }
+  
+  .bg-yellow-100.text-yellow-800.border-yellow-200 {
+    background-color: oklch(0.20 0.04 80) !important;
+    color: oklch(0.85 0.08 80) !important;
+    border-color: oklch(0.30 0.04 80) !important;
+  }
+  
+  .bg-orange-100.text-orange-800.border-orange-200 {
+    background-color: oklch(0.20 0.04 40) !important;
+    color: oklch(0.85 0.08 40) !important;
+    border-color: oklch(0.30 0.04 40) !important;
+  }
+  
+  .bg-purple-100.text-purple-800.border-purple-200 {
+    background-color: oklch(0.20 0.04 280) !important;
+    color: oklch(0.85 0.08 280) !important;
+    border-color: oklch(0.30 0.04 280) !important;
+  }
+  
+  /* Better progress bar styling */
+  .bg-green-600 {
+    background-color: oklch(0.65 0.15 160) !important;
+  }
+  
+  /* Enhanced text contrast */
+  .text-muted-foreground {
+    color: oklch(0.70 0.02 240) !important;
+  }
+  
+  /* Better selection colors */
+  ::selection {
+    background-color: oklch(0.70 0.15 220);
+    color: oklch(0.05 0.02 220);
+  }
+}
+
+/* Enhanced Form Field Styling */
+/* Light Mode Form Fields */
+:root {
+  /* Better input styling for light mode */
+  --input-border: oklch(0.75 0.02 240);        /* Visible border */
+  --input-border-hover: oklch(0.65 0.05 240);  /* Hover state */
+  --input-border-focus: oklch(0.55 0.15 240);  /* Focus state */
+  --input-background: oklch(0.99 0.002 240);   /* Clean white background */
+}
+
+/* Input field base styling */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+textarea,
+select {
+  border: 1.5px solid var(--input-border) !important;
+  background-color: var(--input-background) !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+/* Hover state */
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+input[type="search"]:hover,
+input[type="tel"]:hover,
+input[type="url"]:hover,
+input[type="number"]:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--input-border-hover) !important;
+}
+
+/* Focus state */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--input-border-focus) !important;
+  box-shadow: 0 0 0 2px oklch(0.55 0.15 240 / 0.2) !important;
+  outline: none !important;
+}
+
+/* Dark Mode Form Fields */
+.dark {
+  --input-border: oklch(0.35 0.02 240);        /* Visible border for dark mode */
+  --input-border-hover: oklch(0.45 0.05 240);  /* Hover state */
+  --input-border-focus: oklch(0.70 0.15 220);  /* Bright focus state */
+  --input-background: oklch(0.12 0.015 240);   /* Dark background */
+}
+
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="password"],
+.dark input[type="search"],
+.dark input[type="tel"],
+.dark input[type="url"],
+.dark input[type="number"],
+.dark textarea,
+.dark select {
+  border: 1.5px solid var(--input-border) !important;
+  background-color: var(--input-background) !important;
+  color: oklch(0.92 0.005 240) !important;
+}
+
+.dark input[type="text"]:hover,
+.dark input[type="email"]:hover,
+.dark input[type="password"]:hover,
+.dark input[type="search"]:hover,
+.dark input[type="tel"]:hover,
+.dark input[type="url"]:hover,
+.dark input[type="number"]:hover,
+.dark textarea:hover,
+.dark select:hover {
+  border-color: var(--input-border-hover) !important;
+}
+
+.dark input[type="text"]:focus,
+.dark input[type="email"]:focus,
+.dark input[type="password"]:focus,
+.dark input[type="search"]:focus,
+.dark input[type="tel"]:focus,
+.dark input[type="url"]:focus,
+.dark input[type="number"]:focus,
+.dark textarea:focus,
+.dark select:focus {
+  border-color: var(--input-border-focus) !important;
+  box-shadow: 0 0 0 2px oklch(0.70 0.15 220 / 0.3) !important;
+}
+
+/* Enhanced Select Dropdown Styling */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+.dark select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%9ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+}
+
+/* Enhanced Label Styling */
+label {
+  font-weight: 500 !important;
+  color: oklch(0.25 0.02 240) !important;
+  margin-bottom: 0.5rem !important;
+  display: block !important;
+}
+
+.dark label {
+  color: oklch(0.85 0.01 240) !important;
+}
+
+/* Placeholder styling */
+input::placeholder,
+textarea::placeholder {
+  color: oklch(0.60 0.01 240) !important;
+  opacity: 0.7;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: oklch(0.60 0.01 240) !important;
+  opacity: 0.8;
+}
+
+/* Disabled state */
+input:disabled,
+textarea:disabled,
+select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: oklch(0.95 0.005 240) !important;
+}
+
+.dark input:disabled,
+.dark textarea:disabled,
+.dark select:disabled {
+  background-color: oklch(0.08 0.01 240) !important;
+}
+
+/* Error state */
+input.error,
+textarea.error,
+select.error {
+  border-color: oklch(0.55 0.18 15) !important;
+  box-shadow: 0 0 0 2px oklch(0.55 0.18 15 / 0.2) !important;
+}
+
+.dark input.error,
+.dark textarea.error,
+.dark select.error {
+  border-color: oklch(0.65 0.18 15) !important;
+  box-shadow: 0 0 0 2px oklch(0.65 0.18 15 / 0.3) !important;
+}
+
+/* Enhanced shadcn/ui Component Styling */
+/* Better Input component styling */
+.relative input[class*="flex"][class*="h-9"],
+.relative input[class*="flex"][class*="h-10"],
+input[class*="flex"][class*="h-9"],
+input[class*="flex"][class*="h-10"] {
+  border: 1.5px solid var(--input-border) !important;
+  background-color: var(--input-background) !important;
+}
+
+.relative input[class*="flex"][class*="h-9"]:hover,
+.relative input[class*="flex"][class*="h-10"]:hover,
+input[class*="flex"][class*="h-9"]:hover,
+input[class*="flex"][class*="h-10"]:hover {
+  border-color: var(--input-border-hover) !important;
+}
+
+.relative input[class*="flex"][class*="h-9"]:focus,
+.relative input[class*="flex"][class*="h-10"]:focus,
+input[class*="flex"][class*="h-9"]:focus,
+input[class*="flex"][class*="h-10"]:focus {
+  border-color: var(--input-border-focus) !important;
+  box-shadow: 0 0 0 2px oklch(0.55 0.15 240 / 0.2) !important;
+}
+
+/* Dark mode shadcn inputs */
+.dark .relative input[class*="flex"][class*="h-9"],
+.dark .relative input[class*="flex"][class*="h-10"],
+.dark input[class*="flex"][class*="h-9"],
+.dark input[class*="flex"][class*="h-10"] {
+  border: 1.5px solid var(--input-border) !important;
+  background-color: var(--input-background) !important;
+  color: oklch(0.92 0.005 240) !important;
+}
+
+.dark .relative input[class*="flex"][class*="h-9"]:focus,
+.dark .relative input[class*="flex"][class*="h-10"]:focus,
+.dark input[class*="flex"][class*="h-9"]:focus,
+.dark input[class*="flex"][class*="h-10"]:focus {
+  border-color: var(--input-border-focus) !important;
+  box-shadow: 0 0 0 2px oklch(0.70 0.15 220 / 0.3) !important;
+}
+
+/* Enhanced Textarea styling */
+textarea[class*="flex"],
+textarea[class*="min-h"] {
+  border: 1.5px solid var(--input-border) !important;
+  background-color: var(--input-background) !important;
+  resize: vertical;
+}
+
+textarea[class*="flex"]:hover,
+textarea[class*="min-h"]:hover {
+  border-color: var(--input-border-hover) !important;
+}
+
+textarea[class*="flex"]:focus,
+textarea[class*="min-h"]:focus {
+  border-color: var(--input-border-focus) !important;
+  box-shadow: 0 0 0 2px oklch(0.55 0.15 240 / 0.2) !important;
+}
+
+.dark textarea[class*="flex"],
+.dark textarea[class*="min-h"] {
+  border: 1.5px solid var(--input-border) !important;
+  background-color: var(--input-background) !important;
+  color: oklch(0.92 0.005 240) !important;
+}
+
+.dark textarea[class*="flex"]:focus,
+.dark textarea[class*="min-h"]:focus {
+  border-color: var(--input-border-focus) !important;
+  box-shadow: 0 0 0 2px oklch(0.70 0.15 220 / 0.3) !important;
+}
+
+/* Enhanced Select/Dropdown styling */
+button[role="combobox"],
+.select-trigger {
+  border: 1.5px solid var(--input-border) !important;
+  background-color: var(--input-background) !important;
+}
+
+button[role="combobox"]:hover,
+.select-trigger:hover {
+  border-color: var(--input-border-hover) !important;
+}
+
+button[role="combobox"]:focus,
+.select-trigger:focus {
+  border-color: var(--input-border-focus) !important;
+  box-shadow: 0 0 0 2px oklch(0.55 0.15 240 / 0.2) !important;
+}
+
+.dark button[role="combobox"],
+.dark .select-trigger {
+  border: 1.5px solid var(--input-border) !important;
+  background-color: var(--input-background) !important;
+  color: oklch(0.92 0.005 240) !important;
+}
+
+.dark button[role="combobox"]:focus,
+.dark .select-trigger:focus {
+  border-color: var(--input-border-focus) !important;
+  box-shadow: 0 0 0 2px oklch(0.70 0.15 220 / 0.3) !important;
+}
+
+/* Professional Form Field Enhancements */
+/* Search input in header */
+.header-search input {
+  border: 1.5px solid var(--input-border) !important;
+  background-color: var(--input-background) !important;
+}
+
+.dark .header-search input {
+  border: 1.5px solid var(--input-border) !important;
+  background-color: var(--input-background) !important;
+  color: oklch(0.92 0.005 240) !important;
+}
+
+/* Form group spacing */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+/* Input with icons */
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon input {
+  padding-left: 2.5rem;
+}
+
+.input-with-icon .icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: oklch(0.60 0.01 240);
+  pointer-events: none;
+}
+
+.dark .input-with-icon .icon {
+  color: oklch(0.60 0.01 240);
+}
+
+/* Form validation styling */
+.form-error {
+  color: oklch(0.55 0.18 15) !important;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.dark .form-error {
+  color: oklch(0.65 0.18 15) !important;
+}
+
+.form-success {
+  color: oklch(0.55 0.15 160) !important;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.dark .form-success {
+  color: oklch(0.70 0.15 160) !important;
+}
+
+/* Enhanced card form styling */
+.card form {
+  padding: 0;
+}
+
+.card .form-section {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.card .form-section:last-child {
+  border-bottom: none;
+}
+
+/* Better button styling in forms */
+form button[type="submit"],
+form button[type="button"] {
+  min-width: 120px;
+  font-weight: 500;
+}
+
+/* Enhanced focus ring for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--input-border-focus) !important;
+  outline-offset: 2px !important;
+}
+
+.dark *:focus-visible {
+  outline: 2px solid var(--input-border-focus) !important;
+}
+
+/* Professional form layout */
+.form-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.form-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+  .form-grid-2,
+  .form-grid-3 {
+    grid-template-columns: 1fr;
+  }
 }
 
 @theme inline {

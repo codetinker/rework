@@ -258,7 +258,7 @@ export default function IndustrialTraining() {
                   </li>
                 ))}
               </ul>
-              <Link to={ROUTE_PATHS.ABOUT}>
+              <Link to={ROUTE_PATHS.INQUIRIES}>
                 <Button size="lg" className="rounded-full">
                   Contact for Training Details
                 </Button>
@@ -281,7 +281,7 @@ export default function IndustrialTraining() {
             <p className="text-lg opacity-90 mb-8 relative z-10">
               We provide customized industrial training packages for corporate clients across the ASEAN region.
             </p>
-            <Link to={ROUTE_PATHS.ABOUT} className="relative z-10">
+            <Link to={ROUTE_PATHS.INQUIRIES} className="relative z-10">
               <Button size="lg" variant="secondary" className="rounded-full font-semibold">
                 Request a Training Quote
               </Button>

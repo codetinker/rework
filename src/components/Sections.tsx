@@ -19,7 +19,7 @@ import {
   Play
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ROUTE_PATHS, Policy, Project } from "@/lib/index";
+import { ROUTE_PATHS, Project } from "@/lib/index";
 import { 
   services, 
   policies, 
@@ -284,7 +284,7 @@ export function HeroSection() {
                   <Link to={ROUTE_PATHS.SERVICES}>Our Capabilities</Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild className="px-8 py-4 text-lg font-semibold">
-                  <Link to={ROUTE_PATHS.CONTACT}>Request Consultation</Link>
+                  <Link to={ROUTE_PATHS.INQUIRIES}>Request Consultation</Link>
                 </Button>
               </div>
 
@@ -461,7 +461,7 @@ export function CompanySection() {
             
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="px-8 py-3">
-                <Link to={ROUTE_PATHS.ABOUT}>Our Complete Story</Link>
+                <Link to={ROUTE_PATHS.DASHBOARD}>Our Complete Story</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="px-8 py-3">
                 <Link to={ROUTE_PATHS.SERVICES}>View Capabilities</Link>
@@ -764,7 +764,7 @@ export function PoliciesSection() {
           </div>
 
           <div className="text-center">
-            <Link to={ROUTE_PATHS.POLICIES}>
+            <Link to={ROUTE_PATHS.DASHBOARD}>
               <Button 
                 size="lg" 
                 className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg"
@@ -1165,11 +1165,13 @@ export function ClientsSection() {
               key={`${client.name}-${idx}`}
               className="mx-8 flex items-center justify-center grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 bg-white rounded-lg p-4 shadow-sm"
             >
-              <img 
-                src={client.logo} 
-                alt={client.name}
-                className="h-12 w-auto object-contain max-w-[120px]"
-              />
+              <div className="w-[120px] h-12 flex items-center justify-center">
+                <img 
+                  src={client.logo} 
+                  alt={client.name}
+                  className="max-h-12 max-w-[120px] w-auto h-auto object-contain"
+                />
+              </div>
             </div>
           ))}
         </div>
@@ -1236,7 +1238,7 @@ export function RecognitionSection() {
               RWNA holds essential professional licenses and registrations from regulatory bodies including DOSH and PETRONAS, ensuring full compliance with Malaysian oil & gas industry standards.
             </p>
             <Button asChild variant="default">
-              <Link to={ROUTE_PATHS.RECOGNITION}>View All Certificates</Link>
+              <Link to={ROUTE_PATHS.DASHBOARD}>View All Certificates</Link>
             </Button>
           </div>
           <div className="space-y-4">
@@ -1293,7 +1295,7 @@ export function CareerAndTrainingSection() {
               We provide specialized training for students and professionals in on-site machining, subsea cutting, and high-precision CNC operations at our Innovation & Production Centre.
             </p>
             <Button asChild size="lg" className="rounded-full px-8">
-              <Link to={ROUTE_PATHS.INDUSTRIAL_TRAINING}>Training Programs</Link>
+              <Link to={ROUTE_PATHS.TRAINING}>Training Programs</Link>
             </Button>
           </div>
         </div>
@@ -1311,7 +1313,7 @@ export function QuoteSection() {
           <p className="text-primary-foreground/80">Contact our engineering team for a technical consultation and quote.</p>
         </div>
         <Button asChild size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90">
-          <Link to={ROUTE_PATHS.CONTACT}>Request A Quote</Link>
+          <Link to={ROUTE_PATHS.INQUIRIES}>Request A Quote</Link>
         </Button>
       </div>
     </section>

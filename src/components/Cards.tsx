@@ -4,11 +4,18 @@ import { ArrowRight, Eye, Settings, Waves, ShieldCheck, Cpu, Zap, Wrench } from 
 import { Link } from "react-router-dom";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { Service, Policy, Project, Client, ROUTE_PATHS } from "@/lib/index";
+import { Service, Project, Client, ROUTE_PATHS } from "@/lib/index";
 import { IMAGES } from "@/assets/images";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+export interface Policy {
+  id: string;
+  title: string;
+  description: string;
+  imageKey: string;
+}
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -142,11 +149,13 @@ export function ClientCard({ client }: { client: Client }) {
     <div className="flex items-center justify-center p-6 grayscale transition-all hover:grayscale-0">
       <div className="text-center">
         {client.logoKey ? (
-          <img 
-            src={IMAGES[client.logoKey as keyof typeof IMAGES]} 
-            alt={client.name} 
-            className="h-12 w-auto object-contain" 
-          />
+          <div className="w-[120px] h-12 flex items-center justify-center">
+            <img 
+              src={IMAGES[client.logoKey as keyof typeof IMAGES]} 
+              alt={client.name} 
+              className="max-h-12 max-w-[120px] w-auto h-auto object-contain" 
+            />
+          </div>
         ) : (
           <span className="text-xl font-bold tracking-tighter text-muted-foreground/60 hover:text-primary transition-colors">
             {client.name}

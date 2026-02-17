@@ -198,11 +198,13 @@ export default function Client() {
                     key={`${client.name}-${idx}`}
                     className="mx-8 flex items-center justify-center grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 bg-white rounded-lg p-4 shadow-sm"
                   >
-                    <img 
-                      src={client.logo} 
-                      alt={client.name}
-                      className="h-12 w-auto object-contain max-w-[120px]"
-                    />
+                    <div className="w-[120px] h-12 flex items-center justify-center">
+                      <img 
+                        src={client.logo} 
+                        alt={client.name}
+                        className="max-h-12 max-w-[120px] w-auto h-auto object-contain"
+                      />
+                    </div>
                   </div>
                 ))}
               </div>
@@ -255,7 +257,7 @@ export default function Client() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button size="lg" asChild className="px-8 py-6 rounded-xl">
-                <Link to={ROUTE_PATHS.CONTACT}>
+                <Link to={ROUTE_PATHS.INQUIRIES}>
                   Contact Our Team
                 </Link>
               </Button>
