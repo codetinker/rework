@@ -16,7 +16,7 @@ export const ROUTE_PATHS = {
   CHAT: "/chat",
   USERS: "/users",
   ROLES: "/roles",
-  API_DEMO: "/api-demo",
+
   FILE_MANAGER: "/files",
   TRASH: "/trash",
   REPORTS: "/reports",
@@ -322,7 +322,7 @@ export const ROLE_PERMISSIONS: Record<UserRole, LegacyPermission[]> = {
     { resource: 'files', actions: ['create', 'read', 'update', 'delete'] },
     { resource: 'reports', actions: ['create', 'read', 'update', 'delete'] },
     { resource: 'trash', actions: ['create', 'read', 'update', 'delete'] },
-    { resource: 'api', actions: ['create', 'read', 'update', 'delete'] },
+
     { resource: 'access_logs', actions: ['read'] },
   ],
   [UserRole.CONTENT_MANAGER]: [
@@ -459,12 +459,7 @@ export const SYSTEM_MODULES: Module[] = [
     description: 'Manage deleted items and restore functionality',
     actions: ['read', 'update', 'delete']
   },
-  {
-    id: 'api',
-    name: 'API Demo',
-    description: 'Access to API testing and demonstration tools',
-    actions: ['read']
-  },
+
   {
     id: 'settings',
     name: 'System Settings',

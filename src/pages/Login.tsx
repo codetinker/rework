@@ -117,7 +117,7 @@ export default function Login() {
             <ShieldCheck className="w-10 h-10 text-primary-foreground" />
           </motion.div>
           <h1 className="text-3xl font-black tracking-tighter text-foreground">
-            RWNA <span className="text-primary">CMS</span>
+            RWNA <span className="text-primary">OpsCenter</span>
           </h1>
           <p className="text-muted-foreground text-sm font-medium mt-1 tracking-wide">
             CENTRAL MANAGEMENT SYSTEM

@@ -91,7 +91,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Reports", path: ROUTE_PATHS.REPORTS, icon: FileText },
   { label: "Trash", path: ROUTE_PATHS.TRASH, icon: Trash2 },
   { label: "User Management", path: ROUTE_PATHS.USERS, icon: ShieldCheck },
-  { label: "API Demo", path: ROUTE_PATHS.API_DEMO, icon: Database },
+
 ];
 
 export function Layout({ children }: LayoutProps) {
@@ -169,7 +169,7 @@ export function Layout({ children }: LayoutProps) {
       [ROUTE_PATHS.CHAT]: 'chat',
       [ROUTE_PATHS.FILE_MANAGER]: 'files',
       [ROUTE_PATHS.USERS]: 'users',
-      [ROUTE_PATHS.API_DEMO]: 'api',
+
       [ROUTE_PATHS.REPORTS]: 'reports',
       [ROUTE_PATHS.TRASH]: 'trash',
     };
@@ -210,12 +210,9 @@ export function Layout({ children }: LayoutProps) {
         <div className="flex h-full flex-col">
           <div className="flex h-16 items-center justify-between px-6">
             <Link to={ROUTE_PATHS.DASHBOARD} className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <Briefcase className="h-5 w-5" />
-              </div>
               {isSidebarOpen && (
                 <span className="text-lg font-bold tracking-tight text-sidebar-foreground">
-                  RWNA <span className="text-sidebar-primary">CMS</span>
+                  RWNA <span className="text-sidebar-primary">OpsCenter</span>
                 </span>
               )}
             </Link>
@@ -299,10 +296,7 @@ export function Layout({ children }: LayoutProps) {
               <SheetContent side="left" className="w-72 bg-sidebar p-0">
                 <SheetHeader className="p-6 text-left">
                   <SheetTitle className="text-sidebar-foreground flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                      <Briefcase className="h-5 w-5" />
-                    </div>
-                    RWNA CMS
+                    RWNA OpsCenter
                   </SheetTitle>
                 </SheetHeader>
                 <nav className="mt-4 space-y-1 px-4">
@@ -335,7 +329,7 @@ export function Layout({ children }: LayoutProps) {
             </Sheet>
 
             <div className="flex items-center gap-2 text-sm font-medium">
-              <span className="text-muted-foreground">CMS</span>
+              <span className="text-muted-foreground">OpsCenter</span>
               <ChevronRight className="h-4 w-4 text-muted-foreground/50" />
               <span className="text-foreground">{currentNavItem.label}</span>
             </div>

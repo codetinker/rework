@@ -27,7 +27,7 @@ import Users from "@/pages/Users";
 import Login from "@/pages/Login";
 import AccessLogs from "@/pages/AccessLogs";
 import RoleManagement from "@/pages/RoleManagement";
-import APIDemo from "@/pages/APIDemo";
+
 import Reports from "@/pages/Reports";
 import ProfileSettings from "@/pages/ProfileSettings";
 import CompanySettings from "@/pages/CompanySettings";
@@ -163,14 +163,7 @@ const App = () => {
                 </Layout>
               }
             />
-            <Route
-              path="/api-demo"
-              element={
-                <Layout>
-                  <APIDemo />
-                </Layout>
-              }
-            />
+
             <Route
               path={ROUTE_PATHS.FILE_MANAGER}
               element={
