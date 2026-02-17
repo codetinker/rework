@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { NotificationDropdown } from "@/components/NotificationDropdown";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import {
@@ -16,7 +16,6 @@ import {
   Menu,
   X,
   Bell,
-  Search,
   ChevronRight,
   LogOut,
   FileText,
@@ -24,11 +23,18 @@ import {
   Activity,
   Database,
   FolderOpen,
-  Trash2
+  Trash2,
+  Building2,
+  Sun,
+  Moon,
+  Phone,
+  Mail,
+  Send
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ROUTE_PATHS, UserRole } from "@/lib/index";
 import { useUser } from "@/contexts/UserContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Button } from "@/components/ui/button";
 import { 
   Sheet, 
@@ -47,7 +53,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -78,8 +96,17 @@ const NAV_ITEMS: NavItem[] = [
 
 export function Layout({ children }: LayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const [isSupportDialogOpen, setIsSupportDialogOpen] = useState(false);
+  const [supportForm, setSupportForm] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
   const location = useLocation();
   const { currentUser, hasPermission } = useUser();
+  const { theme, toggleTheme } = useTheme();
   
   // Get trash count from actual deleted items across all modules
   const getTrashCount = () => {
@@ -101,48 +128,77 @@ export function Layout({ children }: LayoutProps) {
   
   const trashCount = getTrashCount();
 
+  const handleSupportSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!supportForm.name || !supportForm.email || !supportForm.subject || !supportForm.message) {
+      toast.error('Please fill in all fields');
+      return;
+    }
+    
+    // Simulate form submission
+    try {
+      // In a real app, this would send to your support system
+      console.log('Support form submitted:', supportForm);
+      toast.success('Support request submitted successfully! We will get back to you soon.');
+      
+      // Reset form
+      setSupportForm({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+      
+      setIsSupportDialogOpen(false);
+    } catch (error) {
+      toast.error('Failed to submit support request. Please try again.');
+    }
+  };
+
   // Filter navigation items based on user permissions
-  const getVisibleNavItems = () => {
-    return NAV_ITEMS.filter(item => {
+  const adminNavItems = useMemo(() => {
+    const routeResourceMap: Record<string, string> = {
+      [ROUTE_PATHS.PROJECTS]: 'projects',
+      [ROUTE_PATHS.CLIENTS]: 'clients',
+      [ROUTE_PATHS.SERVICES]: 'services',
+      [ROUTE_PATHS.CAREER]: 'career',
+      [ROUTE_PATHS.TRAINING]: 'training',
+      [ROUTE_PATHS.NEWS]: 'news',
+      [ROUTE_PATHS.INQUIRIES]: 'inquiries',
+      [ROUTE_PATHS.CHAT]: 'chat',
+      [ROUTE_PATHS.FILE_MANAGER]: 'files',
+      [ROUTE_PATHS.USERS]: 'users',
+      [ROUTE_PATHS.API_DEMO]: 'api',
+      [ROUTE_PATHS.REPORTS]: 'reports',
+      [ROUTE_PATHS.TRASH]: 'trash',
+    };
+
+    const visibleNavItems = NAV_ITEMS.filter(item => {
       // Dashboard and File Manager are always visible
       if (item.path === ROUTE_PATHS.DASHBOARD || item.path === ROUTE_PATHS.FILE_MANAGER) return true;
-      
-      // Map routes to resources for permission checking
-      const routeResourceMap: Record<string, string> = {
-        [ROUTE_PATHS.PROJECTS]: 'projects',
-        [ROUTE_PATHS.CLIENTS]: 'clients',
-        [ROUTE_PATHS.SERVICES]: 'services',
-        [ROUTE_PATHS.CAREER]: 'career',
-        [ROUTE_PATHS.TRAINING]: 'training',
-        [ROUTE_PATHS.NEWS]: 'news',
-        [ROUTE_PATHS.INQUIRIES]: 'inquiries',
-        [ROUTE_PATHS.CHAT]: 'chat',
-        [ROUTE_PATHS.FILE_MANAGER]: 'files',
-        [ROUTE_PATHS.USERS]: 'users',
-        [ROUTE_PATHS.API_DEMO]: 'api',
-      };
       
       const resource = routeResourceMap[item.path];
       return resource ? hasPermission(resource, 'read') : true;
     });
-  };
 
-  const visibleNavItems = getVisibleNavItems();
-
-  // Add Admin-only items for Super Admins
-  const adminNavItems = currentUser?.role === UserRole.SUPER_ADMIN 
-    ? [
-        ...visibleNavItems, 
-        { label: "Role Management", path: ROUTE_PATHS.ROLES, icon: Shield },
-        { label: "Access Logs", path: "/access-logs", icon: Activity }
-      ]
-    : visibleNavItems;
+    // Add Admin-only items for Super Admins
+    return currentUser?.role === UserRole.SUPER_ADMIN 
+      ? [
+          ...visibleNavItems, 
+          { label: "Settings", path: ROUTE_PATHS.COMPANY_SETTINGS, icon: Building2 },
+          { label: "Role Management", path: ROUTE_PATHS.ROLES, icon: Shield },
+          { label: "Access Logs", path: "/access-logs", icon: Activity }
+        ]
+      : visibleNavItems;
+  }, [currentUser, hasPermission]);
 
   const currentNavItem = NAV_ITEMS.find((item) => item.path === location.pathname) || {
     label: "Admin Portal",
   };
 
   return (
+    <>
     <div className="flex min-h-screen bg-background text-foreground">
       {/* Desktop Sidebar */}
       <aside
@@ -286,23 +342,28 @@ export function Layout({ children }: LayoutProps) {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-4">
-            <div className="relative hidden sm:block header-search">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <input
-                type="search"
-                placeholder="Search records..."
-                className="h-9 w-64 rounded-md pl-9 pr-4 text-sm"
-              />
-            </div>
-
             <NotificationDropdown />
+
+            {/* Theme Switcher */}
+            <Button
+              onClick={toggleTheme}
+              variant="ghost"
+              size="sm"
+              className="h-8 w-8 rounded-full"
+            >
+              {theme === 'light' ? (
+                <Moon className="h-4 w-4" />
+              ) : (
+                <Sun className="h-4 w-4" />
+              )}
+            </Button>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                   <Avatar className="h-8 w-8">
                     <AvatarFallback className="bg-primary text-primary-foreground text-xs">
-                      {currentUser ? currentUser.name.split(' ').map(n => n[0]).join('') : 'AD'}
+                      {currentUser?.name?.split(' ').map(n => n[0]).join('') || 'AD'}
                     </AvatarFallback>
                   </Avatar>
                 </Button>
@@ -315,7 +376,7 @@ export function Layout({ children }: LayoutProps) {
                       {currentUser?.email || 'admin@rwna.com.my'}
                     </p>
                     <p className="text-xs leading-none text-primary font-medium">
-                      {currentUser?.role.replace('_', ' ') || 'Admin'}
+                      {currentUser?.role?.replace('_', ' ') || 'Admin'}
                     </p>
                   </div>
                 </DropdownMenuLabel>
@@ -356,7 +417,7 @@ export function Layout({ children }: LayoutProps) {
         <footer className="border-t border-border bg-muted/30 py-4 px-6">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <p className="text-xs text-muted-foreground">
-              © 2026 RWNA Engineering Sdn. Bhd. CMS v1.0.0 | Powered by{' '}
+              © 2026 RWNA Engineering Sdn. Bhd. | Powered by{' '}
               <a 
                 href="https://codestudio.my" 
                 target="_blank" 
@@ -367,8 +428,13 @@ export function Layout({ children }: LayoutProps) {
               </a>
             </p>
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
-              <a href="#" className="hover:text-primary transition-colors">Support</a>
-              <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
+              <button 
+                onClick={() => setIsSupportDialogOpen(true)}
+                className="hover:text-primary transition-colors cursor-pointer"
+              >
+                Support
+              </button>
+
               <span className="text-muted-foreground/40">|</span>
               <span className="flex items-center gap-1.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -379,5 +445,102 @@ export function Layout({ children }: LayoutProps) {
         </footer>
       </div>
     </div>
+
+    {/* Support Dialog */}
+    <Dialog open={isSupportDialogOpen} onOpenChange={setIsSupportDialogOpen}>
+      <DialogContent className="max-w-2xl">
+        <DialogHeader>
+          <DialogTitle>Code Studio Support</DialogTitle>
+          <DialogDescription>
+            Need help? Contact our support team or submit a support request.
+          </DialogDescription>
+        </DialogHeader>
+        
+        <div className="space-y-6">
+          {/* Contact Information */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-muted/50 rounded-lg">
+            <div className="flex items-center gap-3">
+              <Phone className="h-5 w-5 text-primary" />
+              <div>
+                <p className="font-medium">Phone</p>
+                <a href="tel:+60182652081" className="text-sm text-muted-foreground hover:text-primary">
+                  +60 18-265 2081
+                </a>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Mail className="h-5 w-5 text-primary" />
+              <div>
+                <p className="font-medium">Email</p>
+                <a href="mailto:rizalsalim@codestudio.my" className="text-sm text-muted-foreground hover:text-primary">
+                  rizalsalim@codestudio.my
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          {/* Support Form */}
+          <form onSubmit={handleSupportSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="support-name">Name *</Label>
+                <Input
+                  id="support-name"
+                  value={supportForm.name}
+                  onChange={(e) => setSupportForm(prev => ({ ...prev, name: e.target.value }))}
+                  placeholder="Your full name"
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="support-email">Email *</Label>
+                <Input
+                  id="support-email"
+                  type="email"
+                  value={supportForm.email}
+                  onChange={(e) => setSupportForm(prev => ({ ...prev, email: e.target.value }))}
+                  placeholder="your.email@example.com"
+                  required
+                />
+              </div>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="support-subject">Subject *</Label>
+              <Input
+                id="support-subject"
+                value={supportForm.subject}
+                onChange={(e) => setSupportForm(prev => ({ ...prev, subject: e.target.value }))}
+                placeholder="Brief description of your issue"
+                required
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="support-message">Message *</Label>
+              <Textarea
+                id="support-message"
+                value={supportForm.message}
+                onChange={(e) => setSupportForm(prev => ({ ...prev, message: e.target.value }))}
+                placeholder="Please describe your issue or question in detail..."
+                rows={4}
+                required
+              />
+            </div>
+            
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={() => setIsSupportDialogOpen(false)}>
+                Cancel
+              </Button>
+              <Button type="submit" className="flex items-center gap-2">
+                <Send className="h-4 w-4" />
+                Submit Request
+              </Button>
+            </DialogFooter>
+          </form>
+        </div>
+      </DialogContent>
+    </Dialog>
+    </>
   );
 }

@@ -36,13 +36,23 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         if (existingUser && token) {
           setCurrentUser(existingUser);
-          await logAccess('session_restore', 'system', true, 'User session restored');
+          // Log access after user is set
+          try {
+            await logAccess('session_restore', 'system', true, 'User session restored');
+          } catch (logError) {
+            console.error('Failed to log session restore:', logError);
+          }
         } else {
           // Fallback to mock admin user for development
-          const adminUser = mockUsers.find(u => u.role === UserRole.SUPER_ADMIN);
+          const adminUser = mockUsers?.find(u => u.role === UserRole.SUPER_ADMIN);
           if (adminUser) {
             setCurrentUser(adminUser);
-            await logAccess('mock_login', 'system', true, 'Mock admin login for development');
+            // Log access after user is set
+            try {
+              await logAccess('mock_login', 'system', true, 'Mock admin login for development');
+            } catch (logError) {
+              console.error('Failed to log mock login:', logError);
+            }
           }
         }
       } catch (error) {
@@ -56,6 +66,11 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const switchUser = async (userId: string) => {
+    if (!userId) {
+      console.error('switchUser: userId is required');
+      return;
+    }
+
     try {
       // Try to get user from API first
       const response = await usersAPI.getById(userId);
@@ -69,10 +84,16 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
     
     // Fallback to mock data
-    const user = mockUsers.find(u => u.id === userId);
+    const user = mockUsers?.find(u => u.id === userId);
     if (user) {
       setCurrentUser(user);
-      await logAccess('switch_user', 'system', true, `Switched to user: ${user.name} (mock)`);
+      try {
+        await logAccess('switch_user', 'system', true, `Switched to user: ${user.name} (mock)`);
+      } catch (logError) {
+        console.error('Failed to log user switch:', logError);
+      }
+    } else {
+      console.error(`User with id ${userId} not found`);
     }
   };
 
@@ -118,6 +139,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (!currentUser) return false;
     
     const permissions = ROLE_PERMISSIONS[currentUser.role];
+    if (!permissions) return false;
+    
     const resourcePermission = permissions.find(p => p.resource === resource);
     
     return resourcePermission?.actions.includes(action as any) || false;

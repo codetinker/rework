@@ -153,7 +153,7 @@ export default function Dashboard() {
             <div className="flex-1">
               <div className="flex items-center gap-2">
                 <p className="text-lg font-bold text-blue-800 dark:text-blue-200">CMS Status: {stats.totalUsers} Active Users Managing {stats.totalProjects} Projects</p>
-                <Badge variant="outline" className="bg-blue-100 text-blue-800 border-blue-300">
+                <Badge variant="default" className="bg-primary text-primary-foreground border-primary hover:bg-primary/90">
                   {stats.newInquiries} New Inquiries
                 </Badge>
               </div>

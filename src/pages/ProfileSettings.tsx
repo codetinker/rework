@@ -32,6 +32,7 @@ import {
   Moon,
   Sun
 } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
 import { useUser } from '@/contexts/UserContext';
 import { useToast } from '@/hooks/use-toast';
 
@@ -394,61 +395,49 @@ export default function ProfileSettings() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <div>
+                  <div className="space-y-0.5">
                     <p className="font-medium">Email Notifications</p>
                     <p className="text-sm text-muted-foreground">Receive notifications via email</p>
                   </div>
-                  <Button
-                    variant={settings.emailNotifications ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSettings(prev => ({ ...prev, emailNotifications: !prev.emailNotifications }))}
-                  >
-                    {settings.emailNotifications ? "Enabled" : "Disabled"}
-                  </Button>
+                  <Switch
+                    checked={settings.emailNotifications}
+                    onCheckedChange={(checked) => setSettings(prev => ({ ...prev, emailNotifications: checked }))}
+                  />
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <div>
+                  <div className="space-y-0.5">
                     <p className="font-medium">Push Notifications</p>
                     <p className="text-sm text-muted-foreground">Receive browser push notifications</p>
                   </div>
-                  <Button
-                    variant={settings.pushNotifications ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSettings(prev => ({ ...prev, pushNotifications: !prev.pushNotifications }))}
-                  >
-                    {settings.pushNotifications ? "Enabled" : "Disabled"}
-                  </Button>
+                  <Switch
+                    checked={settings.pushNotifications}
+                    onCheckedChange={(checked) => setSettings(prev => ({ ...prev, pushNotifications: checked }))}
+                  />
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <div>
+                  <div className="space-y-0.5">
                     <p className="font-medium">Project Updates</p>
                     <p className="text-sm text-muted-foreground">Get notified about project status changes</p>
                   </div>
-                  <Button
-                    variant={settings.projectUpdates ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSettings(prev => ({ ...prev, projectUpdates: !prev.projectUpdates }))}
-                  >
-                    {settings.projectUpdates ? "Enabled" : "Disabled"}
-                  </Button>
+                  <Switch
+                    checked={settings.projectUpdates}
+                    onCheckedChange={(checked) => setSettings(prev => ({ ...prev, projectUpdates: checked }))}
+                  />
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <div>
+                  <div className="space-y-0.5">
                     <p className="font-medium">System Alerts</p>
                     <p className="text-sm text-muted-foreground">Important system and security alerts</p>
                   </div>
-                  <Button
-                    variant={settings.systemAlerts ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSettings(prev => ({ ...prev, systemAlerts: !prev.systemAlerts }))}
-                  >
-                    {settings.systemAlerts ? "Enabled" : "Disabled"}
-                  </Button>
+                  <Switch
+                    checked={settings.systemAlerts}
+                    onCheckedChange={(checked) => setSettings(prev => ({ ...prev, systemAlerts: checked }))}
+                  />
                 </div>
               </div>
             </CardContent>

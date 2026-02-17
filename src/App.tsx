@@ -8,8 +8,7 @@ import { ROUTE_PATHS } from "@/lib/index";
 import { UserProvider } from "@/contexts/UserContext";
 import { NotificationProvider } from "@/contexts/NotificationContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import { UserSwitcher } from "@/components/UserSwitcher";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+
 
 // Layout
 import { Layout } from "@/components/Layout";
@@ -31,6 +30,7 @@ import RoleManagement from "@/pages/RoleManagement";
 import APIDemo from "@/pages/APIDemo";
 import Reports from "@/pages/Reports";
 import ProfileSettings from "@/pages/ProfileSettings";
+import CompanySettings from "@/pages/CompanySettings";
 import FileManager from "@/pages/FileManager";
 import Trash from "@/pages/Trash";
 
@@ -213,12 +213,19 @@ const App = () => {
                 </Layout>
               }
             />
+            <Route
+              path={ROUTE_PATHS.COMPANY_SETTINGS}
+              element={
+                <Layout>
+                  <CompanySettings />
+                </Layout>
+              }
+            />
 
             {/* 404 Redirect to Dashboard */}
             <Route path="*" element={<Navigate to={ROUTE_PATHS.DASHBOARD} replace />} />
           </Routes>
-            <ThemeSwitcher />
-            <UserSwitcher />
+
           </BrowserRouter>
           <Toaster />
           <Sonner position="top-right" closeButton richColors />

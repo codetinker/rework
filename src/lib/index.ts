@@ -21,6 +21,7 @@ export const ROUTE_PATHS = {
   TRASH: "/trash",
   REPORTS: "/reports",
   PROFILE_SETTINGS: "/profile-settings",
+  COMPANY_SETTINGS: "/company-settings",
 } as const;
 
 export enum UserRole {
@@ -306,6 +307,7 @@ export interface LegacyPermission {
 
 export const ROLE_PERMISSIONS: Record<UserRole, LegacyPermission[]> = {
   [UserRole.SUPER_ADMIN]: [
+    { resource: 'dashboard', actions: ['read'] },
     { resource: 'users', actions: ['create', 'read', 'update', 'delete'] },
     { resource: 'roles', actions: ['create', 'read', 'update', 'delete'] },
     { resource: 'projects', actions: ['create', 'read', 'update', 'delete'] },
@@ -317,8 +319,14 @@ export const ROLE_PERMISSIONS: Record<UserRole, LegacyPermission[]> = {
     { resource: 'inquiries', actions: ['create', 'read', 'update', 'delete'] },
     { resource: 'chat', actions: ['create', 'read', 'update', 'delete'] },
     { resource: 'settings', actions: ['create', 'read', 'update', 'delete'] },
+    { resource: 'files', actions: ['create', 'read', 'update', 'delete'] },
+    { resource: 'reports', actions: ['create', 'read', 'update', 'delete'] },
+    { resource: 'trash', actions: ['create', 'read', 'update', 'delete'] },
+    { resource: 'api', actions: ['create', 'read', 'update', 'delete'] },
+    { resource: 'access_logs', actions: ['read'] },
   ],
   [UserRole.CONTENT_MANAGER]: [
+    { resource: 'dashboard', actions: ['read'] },
     { resource: 'projects', actions: ['create', 'read', 'update', 'delete'] },
     { resource: 'clients', actions: ['create', 'read', 'update', 'delete'] },
     { resource: 'services', actions: ['create', 'read', 'update', 'delete'] },
@@ -327,8 +335,12 @@ export const ROLE_PERMISSIONS: Record<UserRole, LegacyPermission[]> = {
     { resource: 'news', actions: ['create', 'read', 'update', 'delete'] },
     { resource: 'inquiries', actions: ['read', 'update'] },
     { resource: 'chat', actions: ['read', 'update'] },
+    { resource: 'files', actions: ['create', 'read', 'update', 'delete'] },
+    { resource: 'reports', actions: ['read'] },
+    { resource: 'trash', actions: ['read', 'update'] },
   ],
   [UserRole.SUPPORT_STAFF]: [
+    { resource: 'dashboard', actions: ['read'] },
     { resource: 'projects', actions: ['read'] },
     { resource: 'clients', actions: ['read'] },
     { resource: 'career', actions: ['read'] },
@@ -336,6 +348,9 @@ export const ROLE_PERMISSIONS: Record<UserRole, LegacyPermission[]> = {
     { resource: 'news', actions: ['read'] },
     { resource: 'inquiries', actions: ['create', 'read', 'update'] },
     { resource: 'chat', actions: ['create', 'read', 'update', 'delete'] },
+    { resource: 'files', actions: ['read'] },
+    { resource: 'reports', actions: ['read'] },
+    { resource: 'trash', actions: ['read'] },
   ],
 };
 
@@ -431,5 +446,29 @@ export const SYSTEM_MODULES: Module[] = [
     name: 'Access Logs',
     description: 'View system access logs and audit trails',
     actions: ['read']
+  },
+  {
+    id: 'reports',
+    name: 'Reports',
+    description: 'Generate and view system reports and analytics',
+    actions: ['create', 'read', 'update', 'delete']
+  },
+  {
+    id: 'trash',
+    name: 'Trash Management',
+    description: 'Manage deleted items and restore functionality',
+    actions: ['read', 'update', 'delete']
+  },
+  {
+    id: 'api',
+    name: 'API Demo',
+    description: 'Access to API testing and demonstration tools',
+    actions: ['read']
+  },
+  {
+    id: 'settings',
+    name: 'System Settings',
+    description: 'Manage system configuration and company settings',
+    actions: ['create', 'read', 'update', 'delete']
   }
 ];

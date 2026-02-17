@@ -77,12 +77,12 @@ export const UserSwitcher: React.FC = () => {
             <div className="flex items-center gap-3">
               <Avatar className="w-8 h-8">
                 <AvatarFallback className="text-xs font-semibold">
-                  {currentUser.name.split(' ').map(n => n[0]).join('')}
+                  {currentUser.name?.split(' ').map(n => n[0]).join('') || 'U'}
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col items-start">
                 <span className="text-sm font-medium text-foreground">
-                  {currentUser.name.split(' ')[0]}
+                  {currentUser.name?.split(' ')[0] || 'User'}
                 </span>
                 <Badge 
                   variant="outline" 
@@ -124,13 +124,13 @@ export const UserSwitcher: React.FC = () => {
                     <div className="flex items-center gap-3 w-full">
                       <Avatar className="w-8 h-8">
                         <AvatarFallback className="text-xs">
-                          {user.name.split(' ').map(n => n[0]).join('')}
+                          {user.name?.split(' ').map(n => n[0]).join('') || 'U'}
                         </AvatarFallback>
                       </Avatar>
                       
                       <div className="flex-1 text-left">
                         <div className="flex items-center gap-2">
-                          <span className="font-medium text-sm">{user.name}</span>
+                          <span className="font-medium text-sm">{user.name || 'Unknown User'}</span>
                           {currentUser.id === user.id && (
                             <Badge variant="secondary" className="text-xs px-1.5 py-0 h-4">
                               Current
